@@ -368,7 +368,8 @@ function CoverCorner({ pos }) {
   return (
     <img
       className={`sprig-corner ${pos}`}
-      src="/corner-flowers.png"
+      // src="/corner-flowers.png"
+      src={`${import.meta.env.BASE_URL}corner-flowers.png`}
       alt=""
       aria-hidden="true"
     />
