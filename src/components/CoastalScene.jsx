@@ -1,65 +1,85 @@
 import { useEffect, useRef } from 'react'
-import { INVITATION_ARTWORK } from '../invitationArtwork.js'
-import { createCoastalRenderer } from '../coastalMotion.js'
+import { COASTAL_LAYER_ARTWORK, INVITATION_ARTWORK } from '../invitationArtwork.js'
+import { COASTAL_PLANT_REGIONS, createCoastalWaterRenderer, getCoastalImageLayout } from '../coastalMotion.js'
 import './CoastalScene.css'
 
 export default function CoastalScene({ enabled }) {
   const containerRef = useRef(null)
   const imageRef = useRef(null)
+  const stackRef = useRef(null)
+  const backgroundRef = useRef(null)
+  const plantsRef = useRef(null)
   const canvasRef = useRef(null)
 
   useEffect(() => {
     if (!enabled) return
     const container = containerRef.current
     const image = imageRef.current
+    const stack = stackRef.current
+    const background = backgroundRef.current
+    const plants = plantsRef.current
     const canvas = canvasRef.current
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const assets = [image, background, plants]
     let renderer = null
     let inView = container.getBoundingClientRect().bottom > 0
-    let failed = false
+    let waterUnavailable = false
+    let layerFailed = false
     let contextLost = false
     let printing = false
 
+    const resize = () => {
+      const { width, height } = container.getBoundingClientRect()
+      if (!width || !height) return
+      const layout = getCoastalImageLayout({
+        width, height, imageWidth: INVITATION_ARTWORK.width, imageHeight: INVITATION_ARTWORK.height,
+        fit: window.getComputedStyle(image).objectFit,
+      })
+      Object.assign(stack.style, { width: `${layout.width}px`, height: `${layout.height}px`, left: `${layout.left}px`, top: `${layout.top}px` })
+      renderer?.resize()
+    }
     const sync = () => {
-      if (reducedMotion.matches || printing) {
+      const motionAllowed = !reducedMotion.matches && !printing && !layerFailed
+      const ready = assets.every(asset => asset.complete && asset.naturalWidth)
+      if (!motionAllowed || !ready) {
         renderer?.pause()
-        container.removeAttribute('data-motion-ready')
+        container.removeAttribute('data-layers-ready')
+        container.removeAttribute('data-motion-running')
         return
       }
-      if (!image.complete || !image.naturalWidth || failed || contextLost) return
-      if (!renderer) {
+      resize()
+      container.setAttribute('data-layers-ready', '')
+      const running = inView && document.visibilityState !== 'hidden'
+      container.toggleAttribute('data-motion-running', running)
+      if (!renderer && !waterUnavailable && !contextLost) {
         try {
-          renderer = createCoastalRenderer(canvas, image, container)
-          if (!renderer) { failed = true; return }
+          renderer = createCoastalWaterRenderer(canvas, background, stack)
+          if (!renderer) waterUnavailable = true
+          else container.setAttribute('data-water-ready', '')
         } catch (error) {
-          failed = true
-          console.warn('The coastal illustration is using its still-image fallback.', error)
-          return
+          waterUnavailable = true
+          console.warn('The coastal water is using its still-image fallback.', error)
         }
       }
-      container.setAttribute('data-motion-ready', '')
-      if (inView && document.visibilityState !== 'hidden') renderer.play()
-      else renderer.pause()
+      if (running) renderer?.play()
+      else renderer?.pause()
     }
-    const resize = () => renderer?.resize()
+    const failed = () => { layerFailed = true; sync() }
     const lost = event => {
       event.preventDefault()
       contextLost = true
       renderer?.destroy()
       renderer = null
-      container.removeAttribute('data-motion-ready')
+      container.removeAttribute('data-water-ready')
     }
-    const restored = () => { contextLost = false; failed = false; sync() }
+    const restored = () => { contextLost = false; waterUnavailable = false; sync() }
     const beforePrint = () => { printing = true; sync() }
     const afterPrint = () => { printing = false; sync() }
     const resizeObserver = typeof ResizeObserver === 'function' ? new ResizeObserver(resize) : null
-    const visibilityObserver = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries => {
-      inView = entries[0].isIntersecting
-      sync()
-    }) : null
+    const visibilityObserver = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries => { inView = entries[0].isIntersecting; sync() }) : null
     resizeObserver?.observe(container)
     visibilityObserver?.observe(container)
-    image.addEventListener('load', sync)
+    assets.forEach(asset => { asset.addEventListener('load', sync); asset.addEventListener('error', failed) })
     reducedMotion.addEventListener('change', sync)
     document.addEventListener('visibilitychange', sync)
     window.addEventListener('resize', resize)
@@ -71,10 +91,10 @@ export default function CoastalScene({ enabled }) {
 
     return () => {
       renderer?.destroy()
-      container.removeAttribute('data-motion-ready')
+      for (const name of ['data-layers-ready', 'data-motion-running', 'data-water-ready']) container.removeAttribute(name)
       resizeObserver?.disconnect()
       visibilityObserver?.disconnect()
-      image.removeEventListener('load', sync)
+      assets.forEach(asset => { asset.removeEventListener('load', sync); asset.removeEventListener('error', failed) })
       reducedMotion.removeEventListener('change', sync)
       document.removeEventListener('visibilitychange', sync)
       window.removeEventListener('resize', resize)
@@ -88,6 +108,15 @@ export default function CoastalScene({ enabled }) {
   return <div className="coastal-scene" ref={containerRef}>
     <img ref={imageRef} className="villa-art" src={INVITATION_ARTWORK.src} width={INVITATION_ARTWORK.width} height={INVITATION_ARTWORK.height}
       alt="Embroidered coastal villa and flower-filled garden overlooking the blue sea, framed by ivory blossoms on warm linen" fetchPriority="high" />
-    <canvas ref={canvasRef} className="coastal-motion-canvas" aria-hidden="true" />
+    <img ref={plantsRef} className="coastal-plants-preload" src={COASTAL_LAYER_ARTWORK.plants} alt="" aria-hidden="true" />
+    <div ref={stackRef} className="coastal-layer-stack" style={{ '--coastal-plants': `url(${COASTAL_LAYER_ARTWORK.plants})` }} aria-hidden="true">
+      <img ref={backgroundRef} className="coastal-background" src={COASTAL_LAYER_ARTWORK.background} width="941" height="1672" alt="" />
+      <canvas ref={canvasRef} className="coastal-water-canvas" aria-hidden="true" />
+      {COASTAL_PLANT_REGIONS.map(region => <div key={region.name} className="coastal-plant-layer" data-corner={region.name} style={{
+        clipPath: region.clip, transformOrigin: region.origin,
+        '--sway-positive': `${region.positive}deg`, '--sway-negative': `${region.negative}deg`,
+        animationDuration: `${region.seconds}s`, animationDelay: `${region.delay}s`,
+      }} />)}
+    </div>
   </div>
 }

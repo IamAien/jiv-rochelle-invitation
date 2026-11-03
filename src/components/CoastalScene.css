@@ -1,6 +1,14 @@
 .coastal-scene { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
-.coastal-motion-canvas { position: absolute; display: block; opacity: 0; pointer-events: none; }
-.coastal-scene[data-motion-ready] .coastal-motion-canvas { opacity: 1; }
+.coastal-plants-preload { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.coastal-layer-stack { position: absolute; opacity: 0; pointer-events: none; transition: opacity 1.2s ease; }
+.coastal-scene[data-layers-ready] .coastal-layer-stack { opacity: 1; }
+.coastal-background { position: absolute; inset: 0; width: 100%; height: 100%; }
+.coastal-water-canvas { position: absolute; display: block; opacity: 0; pointer-events: none; }
+.coastal-scene[data-water-ready] .coastal-water-canvas { opacity: 1; }
+.coastal-plant-layer { position: absolute; inset: 0; background-image: var(--coastal-plants); background-size: 100% 100%; background-repeat: no-repeat; animation: coastal-plant-sway ease-in-out infinite both paused; }
+.coastal-scene[data-motion-running] .coastal-plant-layer { animation-play-state: running; }
+@keyframes coastal-plant-sway { 0%, 100% { transform: rotate(0deg); } 30% { transform: rotate(var(--sway-positive)); } 72% { transform: rotate(var(--sway-negative)); } }
 @media (prefers-reduced-motion: reduce), print {
-  .coastal-motion-canvas { display: none; }
+  .coastal-layer-stack, .coastal-plants-preload { display: none; }
+  .coastal-plant-layer { animation: none; }
 }

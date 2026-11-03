@@ -17,16 +17,16 @@ export function getCoastalImageLayout({ width, height, imageWidth, imageHeight, 
   }
 }
 
-export function getCoastalBreeze(seconds) {
+export const COASTAL_PLANT_REGIONS = [
+  { name: 'top', clip: 'inset(0 34% 65% 0)', origin: '1.5% 1.5%', positive: .7, negative: -.55, seconds: 12, delay: 0 },
+  { name: 'right', clip: 'inset(76% 0 0 55%)', origin: '99.5% 99%', positive: .85, negative: -.65, seconds: 14.5, delay: .7 },
+  { name: 'left', clip: 'inset(85% 70% 0 0)', origin: '.5% 99.5%', positive: .5, negative: -.45, seconds: 13.2, delay: 1.1 },
+]
+
+export function getCoastalWaterStrength(seconds) {
   const time = Math.max(0, seconds)
   const arrival = Math.min(1, time / 1.8)
-  const strength = arrival * arrival * (3 - 2 * arrival)
-  return {
-    top: strength * (.018 * Math.sin(time * .55) + .004 * Math.sin(time * .91 + .8)),
-    right: strength * (.026 * Math.sin(time * .46 + .9) + .006 * Math.sin(time * .79 + .2)),
-    left: strength * (.017 * Math.sin(time * .5 + 1.9) + .004 * Math.sin(time * .82)),
-    strength,
-  }
+  return arrival * arrival * (3 - 2 * arrival)
 }
 
 const VERTEX_SHADER = `
@@ -44,33 +44,17 @@ precision highp float;
 precision mediump float;
 #endif
 uniform sampler2D u_image;
-uniform vec2 u_image_size;
-uniform vec3 u_breeze;
 uniform float u_time;
 uniform float u_strength;
 varying vec2 v_uv;
-
-vec2 turnAround(vec2 uv, vec2 pivot, float angle) {
-  vec2 point = (uv - pivot) * u_image_size;
-  float c = cos(angle);
-  float s = sin(angle);
-  return pivot + vec2(c * point.x - s * point.y, s * point.x + c * point.y) / u_image_size;
-}
 
 void main() {
   vec2 uv = v_uv;
   vec4 original = texture2D(u_image, uv);
 
-  // Broad, feathered areas flex each botanical corner around its rooted edge.
-  float top = (1.0 - smoothstep(0.50, 0.64, uv.x)) * (1.0 - smoothstep(0.28, 0.35, uv.y));
-  float right = smoothstep(0.61, 0.79, uv.x) * smoothstep(0.805, 0.89, uv.y);
-  float left = (1.0 - smoothstep(0.17, 0.25, uv.x)) * smoothstep(0.92, 0.975, uv.y);
   float edge = min(min(uv.x, 1.0 - uv.x), min(uv.y, 1.0 - uv.y));
   float pin = smoothstep(0.0, 0.012, edge);
   vec2 displaced = uv;
-  displaced += (turnAround(uv, vec2(0.015, 0.015), u_breeze.x) - uv) * top * pin;
-  displaced += (turnAround(uv, vec2(0.995, 0.99), u_breeze.y) - uv) * right * pin;
-  displaced += (turnAround(uv, vec2(0.005, 0.995), u_breeze.z) - uv) * left * pin;
 
   // Follow the shoreline; nearby blue stitches include the ivory wave crests
   // while excluding the warm stone, green planting and distant mountains.
@@ -92,13 +76,17 @@ void main() {
     displaced += vec2(drift * 0.0035, swell * 0.0013) * water * depth * u_strength;
   }
 
+  // This canvas contains water only. The sky, linen and villa are never drawn
+  // or displaced here; the separate background image remains stationary.
+  if (water < 0.001) discard;
   vec4 color = texture2D(u_image, clamp(displaced, vec2(0.0), vec2(1.0)));
   float shimmer = sin(uv.y * 320.0 - u_time * 0.8 + sin(uv.x * 26.0));
   color.rgb *= 1.0 + shimmer * water * 0.025 * u_strength;
+  color.a *= water;
   gl_FragColor = color;
 }`
 
-export function createCoastalRenderer(canvas, image, container) {
+export function createCoastalWaterRenderer(canvas, image, container) {
   const gl = canvas.getContext('webgl', {
     alpha: true, antialias: false, depth: false, stencil: false,
     premultipliedAlpha: false, powerPreference: 'low-power',
@@ -152,16 +140,14 @@ export function createCoastalRenderer(canvas, image, container) {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image)
     gl.uniform1i(gl.getUniformLocation(program, 'u_image'), 0)
-    gl.uniform2f(gl.getUniformLocation(program, 'u_image_size'), image.naturalWidth, image.naturalHeight)
-    const breezeLocation = gl.getUniformLocation(program, 'u_breeze')
     const timeLocation = gl.getUniformLocation(program, 'u_time')
     const strengthLocation = gl.getUniformLocation(program, 'u_strength')
 
     const draw = seconds => {
-      const breeze = getCoastalBreeze(seconds)
-      gl.uniform3f(breezeLocation, breeze.top, breeze.right, breeze.left)
+      gl.clearColor(0, 0, 0, 0)
+      gl.clear(gl.COLOR_BUFFER_BIT)
       gl.uniform1f(timeLocation, seconds)
-      gl.uniform1f(strengthLocation, breeze.strength)
+      gl.uniform1f(strengthLocation, getCoastalWaterStrength(seconds))
       gl.drawArrays(gl.TRIANGLES, 0, 6)
     }
     const resize = () => {

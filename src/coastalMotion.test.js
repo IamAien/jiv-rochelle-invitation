@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { getCoastalBreeze, getCoastalImageLayout } from './coastalMotion.js'
+import { COASTAL_PLANT_REGIONS, getCoastalWaterStrength, getCoastalImageLayout } from './coastalMotion.js'
 
 const close = (actual, expected) => assert.ok(Math.abs(actual - expected) < 1e-7, `${actual} should equal ${expected}`)
 
@@ -33,23 +33,20 @@ test('the motion buffer does not waste resolution on large displays or upscale t
   assert.throws(() => getCoastalImageLayout({ width: 0, height: 836, imageWidth: 941, imageHeight: 1672 }), RangeError)
 })
 
-test('the breeze starts at rest and eases into full strength', () => {
-  assert.deepEqual(getCoastalBreeze(0), { top: 0, right: 0, left: 0, strength: 0 })
-  assert.deepEqual(getCoastalBreeze(-5), getCoastalBreeze(0))
-  assert.ok(getCoastalBreeze(.2).strength < getCoastalBreeze(.9).strength)
-  assert.equal(getCoastalBreeze(1.8).strength, 1)
+test('water starts at rest and eases into full strength', () => {
+  assert.equal(getCoastalWaterStrength(0), 0)
+  assert.equal(getCoastalWaterStrength(-5), 0)
+  assert.ok(getCoastalWaterStrength(.2) < getCoastalWaterStrength(.9))
+  assert.equal(getCoastalWaterStrength(1.8), 1)
 })
 
-test('the botanical corners sway gently in both directions without abrupt frame jumps', () => {
-  const ranges = { top: [], right: [], left: [] }
-  for (let frame = 60; frame < 1800; frame++) {
-    const previous = getCoastalBreeze((frame - 1) / 30)
-    const breeze = getCoastalBreeze(frame / 30)
-    for (const corner of Object.keys(ranges)) {
-      ranges[corner].push(breeze[corner])
-      assert.ok(Math.abs(breeze[corner]) <= .033)
-      assert.ok(Math.abs(breeze[corner] - previous[corner]) < .002)
-    }
+test('only the three transparent plant layers are given slow, small rotations', () => {
+  assert.deepEqual(COASTAL_PLANT_REGIONS.map(region => region.name), ['top', 'right', 'left'])
+  for (const region of COASTAL_PLANT_REGIONS) {
+    assert.ok(region.seconds >= 12)
+    assert.ok(region.positive > 0 && region.positive < 1)
+    assert.ok(region.negative < 0 && region.negative > -1)
+    assert.match(region.clip, /^inset\(/)
+    assert.ok(region.origin.split(' ').every(value => value.endsWith('%')))
   }
-  for (const values of Object.values(ranges)) assert.ok(Math.min(...values) < 0 && Math.max(...values) > 0)
 })
