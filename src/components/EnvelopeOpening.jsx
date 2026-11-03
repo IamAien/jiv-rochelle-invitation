@@ -8,9 +8,13 @@ import './EnvelopeOpening.css'
 // The triangular flap pivots at the actual fold. The upper linen stays behind it.
 const FLAP = 'M0 648 H941 L470.5 1090 Z'
 const POCKET_OPENING = 'M0 0 H941 V648 L470.5 1090 L0 648 Z'
-const FLAP_VERTICES = [[0, 648], [941, 648], [470.5, 1090]]
-const PAPER_EDGES = FLAP_VERTICES.map(([x, y], index) => {
-  const [endX, endY] = FLAP_VERTICES[(index + 1) % FLAP_VERTICES.length]
+// End the diagonal paper edges before the wax seal so they cannot draw across it.
+const PAPER_EDGE_SEGMENTS = [
+  [[0, 648], [941, 648]],
+  [[941, 648], [555.19, 1010.44]],
+  [[385.81, 1010.44], [0, 648]],
+]
+const PAPER_EDGES = PAPER_EDGE_SEGMENTS.map(([[x, y], [endX, endY]]) => {
   return {
     left: `${x / 941 * 100}%`,
     top: `${y / 1672 * 100}%`,
@@ -98,13 +102,6 @@ export default function EnvelopeOpening({ stage, onOpen, onUnavailable }) {
       </svg>
       {PAPER_EDGES.map((edge, index) => <span className="envelope-paper-edge" key={index} style={edge} />)}
       </div>
-      <div className="envelope-address">
-        <p className="envelope-eyebrow">A little envelope, a lifetime of love</p>
-        <p className="envelope-names">Jiv<Ampersand />Rochelle</p>
-        <p className="envelope-date">07 · 02 · 2027</p>
-      </div>
-      <span className="envelope-seal-cue" />
-      <p className="envelope-hint">Tap the seal to open</p>
     </div>
     <button ref={triggerRef} className="envelope-trigger" onClick={onOpen} disabled={!ready || opening}
       aria-label="Open Jiv and Rochelle’s wedding envelope" />

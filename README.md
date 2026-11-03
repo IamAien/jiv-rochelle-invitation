@@ -36,7 +36,7 @@ The production output is in `dist/`.
 - The timeline uses four simple inline stitch-line symbols: a chapel, rings, coupe and celebration star. They stay visible independently of the text-reveal animation and require no image downloads.
 - The live countdown shows days, hours, minutes and seconds in four responsive medallions, targeting the ceremony at 1:00 PM in Cebu (UTC+8). It updates every second and stops at zero when the wedding begins.
 - A shaded ivory pearl follows the timeline as the visitor scrolls forward or back. It sits on its own layer above the events, measures 32px on desktop and 28px on phones, and uses a pixel position that adapts to viewport and content size changes.
-- Reduced-motion preferences shorten the opening and keep its seal hint still. Guests can replay the opening from the footer.
+- The envelope has no added text or circle hint; its original J&R wax seal is unobstructed. Reduced-motion preferences shorten the opening. Guests can replay the opening from the footer.
 - Calendar download and venue map links are included.
 - A thin stitched reading-progress line and active navigation follow scrolling. The story has four softly highlighted chapters, and the blue/pink fabric swatches can be selected, previewed, reset, and copied. Each venue also has a separate calendar download. See `design/REFERENCE-INTERACTIONS.md` for the reference adaptation.
 - The gallery follows the story with three brush-to-reveal linen photo cards and a five-photo draggable Polaroid stack. Reveal, cover, previous, and next buttons support touch and keyboard use. Vertical phone scrolling remains available over the photos. Photo slots currently show labeled linen placeholders; configure real images in `src/gallery.js` and put the files in `public/photos/`.
@@ -46,7 +46,7 @@ The original names, date, ceremony and reception venues, love story, formal dres
 ## Editing
 
 - `src/wedding.js`: countdown date, scroll calculations, and opening durations.
-- `src/components/EnvelopeOpening.jsx` and `EnvelopeOpening.css`: supplied envelope artwork, complementary flap and pocket masks, illustrated letter, tap cue, loading/error handling, and opening animation.
+- `src/components/EnvelopeOpening.jsx` and `EnvelopeOpening.css`: supplied envelope artwork, complementary flap and pocket masks, solid edges that stop before the seal, illustrated letter, loading/error handling, and opening animation.
 - `src/invitationArtwork.js`: current coastal garden artwork shared by the letter and second page.
 - `src/components/StitchedTimelineIcon.jsx`: the four simple stitched timeline symbols.
 - `src/gateGeometry.js`: archived gate geometry used by the previous entrance.
