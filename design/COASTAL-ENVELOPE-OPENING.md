@@ -27,6 +27,14 @@ The page remains inert until the opening completes; focus then moves to the name
 
 The full opening is a keyboard-accessible button. The envelope has no added visible text, circle hint, or seal outline. The original J&R lettering in the wax artwork remains. Letter and second-page text appear inside the invitation as before. On phones the centered portrait artwork fills the screen. Wide windows preserve the portrait composition with warm linen on either side. The second page preserves the complete garden on wide screens and uses a centered crop on phones; text sits in its open linen area.
 
+## Coastal scene motion
+
+`CoastalScene.jsx` keeps the original artwork as its accessible still-image fallback and adds a WebGL canvas after the envelope opens. `coastalMotion.js` samples that same WebP; no new imagery or cutout layers are generated.
+
+Feathered regions turn the upper-left and lower floral corners around their outer stems. The breeze has long, slightly different phases and eases in over 1.8 seconds. The middle of the linen and the villa stay anchored. A shoreline region and nearby blue-stitch samples limit small drifting ripples and a restrained shimmer to the water.
+
+The canvas follows the original image's exact contain/cover scale, centering and phone crop. Its drawing buffer is capped at the native artwork resolution to preserve the threads without wasting work on the empty desktop margins. Motion runs at up to 30 frames per second and pauses when the illustration is offscreen or the browser tab is hidden. Reduced-motion preferences, printing, unavailable graphics support and context loss show the original still image. Replaying the envelope cleans up the renderer before the next reveal.
+
 ## Verification
 
-The production build and behavior suite are required. Server-rendered checks cover the envelope, paper layers, seal, accessibility markup, and animation timing. Current browser automation is unavailable in the editing session, so visual animation QA remains unverified.
+The production build and behavior suite are required. Coastal motion tests verify phone and desktop image alignment, source-resolution limits, a still first frame and bounded, gradual sway in both directions. Server-rendered checks cover the original image fallback, decorative canvas, envelope, paper layers, seal, accessibility markup, and animation timing. Current browser automation is unavailable in the editing session, so visual animation QA remains unverified.

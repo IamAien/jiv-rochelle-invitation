@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { ENVELOPE_OPENING_MS, ENVELOPE_CROSSFADE_MS, getCountdown, getTimelineProgress, WEDDING_DATE } from './wedding.js'
-import { INVITATION_ARTWORK } from './invitationArtwork.js'
 import countdownFrame from './assets/woven-countdown-frame.webp'
 import EnvelopeOpening from './components/EnvelopeOpening.jsx'
+import CoastalScene from './components/CoastalScene.jsx'
 import TimelineArtwork from './components/TimelineArtwork.jsx'
 import { setupScrollReveals } from './scrollReveal.js'
 import WeddingNavigation from './components/WeddingNavigation.jsx'
@@ -134,7 +134,7 @@ export default function App() {
       <WeddingNavigation enabled={stage === 'done'} />
       <main>
         <section className="invitation-cover" id="invitation" aria-labelledby="couple-names">
-          <img className="villa-art" src={INVITATION_ARTWORK.src} width={INVITATION_ARTWORK.width} height={INVITATION_ARTWORK.height} alt="Embroidered coastal villa and flower-filled garden overlooking the blue sea, framed by ivory blossoms on warm linen" fetchPriority="high" />
+          <CoastalScene enabled={stage === 'done'} />
           <div className="invitation-text"><p className="invite-prelude">Together with their families</p><h1 id="couple-names" ref={headingRef} tabIndex="-1" aria-label="Jiv and Rochelle">Jiv<Ampersand />Rochelle</h1><time className="wedding-date" dateTime={WEDDING_DATE}>February 7, 2027</time><p className="cover-location">Cebu, Philippines</p></div>
           <a href="#welcome" className="discover-link">Our forever starts here <span>↓</span></a>
         </section>

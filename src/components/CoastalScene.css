@@ -1,0 +1,6 @@
+.coastal-scene { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.coastal-motion-canvas { position: absolute; display: block; opacity: 0; pointer-events: none; }
+.coastal-scene[data-motion-ready] .coastal-motion-canvas { opacity: 1; }
+@media (prefers-reduced-motion: reduce), print {
+  .coastal-motion-canvas { display: none; }
+}
