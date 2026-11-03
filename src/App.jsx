@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { ENVELOPE_OPENING_MS, ENVELOPE_CROSSFADE_MS, getCountdown, getTimelineProgress, WEDDING_DATE } from './wedding.js'
 import { INVITATION_ARTWORK } from './invitationArtwork.js'
-import florals from './assets/woven-garden-garland.webp'
 import countdownFrame from './assets/woven-countdown-frame.webp'
 import EnvelopeOpening from './components/EnvelopeOpening.jsx'
 import StitchedTimelineIcon from './components/StitchedTimelineIcon.jsx'
@@ -37,7 +36,6 @@ function Countdown() {
     return () => window.clearInterval(timer)
   }, [])
   return <section className="countdown-section section" id="countdown" aria-labelledby="countdown-title">
-    <img className="floral-garland" src={florals} alt="" loading="lazy" />
     <p className="eyebrow">Every day, a little closer</p><h2 id="countdown-title">Counting down<br /><em>to forever</em></h2>
     <p className="section-intro">Until we say “I do,” with you by our side.</p>
     <div className="countdown" role="timer" aria-label={`${remaining.days} days, ${remaining.hours} hours, ${remaining.minutes} minutes, ${remaining.seconds} seconds until the wedding`}>

@@ -31,8 +31,8 @@ The production output is in `dist/`.
 - Portrait artwork fills the phone opening and keeps its proportions on desktop, with warm linen at either side. The invitation preserves the complete garden on wide screens and uses a centered crop on phones.
 - The opening supports keyboard activation, loading failure recovery, focus handoff, replay, and reduced-motion preferences. Page navigation unlocks after the transition.
 - Text fades in with a slight rise as visitors scroll. Short staggered delays create a soft sequence, and blocks remain visible when scrolling back.
-- Countdown linen patches, olive-and-rose garlands, running-stitch dividers and fabric swatches follow the supplied scenes' muted textile palette. Smooth warm ivory, pale sage, dusty blush and light stone backgrounds complement the artwork.
-- The floral garland appears on the countdown; the dress-code and closing sections use clean spacing without floral artwork.
+- Countdown linen patches, running-stitch dividers and fabric swatches follow the supplied scenes' muted textile palette. Smooth warm ivory, pale sage, dusty blush and light stone backgrounds complement the artwork.
+- The countdown, dress-code and closing sections use clean spacing without floral garlands.
 - The timeline uses four simple inline stitch-line symbols: a chapel, rings, coupe and celebration star. They stay visible independently of the text-reveal animation and require no image downloads.
 - The live countdown shows days, hours, minutes and seconds in four responsive medallions, targeting the ceremony at 1:00 PM in Cebu (UTC+8). It updates every second and stops at zero when the wedding begins.
 - A shaded ivory pearl follows the timeline as the visitor scrolls forward or back. It sits on its own layer above the events, measures 32px on desktop and 28px on phones, and uses a pixel position that adapts to viewport and content size changes.

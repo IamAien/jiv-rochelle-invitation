@@ -1,6 +1,6 @@
 # Woven decoration set
 
-The current background tints, simplified timeline symbols and scrolling pearl are described in [Soft linen and timeline](SOFT-LINEN-AND-TIMELINE.md). The earlier bitmap timeline illustrations below are retained as source history; the garlands, countdown patches and linen tile remain active.
+The current background tints, simplified timeline symbols and scrolling pearl are described in [Soft linen and timeline](SOFT-LINEN-AND-TIMELINE.md). The bitmap timeline illustrations and floral garland below are retained as source artwork; the countdown patches and linen tile remain active. The countdown heading has no floral decoration or reserved garland spacing.
 
 The invitation decorations use fine cotton embroidery on visible ivory linen, faded olive leaves, dusty rose, oatmeal thread and small lavender accents. The countdown uses plain round linen patches with running-stitch borders and small botanical sprigs. Garlands, timeline motifs, fabric backgrounds, dividers, swatches and the moving timeline marker share that treatment.
 

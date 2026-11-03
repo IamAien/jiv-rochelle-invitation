@@ -59,8 +59,7 @@ body { background: var(--ivory); }
 .full-names span { display: block; font-size: 22px; margin: 4px 0; }
 .text-button { display: inline-flex; gap: 28px; align-items: center; justify-content: center; padding: 12px 0; margin-top: 24px; border: 0; border-bottom: 1px dashed #93957a; background: transparent; font: 9px var(--sans); letter-spacing: .15em; text-transform: uppercase; transition: color .2s, gap .2s; }
 .text-button:hover { color: #997945; gap: 36px; }
-.countdown-section { --section-tone: #eee4dc; padding-top: 240px; padding-bottom: 45px; }
-.floral-garland { position: absolute; width: 92%; max-width: 640px; top: 25px; left: 50%; transform: translateX(-50%); pointer-events: none; }
+.countdown-section { --section-tone: #eee4dc; padding-top: 95px; padding-bottom: 45px; }
 .countdown-section h2 { font-size: clamp(48px, 7vw, 65px); }
 .countdown { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 2.5vw, 25px); width: 100%; max-width: 780px; margin: 54px auto 0; }
 .countdown-unit { min-width: 0; }
@@ -209,8 +208,7 @@ body { background: var(--ivory); }
   .welcome-section { padding-top: 76px; padding-bottom: 55px; }
   .welcome-section .full-names { font-size: 24px; }
   .body-copy { font-size: 19px; }
-  .countdown-section { padding-top: 185px; padding-bottom: 32px; }
-  .countdown-section .floral-garland { top: 20px; width: 104%; }
+  .countdown-section { padding-top: 76px; padding-bottom: 32px; }
   .countdown { gap: 8px; margin: 44px auto 0; }
   .countdown-value { font-size: clamp(22px, 6vw, 36px); padding-right: 1px; }
   .countdown-label { font-size: 8px; letter-spacing: .08em; margin-top: 12px; }
@@ -255,7 +253,6 @@ body { background: var(--ivory); }
   .site-header nav { gap: 12px; }
   .section h2 { font-size: 40px; }
   .countdown { gap: 6px; }
-  .countdown-section { padding-top: 165px; }
   .swatches { gap: 10px; }
   .swatch-color { width: 39px; height: 39px; }
 }
