@@ -1,7 +1,6 @@
 // The ceremony begins at 1 PM in Cebu (UTC+8).
 export const WEDDING_DATE = '2027-02-07T13:00:00+08:00'
 export const WEDDING_TIMESTAMP = new Date(WEDDING_DATE).getTime()
-export const GATE_OPENING_MS = 8800
 export const ENVELOPE_OPENING_MS = 10000
 export const ENVELOPE_CROSSFADE_MS = 1700
 

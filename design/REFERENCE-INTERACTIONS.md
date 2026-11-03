@@ -1,6 +1,6 @@
 # Reference interactions adapted to the linen invitation
 
-The supplied `jiv-rochelle-wedding3/src/App.jsx` and `App.css` were used as interaction references. The original invitation keeps its gate opening, ceremony artwork, typefaces, muted palette, countdown frames, timeline pearl, and wedding details.
+The supplied `jiv-rochelle-wedding3/src/App.jsx` and `App.css` were used as interaction references. The invitation uses the coastal envelope opening and villa artwork, with its selected typefaces, muted palette, countdown frames, timeline pearl, and wedding details.
 
 - The reference's scroll progress becomes a thin running-stitch line beneath the existing header. Navigation underlines the section being read. Desktop navigation also links to the story and attire; phones retain the three original links.
 - The reference's word-by-word story becomes four naturally scrolling chapters. A small thread marker and warm paper highlight follow the current paragraph in either direction. Every paragraph stays readable, with no pinned screen or additional scroll distance.
@@ -16,4 +16,4 @@ Both the supplied reference and the working project lacked personal photos. `src
 
 Implementation lives in `src/components/WeddingNavigation.jsx`, `WeddingStory.jsx`, `GuestPalette.jsx`, `WeddingVenues.jsx`, `WeddingGallery.jsx`, `src/useScrollFrame.js`, `src/gallery.js`, and `src/calendar.js`, with styles in `src/App.css` and `src/components/WeddingGallery.css`.
 
-Validation: 24 behavior tests, production build, and server-rendered markup checks. Live visual and pointer/touch verification could not run because the browser/native connection was unavailable.
+Validation: behavior tests, production build, and server-rendered markup checks. Live visual and pointer/touch verification could not run because the browser/native connection was unavailable.

@@ -1,6 +1,6 @@
 # Coastal envelope and invitation
 
-The current entrance replaces the garden gates with the user's supplied embroidered coastal envelope. The invitation cover uses the separately supplied coastal villa garden. Existing wedding details, selected Baskerville ampersand, countdown, story, gallery, palette and venue links are retained.
+The opening uses the user's supplied embroidered coastal envelope. The invitation cover uses the separately supplied coastal villa garden. Wedding details, selected Baskerville ampersand, countdown, story, gallery, palette and venue links share this invitation.
 
 ## Supplied artwork
 
@@ -29,4 +29,4 @@ The full opening is a keyboard-accessible button. The envelope has no added visi
 
 ## Verification
 
-The production build and existing behavior suite are required. Current browser automation is unavailable in the editing session, so visual animation QA remains unverified. Older garden gate and fountain files and their geometry tests are retained as archived implementations and are excluded from the active bundle.
+The production build and behavior suite are required. Server-rendered checks cover the envelope, paper layers, seal, accessibility markup, and animation timing. Current browser automation is unavailable in the editing session, so visual animation QA remains unverified.

@@ -121,7 +121,7 @@ export default function App() {
     setOpeningStarted(true)
     setStage('opening')
   }
-  const handleEntranceUnavailable = () => {
+  const handleEnvelopeUnavailable = () => {
     window.scrollTo({ top: 0, behavior: 'instant' })
     setStage('done')
   }
@@ -150,6 +150,6 @@ export default function App() {
       </main>
       <footer className="closing-section section"><p className="eyebrow">We can’t wait to celebrate with you</p><Monogram /><p className="closing-names">Jiv <Ampersand /> Rochelle</p><p className="closing-date">February 7, 2027 · Cebu</p><button className="replay-button" onClick={replayOpening}><span aria-hidden="true">↺</span> Open the magic again</button></footer>
     </div>
-    <EnvelopeOpening stage={stage} onOpen={openInvitation} onUnavailable={handleEntranceUnavailable} />
+    <EnvelopeOpening stage={stage} onOpen={openInvitation} onUnavailable={handleEnvelopeUnavailable} />
   </>
 }

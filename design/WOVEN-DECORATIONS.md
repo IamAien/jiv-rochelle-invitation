@@ -2,16 +2,13 @@
 
 The current background tints, simplified timeline symbols and scrolling pearl are described in [Soft linen and timeline](SOFT-LINEN-AND-TIMELINE.md). The earlier bitmap timeline illustrations below are retained as source history; the garlands, countdown patches and linen tile remain active.
 
-The invitation decorations now follow the two supplied desktop scenes: fine cotton embroidery on visible ivory linen, faded olive leaves, dusty rose, oatmeal thread and small lavender accents. The countdown uses plain round linen patches with running-stitch borders and small botanical sprigs. Garlands, timeline motifs, fabric backgrounds, dividers, swatches and the moving timeline marker share that treatment.
+The invitation decorations use fine cotton embroidery on visible ivory linen, faded olive leaves, dusty rose, oatmeal thread and small lavender accents. The countdown uses plain round linen patches with running-stitch borders and small botanical sprigs. Garlands, timeline motifs, fabric backgrounds, dividers, swatches and the moving timeline marker share that treatment.
 
-Both desktop scene JPEGs, the retained phone artwork, opening sequence, wedding information, four-part live countdown and scroll behavior are preserved.
+These decorations accompany the current coastal envelope and villa invitation, four-part live countdown and scroll behavior.
 
 ## Method and references
 
-Generated with the **built-in image_gen tool**, using these local images as material, palette and thread-scale references:
-
-- [Desktop entrance](../src/assets/desktop-entrance-supplied.jpg)
-- [Desktop ceremony](../src/assets/desktop-ceremony-supplied.jpg)
+Generated with the **built-in image_gen tool**, using embroidered linen scenes as material, palette and thread-scale references.
 
 No CLI image API was used. All generated originals are preserved as PNGs in the project. Garlands, countdown patches and timeline motifs have real alpha transparency. PNG/WebP composites were inspected on the website's ivory background to check the edges; transparent-pixel RGB colors do not appear when composited. Production WebPs use quality 96 without resizing, except the background tile, encoded at 640 × 640, quality 94, to reduce page weight.
 

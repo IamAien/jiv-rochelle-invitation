@@ -49,8 +49,6 @@ The original names, date, ceremony and reception venues, love story, formal dres
 - `src/components/EnvelopeOpening.jsx` and `EnvelopeOpening.css`: supplied envelope artwork, complementary flap and pocket masks, solid edges that stop before the seal, illustrated letter, loading/error handling, and opening animation.
 - `src/invitationArtwork.js`: current coastal garden artwork shared by the letter and second page.
 - `src/components/StitchedTimelineIcon.jsx`: the four simple stitched timeline symbols.
-- `src/gateGeometry.js`: archived gate geometry used by the previous entrance.
-- `src/components/GardenEntrance.jsx`, `GardenEntrance.css`, `src/ceremonyArtwork.js`, `src/fountainReveal.js`, and `src/components/FountainReveal.jsx`: archived garden entrance and fountain implementation, excluded from the active bundle.
 - `src/App.jsx`: invitation text, timeline, venues, palettes, and opening lifecycle.
 - `src/App.css`: visual design and animations.
 - The name separators and monograms use the selected option 05, Baskerville. `src/components/Ampersand.jsx` renders the exact comparison outline from `src/assets/baskerville-ampersand.json`, so its shape stays consistent across devices.
@@ -58,20 +56,13 @@ The original names, date, ceremony and reception venues, love story, formal dres
 - `src/gallery.js`: gallery photos and captions, GitHub Pages image paths, scratch coverage, and album navigation helpers.
 - `src/scrollReveal.js`: progressive text reveals, reduced-motion and browser fallbacks, and replay cleanup.
 - `src/assets/`: optimized website artwork and original PNGs.
+- `design/COASTAL-ENVELOPE-OPENING.md`: current envelope artwork, paper layers, animation timing, and invitation layout.
 - `design/WOVEN-DECORATIONS.md`: current decoration assets, material references, production details and full generation prompts.
 - `design/SOFT-LINEN-AND-TIMELINE.md`: current subtle background palette, simplified timeline symbols and visible scrolling pearl.
 - `design/ENHANCED-PAGE-LINEN.md`: earlier linen background experiment, saved texture files, full generation prompt and production settings.
-- `design/MUTED-REFERENCE-PALETTE.md`: current soft textile treatment, saved assets, input references and complete prompts.
-- `design/STITCHED-PLANTS-AND-CEREMONY.md`: earlier stronger needlework iteration.
-- `design/REFERENCE-EXTENSION.md`: previous terrace extension iteration.
-- `design/FINE-THREAD-GARDEN.md`: previous fine-thread scene iteration.
-- `design/GATES-AND-CEREMONY.md`: previous entrance and ceremony artwork history.
-- `design/COZY-COTTAGE-AND-REVEALS.md`: retained scroll-reveal and embroidered-detail notes, with earlier artwork.
-- `design/BOOK-OPENING.md` and `design/STITCHED-COVER-AND-HOUSE.md`: earlier artwork history.
-- `design/ARTWORK.md`: earlier artwork retained as source material.
 
 The illustrated coastal villa and garden are decorative invitation artwork; the actual venues are listed in the details section.
 
 ## Verification
 
-The production build and 29 existing behavior tests pass. Server-rendered checks verify the supplied artwork, envelope states, valid SVG mask references, both paper faces and three solid edges, inert invitation content, reduced-motion rules, and the ten-second transition. Browser preview is unavailable in the current session, so the new animation has not had visual browser QA. Older gate and fountain tests remain as regression coverage for the archived implementation.
+The production build and 21 behavior tests cover the current countdown, scroll reveals, calendar downloads and gallery. Server-rendered checks verify the supplied artwork, envelope states, valid SVG mask references, both paper faces and three solid edges, inert invitation content, reduced-motion rules, and the ten-second transition. Browser preview is unavailable in the current session, so the animation has not had visual browser QA.

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-// One measurement per animation frame; nothing runs behind the entrance.
+// One measurement per animation frame; nothing runs while the invitation is closed.
 export function useScrollFrame(enabled, update) {
   useEffect(() => {
     if (!enabled) return

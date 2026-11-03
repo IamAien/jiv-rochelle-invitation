@@ -6,4 +6,4 @@ The timeline has four small code-native symbols in [StitchedTimelineIcon.jsx](..
 
 The scrolling pearl is a direct child of the timeline, after the event list, on layer 3. It is 32px on desktop and 28px on phones, with a soft ivory highlight, warm outline and small shadow. Both the line and pearl share one responsive horizontal axis. Scroll and resize updates set its pixel position to the current progress multiplied by the thread height, avoiding percentage positioning inside a two-pixel-wide nested container.
 
-The supplied opening and ceremony images, countdown artwork and live seconds, entrance animation and text reveals are retained. The timeline symbols and pearl remain outside the text-reveal effect.
+The coastal envelope and villa artwork, countdown and live seconds, opening animation and text reveals work together with this palette. The timeline symbols and pearl remain outside the text-reveal effect.
