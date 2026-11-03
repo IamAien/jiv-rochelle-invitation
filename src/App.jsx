@@ -3,7 +3,7 @@ import { ENVELOPE_OPENING_MS, ENVELOPE_CROSSFADE_MS, getCountdown, getTimelinePr
 import { INVITATION_ARTWORK } from './invitationArtwork.js'
 import countdownFrame from './assets/woven-countdown-frame.webp'
 import EnvelopeOpening from './components/EnvelopeOpening.jsx'
-import StitchedTimelineIcon from './components/StitchedTimelineIcon.jsx'
+import TimelineArtwork from './components/TimelineArtwork.jsx'
 import { setupScrollReveals } from './scrollReveal.js'
 import WeddingNavigation from './components/WeddingNavigation.jsx'
 import WeddingStory from './components/WeddingStory.jsx'
@@ -15,10 +15,10 @@ import { downloadWeddingCalendar } from './calendar.js'
 import './App.css'
 
 const EVENTS = [
-  { icon: 'chapel', time: '1:00 PM', title: 'The ceremony', description: 'The Archdiocesan Shrine of the Most Sacred Heart of Jesus', note: 'Our forever begins.' },
-  { icon: 'rings', time: 'After “I do”', title: 'A little time together', description: 'Photographs, happy tears, and wishes for the newlyweds.', note: 'A moment to remember.' },
-  { icon: 'glass', time: '5:00 PM', title: 'The reception', description: 'Marco Polo Plaza Cebu', note: 'Let the celebration begin.' },
-  { icon: 'sparkle', time: 'Into the evening', title: 'Love & celebration', description: 'Good food, heartfelt toasts, and a little dancing.', note: 'Memories to last a lifetime.' },
+  { icon: 'arch', time: '1:00 PM', title: 'The ceremony', description: 'The Archdiocesan Shrine of the Most Sacred Heart of Jesus', note: 'Our forever begins.' },
+  { icon: 'couple', time: 'After “I do”', title: 'A little time together', description: 'Photographs, happy tears, and wishes for the newlyweds.', note: 'A moment to remember.' },
+  { icon: 'cake', time: '5:00 PM', title: 'The reception', description: 'Marco Polo Plaza Cebu', note: 'Let the celebration begin.' },
+  { icon: 'disco', time: 'Into the evening', title: 'Love & celebration', description: 'Good food, heartfelt toasts, and a little dancing.', note: 'Memories to last a lifetime.' },
 ]
 
 function Flourish({ className = '' }) {
@@ -83,9 +83,9 @@ function Timeline() {
     <p className="section-intro">A beautiful beginning, one moment at a time.</p>
     <div className="timeline" ref={trackRef}>
       <div className="timeline-thread" aria-hidden="true"><span className="timeline-fill" /></div>
-      <ol className="timeline-events">{EVENTS.map(event => <li className="timeline-event" key={event.title}><div className="timeline-art"><StitchedTimelineIcon kind={event.icon} /></div><div className="timeline-copy"><p className="event-time">{event.time}</p><h3>{event.title}</h3><p>{event.description}</p><span className="event-note">{event.note}</span></div></li>)}</ol>
+      <ol className="timeline-events">{EVENTS.map(event => <li className="timeline-event" key={event.title}><div className="timeline-art"><TimelineArtwork kind={event.icon} /></div><div className="timeline-copy"><p className="event-time">{event.time}</p><h3>{event.title}</h3><p>{event.description}</p><span className="event-note">{event.note}</span></div></li>)}</ol>
       <span className="traveling-pearl" aria-hidden="true" />
-      <span className="timeline-end" aria-hidden="true" />
+      <TimelineArtwork kind="moon" className="timeline-ending" />
     </div>
   </section>
 }

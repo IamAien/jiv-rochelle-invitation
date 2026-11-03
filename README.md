@@ -33,7 +33,7 @@ The production output is in `dist/`.
 - Text fades in with a slight rise as visitors scroll. Short staggered delays create a soft sequence, and blocks remain visible when scrolling back.
 - Countdown linen patches, running-stitch dividers and fabric swatches follow the supplied scenes' muted textile palette. Smooth warm ivory, pale sage, dusty blush and light stone backgrounds complement the artwork.
 - The countdown, dress-code and closing sections use clean spacing without floral garlands.
-- The timeline uses four simple inline stitch-line symbols: a chapel, rings, coupe and celebration star. They stay visible independently of the text-reveal animation and require no image downloads.
+- The timeline uses the supplied floral arch, dancing couple, wedding cake and disco-ball illustrations for its four events. The supplied moon and clouds close the timeline. Images are optimized as WebP and stay visible independently of the text-reveal animation.
 - The live countdown shows days, hours, minutes and seconds in four responsive medallions, targeting the ceremony at 1:00 PM in Cebu (UTC+8). It updates every second and stops at zero when the wedding begins.
 - A shaded ivory pearl follows the timeline as the visitor scrolls forward or back. It sits on its own layer above the events, measures 32px on desktop and 28px on phones, and uses a pixel position that adapts to viewport and content size changes.
 - The envelope has no added text or circle hint; its original J&R wax seal is unobstructed. Reduced-motion preferences shorten the opening. Guests can replay the opening from the footer.
@@ -48,7 +48,7 @@ The original names, date, ceremony and reception venues, love story, formal dres
 - `src/wedding.js`: countdown date, scroll calculations, and opening durations.
 - `src/components/EnvelopeOpening.jsx` and `EnvelopeOpening.css`: supplied envelope artwork, complementary flap and pocket masks, solid edges that stop before the seal, illustrated letter, loading/error handling, and opening animation.
 - `src/invitationArtwork.js`: current coastal garden artwork shared by the letter and second page.
-- `src/components/StitchedTimelineIcon.jsx`: the four simple stitched timeline symbols.
+- `src/components/TimelineArtwork.jsx` and `src/assets/timeline/`: supplied timeline illustrations, original PNGs, optimized WebPs, and display sizing.
 - `src/App.jsx`: invitation text, timeline, venues, palettes, and opening lifecycle.
 - `src/App.css`: visual design and animations.
 - The name separators and monograms use the selected option 05, Baskerville. `src/components/Ampersand.jsx` renders the exact comparison outline from `src/assets/baskerville-ampersand.json`, so its shape stays consistent across devices.
@@ -58,7 +58,7 @@ The original names, date, ceremony and reception venues, love story, formal dres
 - `src/assets/`: optimized website artwork and original PNGs.
 - `design/COASTAL-ENVELOPE-OPENING.md`: current envelope artwork, paper layers, animation timing, and invitation layout.
 - `design/WOVEN-DECORATIONS.md`: current decoration assets, material references, production details and full generation prompts.
-- `design/SOFT-LINEN-AND-TIMELINE.md`: current subtle background palette, simplified timeline symbols and visible scrolling pearl.
+- `design/SOFT-LINEN-AND-TIMELINE.md`: current background palette, supplied timeline illustrations and scrolling pearl.
 - `design/ENHANCED-PAGE-LINEN.md`: earlier linen background experiment, saved texture files, full generation prompt and production settings.
 
 The illustrated coastal villa and garden are decorative invitation artwork; the actual venues are listed in the details section.

@@ -1,6 +1,6 @@
 # Woven decoration set
 
-The current background tints, simplified timeline symbols and scrolling pearl are described in [Soft linen and timeline](SOFT-LINEN-AND-TIMELINE.md). The bitmap timeline illustrations and floral garland below are retained as source artwork; the countdown patches and linen tile remain active. The countdown heading has no floral decoration or reserved garland spacing.
+The current background tints, supplied timeline illustrations and scrolling pearl are described in [Soft linen and timeline](SOFT-LINEN-AND-TIMELINE.md). The earlier bitmap timeline illustrations and floral garland below are retained as source artwork; the countdown patches and linen tile remain active. The countdown heading has no floral decoration or reserved garland spacing.
 
 The invitation decorations use fine cotton embroidery on visible ivory linen, faded olive leaves, dusty rose, oatmeal thread and small lavender accents. The countdown uses plain round linen patches with running-stitch borders and small botanical sprigs. Garlands, timeline motifs, fabric backgrounds, dividers, swatches and the moving timeline marker share that treatment.
 
@@ -21,7 +21,7 @@ No CLI image API was used. All generated originals are preserved as PNGs in the 
 | Four timeline motifs | [WebP](../src/assets/woven-timeline-sheet.webp) | [PNG](../src/assets/woven-timeline-sheet.png) | 1254 × 1254 | 1254 × 1254 |
 | Plain linen tile | [WebP](../src/assets/woven-linen.webp) | [PNG](../src/assets/woven-linen.png) | 1254 × 1254 | 640 × 640 |
 
-The timeline sheet places the chapel, rings, coupe and celebration ornament in top-left, top-right, bottom-left and bottom-right quadrants. Its four quadrants are prepared as individual 627 × 627 production images: [chapel](../src/assets/woven-timeline-chapel.webp), [rings](../src/assets/woven-timeline-rings.webp), [coupe](../src/assets/woven-timeline-coupe.webp), and [celebration](../src/assets/woven-timeline-celebration.webp). The timeline renders these as normal image elements with intrinsic dimensions, outside the scroll-reveal effect; the original sheet remains source artwork. Live countdown numbers remain HTML text, including seconds. Section textures use a low-opacity layer so text remains readable. Dress-code colors remain colored fabric swatches with a linen overlay. The timeline marker is a small matte stitched button following the existing scroll calculation.
+The earlier timeline sheet places the chapel, rings, coupe and celebration ornament in top-left, top-right, bottom-left and bottom-right quadrants. Its four quadrants remain source images: [chapel](../src/assets/woven-timeline-chapel.webp), [rings](../src/assets/woven-timeline-rings.webp), [coupe](../src/assets/woven-timeline-coupe.webp), and [celebration](../src/assets/woven-timeline-celebration.webp). The active timeline uses the five supplied painted illustrations documented in [Soft linen and timeline](SOFT-LINEN-AND-TIMELINE.md). Live countdown numbers remain HTML text, including seconds. Dress-code colors remain colored fabric swatches with a linen overlay. The timeline pearl follows the existing scroll calculation.
 
 ## Final prompts
 
