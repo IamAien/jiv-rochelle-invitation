@@ -5,8 +5,19 @@ import { ENVELOPE_OPENING_MS } from '../wedding.js'
 import Ampersand from './Ampersand.jsx'
 import './EnvelopeOpening.css'
 
-// Both pieces use the original pixels, including the existing J&R wax seal.
-const FLAP = 'M0 0 H941 V648 L470.5 1090 L0 648 Z'
+// The triangular flap pivots at the actual fold. The upper linen stays behind it.
+const FLAP = 'M0 648 H941 L470.5 1090 Z'
+const POCKET_OPENING = 'M0 0 H941 V648 L470.5 1090 L0 648 Z'
+const FLAP_VERTICES = [[0, 648], [941, 648], [470.5, 1090]]
+const PAPER_EDGES = FLAP_VERTICES.map(([x, y], index) => {
+  const [endX, endY] = FLAP_VERTICES[(index + 1) % FLAP_VERTICES.length]
+  return {
+    left: `${x / 941 * 100}%`,
+    top: `${y / 1672 * 100}%`,
+    width: `${Math.hypot(endX - x, endY - y) / 941 * 100}%`,
+    '--edge-angle': `${Math.atan2(endY - y, endX - x)}rad`,
+  }
+})
 
 export default function EnvelopeOpening({ stage, onOpen, onUnavailable }) {
   const [ready, setReady] = useState(false)
@@ -34,8 +45,10 @@ export default function EnvelopeOpening({ stage, onOpen, onUnavailable }) {
           <pattern id={`${id}-linen`} width="941" height="400" patternUnits="userSpaceOnUse">
             <image href={envelope} width="941" height="1672" />
           </pattern>
+          <clipPath id={`${id}-upper-linen`}><rect width="941" height="648" /></clipPath>
         </defs>
         <rect width="941" height="1672" fill={`url(#${id}-linen)`} />
+        <image href={envelope} width="941" height="1672" clipPath={`url(#${id}-upper-linen)`} />
       </svg>
       <div className="envelope-letter">
         <img src={INVITATION_ARTWORK.src} alt="" fetchPriority="high" />
@@ -49,13 +62,14 @@ export default function EnvelopeOpening({ stage, onOpen, onUnavailable }) {
         <defs>
           <mask id={`${id}-pocket`} maskUnits="userSpaceOnUse" x="0" y="0" width="941" height="1672" style={{ maskType: 'luminance' }}>
             <rect width="941" height="1672" fill="white" />
-            <path d={FLAP} fill="black" />
+            <path d={POCKET_OPENING} fill="black" />
             <ellipse cx="470.5" cy="1045" rx="83" ry="86" fill="black" />
           </mask>
         </defs>
         <image href={envelope} width="941" height="1672" mask={`url(#${id}-pocket)`} />
       </svg>
-      <svg className="envelope-flap" viewBox="0 0 941 1672">
+      <div className="envelope-flap">
+      <svg className="envelope-flap-face envelope-flap-front" viewBox="0 0 941 1672">
         <defs>
           <mask id={`${id}-flap`} maskUnits="userSpaceOnUse" x="0" y="0" width="941" height="1672" style={{ maskType: 'luminance' }}>
             <rect width="941" height="1672" fill="black" />
@@ -65,6 +79,25 @@ export default function EnvelopeOpening({ stage, onOpen, onUnavailable }) {
         </defs>
         <image href={envelope} width="941" height="1672" mask={`url(#${id}-flap)`} />
       </svg>
+      <svg className="envelope-flap-face envelope-flap-back" viewBox="0 0 941 1672">
+        <defs>
+          <pattern id={`${id}-reverse-linen`} width="941" height="400" patternUnits="userSpaceOnUse">
+            <image href={envelope} width="941" height="1672" />
+          </pattern>
+          <linearGradient id={`${id}-reverse-shade`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#ac8961" stopOpacity=".2" />
+            <stop offset=".2" stopColor="#fff5e6" stopOpacity=".08" />
+            <stop offset="1" stopColor="#d0ad82" stopOpacity=".12" />
+          </linearGradient>
+        </defs>
+        <ellipse cx="470.5" cy="1045" rx="78" ry="81" fill="#b77b58" />
+        <path d={FLAP} fill={`url(#${id}-reverse-linen)`} />
+        <path d={FLAP} fill={`url(#${id}-reverse-shade)`} />
+        <path d={FLAP} fill="none" stroke="#e8cfad" strokeWidth="7" strokeLinejoin="round" />
+        <path d={FLAP} fill="none" stroke="#bda17d" strokeWidth="2" strokeDasharray="2 5" strokeLinecap="round" />
+      </svg>
+      {PAPER_EDGES.map((edge, index) => <span className="envelope-paper-edge" key={index} style={edge} />)}
+      </div>
       <div className="envelope-address">
         <p className="envelope-eyebrow">A little envelope, a lifetime of love</p>
         <p className="envelope-names">Jiv<Ampersand />Rochelle</p>

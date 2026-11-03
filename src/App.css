@@ -10,7 +10,7 @@
 body { background: var(--ivory); }
 .invitation-shell { position: relative; width: 100%; min-height: 100svh; background: var(--ivory); overflow: clip; }
 .invitation-shell:not(.has-started):not(.is-open) { visibility: hidden; }
-.invitation-shell.has-started { animation: invitation-page-appear 1s ease 3.2s both; }
+.invitation-shell.has-started { animation: invitation-page-appear var(--page-reveal-duration) ease-in-out var(--page-reveal-delay) both; }
 @keyframes invitation-page-appear { from { opacity: 0; } to { opacity: 1; } }
 .site-header { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; min-height: 64px; padding: 0 clamp(28px, 5vw, 90px); background: var(--ivory); border-bottom: 1px dashed #887b6240; }
 .site-header nav { display: flex; gap: clamp(14px, 2.2vw, 24px); }
@@ -51,7 +51,7 @@ body { background: var(--ivory); }
 .cover-location { font: 8px/1.6 var(--sans); text-transform: uppercase; letter-spacing: .25em; margin-top: 12px; }
 .discover-link { position: absolute; bottom: 4%; left: 50%; transform: translateX(-50%); white-space: nowrap; font: 8px var(--sans); letter-spacing: .14em; padding: 12px 17px; color: #785a3e; background: #fcf0dfe6; border: 1px solid #a98a6533; }
 .discover-link span { margin-left: 14px; }
-.has-started .invitation-text { animation: invitation-appear 1.4s ease 3.2s both; }
+.has-started .invitation-text { animation: invitation-appear 2s ease-in-out var(--page-reveal-delay) both; }
 .is-open:not(.has-started) .invitation-text { animation: invitation-appear 1.4s ease both; }
 @keyframes invitation-appear { from { opacity: 0; translate: 0 12px; } to { opacity: 1; translate: 0 0; } }
 .welcome-section { padding-top: 90px; padding-bottom: 80px; }

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ENVELOPE_OPENING_MS, getCountdown, getTimelineProgress, WEDDING_DATE } from './wedding.js'
+import { ENVELOPE_OPENING_MS, ENVELOPE_CROSSFADE_MS, getCountdown, getTimelineProgress, WEDDING_DATE } from './wedding.js'
 import { INVITATION_ARTWORK } from './invitationArtwork.js'
 import florals from './assets/woven-garden-garland.webp'
 import countdownFrame from './assets/woven-countdown-frame.webp'
@@ -131,7 +131,8 @@ export default function App() {
     setStage('closed')
   }
   return <>
-    <div ref={contentRef} className={`invitation-shell ${openingStarted ? 'has-started' : ''} ${stage === 'done' ? 'is-open' : ''}`} inert={stage !== 'done'}>
+    <div ref={contentRef} className={`invitation-shell ${openingStarted ? 'has-started' : ''} ${stage === 'done' ? 'is-open' : ''}`} inert={stage !== 'done'}
+      style={{ '--page-reveal-delay': `${ENVELOPE_OPENING_MS - ENVELOPE_CROSSFADE_MS}ms`, '--page-reveal-duration': `${ENVELOPE_CROSSFADE_MS}ms` }}>
       <WeddingNavigation enabled={stage === 'done'} />
       <main>
         <section className="invitation-cover" id="invitation" aria-labelledby="couple-names">

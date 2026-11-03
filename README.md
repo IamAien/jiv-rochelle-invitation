@@ -26,7 +26,7 @@ The production output is in `dist/`.
 
 ## Experience
 
-- The opening uses the supplied embroidered coastal envelope, including its original J&R wax seal. A tap lifts the flap, slides out an illustrated letter, and reveals the invitation in a gentle 4.2-second sequence. See `design/COASTAL-ENVELOPE-OPENING.md`.
+- The opening uses the supplied embroidered coastal envelope, including its original J&R wax seal. A tap gently unfolds the flap from its actual crease, pauses, glides out an illustrated letter, and reveals the invitation over ten seconds. The flap has a linen reverse, stitched border, and solid paper edges visible as it turns. See `design/COASTAL-ENVELOPE-OPENING.md`.
 - The second page uses the supplied coastal villa garden. Warm serif lettering sits in its clear linen area, with the names on one line and the selected Baskerville ampersand.
 - Portrait artwork fills the phone opening and keeps its proportions on desktop, with warm linen at either side. The invitation preserves the complete garden on wide screens and uses a centered crop on phones.
 - The opening supports keyboard activation, loading failure recovery, focus handoff, replay, and reduced-motion preferences. Page navigation unlocks after the transition.
@@ -74,4 +74,4 @@ The illustrated coastal villa and garden are decorative invitation artwork; the 
 
 ## Verification
 
-The production build and 29 existing behavior tests pass. Server-rendered checks verify the supplied artwork, envelope states, valid SVG mask references, inert invitation content, reduced-motion rules, and the 4.2-second transition. Browser preview is unavailable in the current session, so the new animation has not had visual browser QA. Older gate and fountain tests remain as regression coverage for the archived implementation.
+The production build and 29 existing behavior tests pass. Server-rendered checks verify the supplied artwork, envelope states, valid SVG mask references, both paper faces and three solid edges, inert invitation content, reduced-motion rules, and the ten-second transition. Browser preview is unavailable in the current session, so the new animation has not had visual browser QA. Older gate and fountain tests remain as regression coverage for the archived implementation.
