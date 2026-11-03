@@ -6,7 +6,6 @@ const REVEAL_SELECTOR = [
   '.section .story-signature',
   '.section .text-button',
   '.section .countdown-unit',
-  '.section .timeline-art',
   '.section .swatches',
   '.section .monogram',
   '.section .replay-button',

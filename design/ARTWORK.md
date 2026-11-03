@@ -1,5 +1,7 @@
 # Wedding artwork
 
+Current decorations and their complete generation prompts: [Woven decoration set](WOVEN-DECORATIONS.md). The earlier decorations below remain as source history.
+
 Current selected artwork, source files and final prompts: [Muted reference palette](MUTED-REFERENCE-PALETTE.md).
 
 Current artwork: [Stitched plants and ceremony](STITCHED-PLANTS-AND-CEREMONY.md), with two different locations, saved assets and complete final edit prompts.

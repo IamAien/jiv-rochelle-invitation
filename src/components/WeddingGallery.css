@@ -1,0 +1,70 @@
+.gallery-section { --section-tone: #e9e5da; padding-top: 82px; padding-bottom: 88px; }
+.gallery-hint { max-width: 360px; margin: 18px auto 0; font-size: 15px; line-height: 1.6; font-style: italic; }
+.memory-reveal-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 42px); max-width: 1060px; margin: 55px auto 0; }
+.memory-reveal-card { position: relative; margin: 0; padding: 11px 11px 0; min-width: 0; background: #f8f2e7; border: 1px solid #b6a48a45; box-shadow: 0 5px 12px #77644e12; transform: rotate(var(--photo-tilt)); transition: transform .6s; }
+.memory-photo-window { position: relative; isolation: isolate; aspect-ratio: 4 / 5; overflow: hidden; background: #ded5c4; }
+.memory-photo-window > img, .memory-stack-photo > img { width: 100%; height: 100%; object-fit: cover; user-select: none; }
+.memory-veil { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; touch-action: pan-y; cursor: crosshair; opacity: 1; transition: opacity .8s ease; }
+.memory-reveal-card.is-revealed .memory-veil { opacity: 0; pointer-events: none; }
+.memory-reveal-caption { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 12px; min-height: 82px; padding: 13px 3px 15px; text-align: left; }
+.memory-reveal-caption > span { font-size: clamp(17px, 1.8vw, 23px); font-style: italic; line-height: 1.2; }
+.memory-reveal-caption button { display: inline-flex; align-items: center; gap: 10px; border: 0; border-bottom: 1px dashed #9a9c83; padding: 9px 0; background: transparent; font: 8px/1.5 var(--sans); letter-spacing: .06em; white-space: nowrap; }
+.memory-reveal-caption button:hover { color: #65744f; }
+.memory-reveal-caption button span { font-size: 13px; line-height: 1; }
+.photo-placeholder { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; min-height: 0; background-color: #d9dfd3; background-image: var(--linen); background-size: 220px; background-blend-mode: multiply; color: #69715e; }
+.placeholder-tone-1 { background-color: #dbe2e5; color: #5a707d; }
+.placeholder-tone-2 { background-color: #e6d7d0; color: #846d67; }
+.placeholder-stitch { position: absolute; inset: 16px; border: 1px dashed currentColor; opacity: .42; }
+.placeholder-stitch::before, .placeholder-stitch::after { content: ''; position: absolute; left: 50%; width: 14px; height: 14px; border: 1px dashed currentColor; background: #e6e0d1; transform: translate(-50%, -50%) rotate(45deg); }
+.placeholder-stitch::before { top: 0; }
+.placeholder-stitch::after { top: 100%; }
+.placeholder-monogram { font-size: clamp(43px, 5vw, 65px); letter-spacing: -.07em; line-height: 1; }
+.placeholder-monogram .ampersand { display: inline-block; margin: 0 .18em; font-size: .68em; letter-spacing: 0; }
+.placeholder-note { margin-top: 21px; font: 8px/1.6 var(--sans); letter-spacing: .12em; text-transform: uppercase; }
+.gallery-flourish { margin: 68px auto 45px; }
+.memory-album { max-width: 560px; margin: 0 auto; }
+.memory-album .album-title { margin-top: 14px; font-size: clamp(33px, 5vw, 43px); line-height: 1.1; }
+.memory-stack { --drag-x: 0px; --drag-turn: 0deg; position: relative; width: min(100% - 32px, 310px); aspect-ratio: 4 / 5.15; margin: 44px auto 40px; touch-action: pan-y; cursor: grab; user-select: none; }
+.memory-stack[data-dragging] { cursor: grabbing; }
+.memory-stack-card { position: absolute; inset: 0; display: flex; flex-direction: column; margin: 0; padding: 13px 13px 0; background: #f8f2e7; border: 1px solid #b6a48a4d; box-shadow: 0 5px 12px #77644e20; transform: translateY(var(--card-offset)) rotate(var(--card-rotation)) scale(var(--card-scale)); transition: transform .55s ease; pointer-events: none; }
+.memory-stack-card::after { content: ''; position: absolute; top: -6px; left: calc(50% - 26px); width: 52px; height: 17px; background: #e6dfcfa8; border-inline: 1px solid #c4bda670; transform: rotate(-5deg); }
+.memory-stack-card.is-front { transform: translateX(var(--drag-x)) rotate(calc(var(--card-rotation) + var(--drag-turn))); transition: transform .28s cubic-bezier(.2, .65, .3, 1), opacity .28s; }
+.memory-stack[data-dragging] .is-front { transition: none; }
+.memory-stack.is-leaving .is-front { opacity: 0; }
+.memory-stack-photo { position: relative; flex: 1; min-height: 0; overflow: hidden; aspect-ratio: 4 / 4.5; }
+.memory-stack-card figcaption { padding: 18px 0 20px; font-size: 24px; font-style: italic; line-height: 1.2; text-align: center; }
+.album-hint { font-size: 15px; line-height: 1.6; font-style: italic; }
+.album-controls { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px 23px; margin-top: 15px; }
+.album-controls button { display: inline-flex; align-items: center; gap: 12px; padding: 12px 0; border: 0; border-bottom: 1px dashed #9a9c83; background: transparent; font: 9px/1.5 var(--sans); letter-spacing: .04em; }
+.album-controls button:hover { color: #65744f; }
+.album-controls button:disabled { opacity: .5; }
+.album-counter { font: 9px/1.5 var(--sans); letter-spacing: .1em; font-variant-numeric: tabular-nums; }
+.album-counter i { padding: 0 5px; color: #9a8b74; }
+@media (hover: hover) and (pointer: fine) {
+  .memory-reveal-card:hover, .memory-reveal-card:focus-within { transform: rotate(0deg) translateY(-3px); }
+}
+@media (max-width: 760px) {
+  .memory-reveal-grid { grid-template-columns: 1fr; gap: 35px; max-width: 330px; margin-top: 40px; }
+  .memory-reveal-caption { min-height: 76px; }
+  .memory-reveal-caption > span { font-size: 22px; }
+}
+@media (max-width: 600px) {
+  .gallery-section { padding-top: 68px; padding-bottom: 70px; }
+  .gallery-section .section-intro { font-size: 17px; }
+  .gallery-hint { font-size: 14px; }
+  .memory-reveal-caption > span { font-size: 21px; }
+  .gallery-flourish { margin-top: 52px; }
+  .memory-stack { margin-top: 36px; }
+  .memory-stack-card { padding: 11px 11px 0; }
+  .memory-stack-card figcaption { font-size: 23px; }
+  .album-controls { column-gap: 16px; }
+  .album-controls button { font-size: 8px; gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce), print {
+  .memory-reveal-card, .memory-reveal-card:hover { transform: none; }
+  .memory-stack-card { transition: none; }
+}
+@media print {
+  .memory-veil { display: none; }
+  .gallery-hint, .memory-reveal-caption button, .album-controls, .album-hint { display: none; }
+}

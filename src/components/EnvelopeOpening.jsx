@@ -1,93 +1,81 @@
-import React, { useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react'
+import envelope from '../assets/embroidered-coastal-envelope.webp'
+import { INVITATION_ARTWORK } from '../invitationArtwork.js'
+import { ENVELOPE_OPENING_MS } from '../wedding.js'
+import Ampersand from './Ampersand.jsx'
+import './EnvelopeOpening.css'
 
-export default function EnvelopeOpening({ onComplete }) {
-  const [stage, setStage] = useState('sealed'); // 'sealed' | 'opening' | 'revealing' | 'done'
+// Both pieces use the original pixels, including the existing J&R wax seal.
+const FLAP = 'M0 0 H941 V648 L470.5 1090 L0 648 Z'
 
-  const handleOpen = () => {
-    if (stage !== 'sealed') return;
-    setStage('opening');
-    setTimeout(() => setStage('revealing'), 1000); // Trigger card slide & fade out
-    setTimeout(() => {
-      setStage('done');
-      if (onComplete) onComplete(); // Unlocks main website view
-    }, 2800);
-  };
+export default function EnvelopeOpening({ stage, onOpen, onUnavailable }) {
+  const [ready, setReady] = useState(false)
+  const [failed, setFailed] = useState(false)
+  const triggerRef = useRef(null)
+  const id = `envelope-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`
 
-  if (stage === 'done') return null;
+  useEffect(() => {
+    if (ready && stage === 'closed') triggerRef.current?.focus({ preventScroll: true })
+  }, [ready, stage])
 
-  return (
-    <div className={`fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-1000 bg-slate-950/70 backdrop-blur-md ${
-      stage === 'revealing' ? 'opacity-0 pointer-events-none' : 'opacity-100'
-    }`}>
-      
-      {/* Full Screen Envelope Container with 3D perspective */}
-      <div className="relative w-[90vw] max-w-[420px] h-[600px] perspective-1200 flex items-center justify-center">
+  if (stage === 'done') return null
+  const opening = stage === 'opening'
 
-        {/* 1. Envelope Back Pocket (Uses your Canva paper texture) */}
-        <div 
-          className="absolute inset-0 rounded-xl shadow-2xl overflow-hidden border border-stone-300/30"
-          style={{
-            backgroundImage: 'url(/envelope-bg.jpg)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        ></div>
-
-        {/* 2. Invitation Card Sliding Out */}
-        <div className={`absolute w-[86%] h-[84%] bg-white rounded-lg shadow-xl p-6 flex flex-col justify-between items-center text-center transition-transform duration-1000 ease-in-out ${
-          stage === 'revealing' ? '-translate-y-52 scale-105 shadow-2xl' : 'translate-y-6'
-        }`} style={{ zIndex: 15 }}>
-          <div className="border border-stone-200 inset-3 absolute rounded pointer-events-none"></div>
-          <span className="font-serif text-xs tracking-widest text-stone-500 uppercase">Wedding Invitation</span>
-          <h2 className="font-serif text-3xl text-stone-800">Jiv & Rochelle</h2>
-          <p className="text-xs text-stone-600 tracking-wider">November 24, 2026</p>
+  return <div
+    className={`envelope-opening ${ready ? 'has-art' : ''} ${opening ? 'is-opening' : ''}`}
+    style={{ '--opening-duration': `${ENVELOPE_OPENING_MS}ms` }}
+    role="dialog" aria-modal="true" aria-label="Jiv and Rochelle’s wedding invitation"
+  >
+    <img className="envelope-preload" src={envelope} alt="" aria-hidden="true"
+      fetchPriority="high" onLoad={() => setReady(true)} onError={() => setFailed(true)} />
+    <div className="envelope-artboard" aria-hidden="true">
+      <svg className="envelope-lining" viewBox="0 0 941 1672">
+        <defs>
+          <pattern id={`${id}-linen`} width="941" height="400" patternUnits="userSpaceOnUse">
+            <image href={envelope} width="941" height="1672" />
+          </pattern>
+        </defs>
+        <rect width="941" height="1672" fill={`url(#${id}-linen)`} />
+      </svg>
+      <div className="envelope-letter">
+        <img src={INVITATION_ARTWORK.src} alt="" fetchPriority="high" />
+        <div className="envelope-letter-copy">
+          <p>Together with their families</p>
+          <span className="envelope-letter-names">Jiv<Ampersand />Rochelle</span>
+          <span className="envelope-letter-date">February 7, 2027</span>
         </div>
-
-        {/* 3. Envelope Front V-Pocket Overlay */}
-        <div 
-          className="absolute inset-x-0 bottom-0 h-[55%] rounded-b-xl shadow-inner pointer-events-none"
-          style={{
-            backgroundImage: 'url(/envelope-bg.jpg)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            clipPath: 'polygon(0% 0%, 50% 45%, 100% 0%, 100% 100%, 0% 100%)',
-            zIndex: 20
-          }}
-        ></div>
-
-        {/* 4. Top Flap (3D Folding Animation) */}
-        <div 
-          className={`absolute top-0 inset-x-0 h-[52%] preserve-3d origin-top transition-transform duration-1000 ease-in-out ${
-            stage !== 'sealed' ? 'rotate-x-180' : ''
-          }`}
-          style={{ zIndex: stage !== 'sealed' ? 10 : 30 }}
-        >
-          <div 
-            className="absolute inset-0 backface-hidden shadow-md"
-            style={{
-              backgroundImage: 'url(/envelope-bg.jpg)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              clipPath: 'polygon(0 0, 100% 0, 50% 100%)'
-            }}
-          ></div>
-        </div>
-
-        {/* 5. Clickable Wax Seal / Button */}
-        {stage === 'sealed' && (
-          <button
-            onClick={handleOpen}
-            className="absolute left-1/2 top-[47%] -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full hover:scale-105 transition-transform cursor-pointer focus:outline-none group"
-            style={{ zIndex: 40, background: 'transparent' }}
-            aria-label="Open envelope"
-          >
-            <div className="w-full h-full rounded-full bg-amber-800/80 shadow-2xl flex items-center justify-center border-2 border-amber-600/50 text-amber-100 font-serif text-xl tracking-widest group-hover:bg-amber-700 transition-colors">
-              JR
-            </div>
-          </button>
-        )}
-
       </div>
+      <svg className="envelope-pocket" viewBox="0 0 941 1672">
+        <defs>
+          <mask id={`${id}-pocket`} maskUnits="userSpaceOnUse" x="0" y="0" width="941" height="1672" style={{ maskType: 'luminance' }}>
+            <rect width="941" height="1672" fill="white" />
+            <path d={FLAP} fill="black" />
+            <ellipse cx="470.5" cy="1045" rx="83" ry="86" fill="black" />
+          </mask>
+        </defs>
+        <image href={envelope} width="941" height="1672" mask={`url(#${id}-pocket)`} />
+      </svg>
+      <svg className="envelope-flap" viewBox="0 0 941 1672">
+        <defs>
+          <mask id={`${id}-flap`} maskUnits="userSpaceOnUse" x="0" y="0" width="941" height="1672" style={{ maskType: 'luminance' }}>
+            <rect width="941" height="1672" fill="black" />
+            <path d={FLAP} fill="white" />
+            <ellipse cx="470.5" cy="1045" rx="83" ry="86" fill="white" />
+          </mask>
+        </defs>
+        <image href={envelope} width="941" height="1672" mask={`url(#${id}-flap)`} />
+      </svg>
+      <div className="envelope-address">
+        <p className="envelope-eyebrow">A little envelope, a lifetime of love</p>
+        <p className="envelope-names">Jiv<Ampersand />Rochelle</p>
+        <p className="envelope-date">07 · 02 · 2027</p>
+      </div>
+      <span className="envelope-seal-cue" />
+      <p className="envelope-hint">Tap the seal to open</p>
     </div>
-  );
+    <button ref={triggerRef} className="envelope-trigger" onClick={onOpen} disabled={!ready || opening}
+      aria-label="Open Jiv and Rochelle’s wedding envelope" />
+    {failed && !ready && <button className="envelope-fallback" onClick={onUnavailable} autoFocus>View invitation</button>}
+    <span className="sr-only" role="status">{opening ? 'The envelope is opening. Your invitation is inside.' : !ready && !failed ? 'Preparing your invitation.' : ''}</span>
+  </div>
 }

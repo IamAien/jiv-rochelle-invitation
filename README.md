@@ -26,29 +26,41 @@ The production output is in `dist/`.
 
 ## Experience
 
-- The full-screen lakeside gate entrance has stitched J & R and a modest grey gate. Both scenes use the latest references' softer linen, fine cotton stitches, pale ivory/beige, faded olive and dusty blush. Portrait and landscape artwork keep their natural proportions.
-- A tap slowly opens the gate from the middle around its outer hinges. The moving leaves use the exact gate pixels from the entrance illustration, keeping their original style and scale.
-- The second page remains a different place: a ceremony courtyard with an ivory arch, blue curtain ties, central fountain, pavilion and stone path. Its planting and thread shadows are lighter and more subdued. The entrance retains its gentle 8.8-second timing.
-- At desktop widths of 900px and above, the second page uses the user's supplied 1376 × 768 garden JPEG directly. Phone portrait and landscape artwork are retained.
-- The desktop opening uses the user's supplied 1368 × 768 lakeside terrace JPEG directly, with the animated leaves and hints aligned to its gate and monogram. Phone portrait and landscape entrances retain their artwork.
+- The opening uses the supplied embroidered coastal envelope, including its original J&R wax seal. A tap lifts the flap, slides out an illustrated letter, and reveals the invitation in a gentle 4.2-second sequence. See `design/COASTAL-ENVELOPE-OPENING.md`.
+- The second page uses the supplied coastal villa garden. Warm serif lettering sits in its clear linen area, with the names on one line and the selected Baskerville ampersand.
+- Portrait artwork fills the phone opening and keeps its proportions on desktop, with warm linen at either side. The invitation preserves the complete garden on wide screens and uses a centered crop on phones.
+- The opening supports keyboard activation, loading failure recovery, focus handoff, replay, and reduced-motion preferences. Page navigation unlocks after the transition.
 - Text fades in with a slight rise as visitors scroll. Short staggered delays create a soft sequence, and blocks remain visible when scrolling back.
-- Timeline illustrations and countdown medallions use matching embroidered textile artwork, while numbers stay live and accessible.
+- Countdown linen patches, olive-and-rose garlands, running-stitch dividers and fabric swatches follow the supplied scenes' muted textile palette. Smooth warm ivory, pale sage, dusty blush and light stone backgrounds complement the artwork.
+- The floral garland appears on the countdown; the dress-code and closing sections use clean spacing without floral artwork.
+- The timeline uses four simple inline stitch-line symbols: a chapel, rings, coupe and celebration star. They stay visible independently of the text-reveal animation and require no image downloads.
 - The live countdown shows days, hours, minutes and seconds in four responsive medallions, targeting the ceremony at 1:00 PM in Cebu (UTC+8). It updates every second and stops at zero when the wedding begins.
-- A pearl follows the timeline as the visitor scrolls forward or back. Its position also adapts when the viewport or content size changes.
-- Reduced-motion preferences shorten the opening and keep its gate hint still. Guests can replay the opening from the footer.
+- A shaded ivory pearl follows the timeline as the visitor scrolls forward or back. It sits on its own layer above the events, measures 32px on desktop and 28px on phones, and uses a pixel position that adapts to viewport and content size changes.
+- Reduced-motion preferences shorten the opening and keep its seal hint still. Guests can replay the opening from the footer.
 - Calendar download and venue map links are included.
+- A thin stitched reading-progress line and active navigation follow scrolling. The story has four softly highlighted chapters, and the blue/pink fabric swatches can be selected, previewed, reset, and copied. Each venue also has a separate calendar download. See `design/REFERENCE-INTERACTIONS.md` for the reference adaptation.
+- The gallery follows the story with three brush-to-reveal linen photo cards and a five-photo draggable Polaroid stack. Reveal, cover, previous, and next buttons support touch and keyboard use. Vertical phone scrolling remains available over the photos. Photo slots currently show labeled linen placeholders; configure real images in `src/gallery.js` and put the files in `public/photos/`.
 
 The original names, date, ceremony and reception venues, love story, formal dress code, and blue/pink guest palette are retained. Only the ceremony at 1 PM and reception at 5 PM have fixed times; intermediate timeline moments are descriptive.
 
 ## Editing
 
-- `src/wedding.js`: countdown date, scroll calculations, and shared gate-opening duration.
-- `src/components/GardenEntrance.jsx` and `GardenEntrance.css`: complete entrance illustration, native gate crops, masked portal, hinged leaves, and loading/error handling. A small “Tap to open” hint sits beneath the stitched J & R in both layouts; a soft double ripple with a 2px white stroke marks the latch. Both hints fade when opening begins. The opening plays through without a skip control; reduced-motion settings keep the ripple still.
-- `src/gateGeometry.js`: source-coordinate crops, hinge placement and gate proportions.
+- `src/wedding.js`: countdown date, scroll calculations, and opening durations.
+- `src/components/EnvelopeOpening.jsx` and `EnvelopeOpening.css`: supplied envelope artwork, complementary flap and pocket masks, illustrated letter, tap cue, loading/error handling, and opening animation.
+- `src/invitationArtwork.js`: current coastal garden artwork shared by the letter and second page.
+- `src/components/StitchedTimelineIcon.jsx`: the four simple stitched timeline symbols.
+- `src/gateGeometry.js`: archived gate geometry used by the previous entrance.
+- `src/components/GardenEntrance.jsx`, `GardenEntrance.css`, `src/ceremonyArtwork.js`, `src/fountainReveal.js`, and `src/components/FountainReveal.jsx`: archived garden entrance and fountain implementation, excluded from the active bundle.
 - `src/App.jsx`: invitation text, timeline, venues, palettes, and opening lifecycle.
 - `src/App.css`: visual design and animations.
+- The name separators and monograms use the selected option 05, Baskerville. `src/components/Ampersand.jsx` renders the exact comparison outline from `src/assets/baskerville-ampersand.json`, so its shape stays consistent across devices.
+- `src/components/WeddingGallery.jsx` and `WeddingGallery.css`: brush-to-reveal cards, draggable album, photo placeholders, and responsive gallery styling.
+- `src/gallery.js`: gallery photos and captions, GitHub Pages image paths, scratch coverage, and album navigation helpers.
 - `src/scrollReveal.js`: progressive text reveals, reduced-motion and browser fallbacks, and replay cleanup.
 - `src/assets/`: optimized website artwork and original PNGs.
+- `design/WOVEN-DECORATIONS.md`: current decoration assets, material references, production details and full generation prompts.
+- `design/SOFT-LINEN-AND-TIMELINE.md`: current subtle background palette, simplified timeline symbols and visible scrolling pearl.
+- `design/ENHANCED-PAGE-LINEN.md`: earlier linen background experiment, saved texture files, full generation prompt and production settings.
 - `design/MUTED-REFERENCE-PALETTE.md`: current soft textile treatment, saved assets, input references and complete prompts.
 - `design/STITCHED-PLANTS-AND-CEREMONY.md`: earlier stronger needlework iteration.
 - `design/REFERENCE-EXTENSION.md`: previous terrace extension iteration.
@@ -58,8 +70,8 @@ The original names, date, ceremony and reception venues, love story, formal dres
 - `design/BOOK-OPENING.md` and `design/STITCHED-COVER-AND-HOUSE.md`: earlier artwork history.
 - `design/ARTWORK.md`: earlier artwork retained as source material.
 
-The illustrated ceremony garden and gate are decorative invitation artwork; the actual venues are listed in the details section.
+The illustrated coastal villa and garden are decorative invitation artwork; the actual venues are listed in the details section.
 
 ## Verification
 
-The production build and 14 behavior tests pass. Geometry tests verify native gate scale and latch registration. Server rendering verifies both entrance layouts, complete closed artwork, source-image gate crops, the opening mask, completion, and the distinct ceremony courtyard artwork. Live browser visual verification was unavailable because the browser connection was not available in this session.
+The production build and 29 existing behavior tests pass. Server-rendered checks verify the supplied artwork, envelope states, valid SVG mask references, inert invitation content, reduced-motion rules, and the 4.2-second transition. Browser preview is unavailable in the current session, so the new animation has not had visual browser QA. Older gate and fountain tests remain as regression coverage for the archived implementation.

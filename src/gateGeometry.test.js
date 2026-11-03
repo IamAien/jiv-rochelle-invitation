@@ -15,9 +15,9 @@ test('the gate halves meet at the painted latch even when their widths differ', 
 
 test('portrait and landscape gate positions retain their source scale in both axes', () => {
   for (const scene of [
-    { width: 941, height: 1672, gate: { x: 458, y: 1265, width: 360, height: 247, seam: 638 } },
+    { width: 941, height: 1672, gate: { x: 522, y: 728, width: 305, height: 426, seam: 670 } },
     { width: 1672, height: 940, gate: { x: 984, y: 666, width: 309, height: 189, seam: 1139 } },
-    { width: 1368, height: 768, gate: { x: 809, y: 548, width: 255, height: 148, seam: 937 } },
+    { width: 1672, height: 941, gate: { x: 943, y: 325, width: 313, height: 380, seam: 1095 } },
   ]) {
     const parts = getGateParts(scene)
     assert.ok(Math.abs(parseFloat(parts.position.width) / 100 * scene.width - scene.gate.width) < 1e-8)
