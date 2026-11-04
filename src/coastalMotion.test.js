@@ -59,7 +59,18 @@ test('the top and lower-right overlays visibly sway without adding the pink lowe
     assert.ok(region.seconds >= 8 && region.seconds <= 10)
     assert.ok(region.positive >= 3 && region.positive <= 4)
     assert.ok(region.negative <= -2.5 && region.negative >= -4)
-    assert.match(region.clip, /^inset\(/)
     assert.ok(region.origin.split(' ').every(value => value.endsWith('%')))
+    // The complete plant image must fit even at either sway limit.
+    const [originX, originY] = region.origin.split(' ').map(parseFloat)
+    const pivotX = region.width * originX / 100
+    const pivotY = region.height * originY / 100
+    for (const degrees of [region.negative, 0, region.positive]) {
+      const angle = degrees * Math.PI / 180
+      for (const x of [0, region.width]) for (const y of [0, region.height]) {
+        const rotatedX = region.x + pivotX + (x - pivotX) * Math.cos(angle) - (y - pivotY) * Math.sin(angle)
+        const rotatedY = region.y + pivotY + (x - pivotX) * Math.sin(angle) + (y - pivotY) * Math.cos(angle)
+        assert.ok(rotatedX >= 0 && rotatedX <= 941 && rotatedY >= 0 && rotatedY <= 1672, `${region.name} plant must fit at ${degrees} degrees`)
+      }
+    }
   }
 })

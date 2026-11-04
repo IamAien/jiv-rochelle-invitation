@@ -18,9 +18,15 @@ export function getCoastalImageLayout({ width, height, imageWidth, imageHeight, 
 }
 
 export const COASTAL_PLANT_REGIONS = [
-  { name: 'top', clip: 'inset(0 34% 65% 0)', x: 0, y: 17, scale: .62, anchor: '0% 0%', origin: '0% 7.5%', positive: 3.2, negative: -2.8, seconds: 8.5, delay: 0 },
-  { name: 'right', clip: 'inset(76% 0 0 55%)', x: 0, y: -8, scale: .74, anchor: '100% 100%', origin: '100% 100%', positive: 3.8, negative: -3.1, seconds: 9.3, delay: .4 },
+  { name: 'top', x: 24, y: 58, width: 600, height: 550, origin: '0% 22.8%', positive: 3.2, negative: -2.8, seconds: 8.5, delay: 0 },
+  { name: 'right', x: 509, y: 1222, width: 400, height: 420, origin: '100% 100%', positive: 3.8, negative: -3.1, seconds: 9.3, delay: .4 },
 ]
+
+// Layout size stays stable while the envelope translates its invitation card.
+export function getCoastalElementSize(element, environment = window) {
+  const style = environment.getComputedStyle(element)
+  return { width: parseFloat(style.width) || element.clientWidth, height: parseFloat(style.height) || element.clientHeight }
+}
 
 export const COASTAL_CLOUDS = [
   { left: 55, top: 0, width: 43, seconds: 22, delay: -6 },
@@ -157,7 +163,7 @@ export function createCoastalWaterRenderer(canvas, image, container) {
       gl.drawArrays(gl.TRIANGLES, 0, 6)
     }
     const resize = () => {
-      const { width, height } = container.getBoundingClientRect()
+      const { width, height } = getCoastalElementSize(container)
       if (!width || !height) return
       const layout = getCoastalImageLayout({
         width, height, imageWidth: image.naturalWidth, imageHeight: image.naturalHeight,

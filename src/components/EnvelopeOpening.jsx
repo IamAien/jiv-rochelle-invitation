@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import envelope from '../assets/embroidered-coastal-envelope.webp'
-import { INVITATION_ARTWORK } from '../invitationArtwork.js'
+import CoastalScene from './CoastalScene.jsx'
 import { ENVELOPE_OPENING_MS } from '../wedding.js'
 import Ampersand from './Ampersand.jsx'
 import './EnvelopeOpening.css'
@@ -23,9 +23,11 @@ const PAPER_EDGES = PAPER_EDGE_SEGMENTS.map(([[x, y], [endX, endY]]) => {
   }
 })
 
-export default function EnvelopeOpening({ stage, onOpen, onUnavailable }) {
-  const [ready, setReady] = useState(false)
+export default function EnvelopeOpening({ stage, onOpen, onUnavailable, sceneReady = false }) {
+  const [envelopeReady, setEnvelopeReady] = useState(false)
+  const [letterReady, setLetterReady] = useState(false)
   const [failed, setFailed] = useState(false)
+  const ready = envelopeReady && letterReady && sceneReady
   const triggerRef = useRef(null)
   const id = `envelope-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`
 
@@ -42,7 +44,7 @@ export default function EnvelopeOpening({ stage, onOpen, onUnavailable }) {
     role="dialog" aria-modal="true" aria-label="Jiv and Rochelle’s wedding invitation"
   >
     <img className="envelope-preload" src={envelope} alt="" aria-hidden="true"
-      fetchPriority="high" onLoad={() => setReady(true)} onError={() => setFailed(true)} />
+      fetchPriority="high" onLoad={() => setEnvelopeReady(true)} onError={() => setFailed(true)} />
     <div className="envelope-artboard" aria-hidden="true">
       <svg className="envelope-lining" viewBox="0 0 941 1672">
         <defs>
@@ -55,7 +57,7 @@ export default function EnvelopeOpening({ stage, onOpen, onUnavailable }) {
         <image href={envelope} width="941" height="1672" clipPath={`url(#${id}-upper-linen)`} />
       </svg>
       <div className="envelope-letter">
-        <img src={INVITATION_ARTWORK.src} alt="" fetchPriority="high" />
+        <CoastalScene enabled={opening} onReady={setLetterReady} />
         <div className="envelope-letter-copy">
           <p>Together with their families</p>
           <span className="envelope-letter-names">Jiv<Ampersand />Rochelle</span>

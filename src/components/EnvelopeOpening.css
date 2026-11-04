@@ -59,7 +59,7 @@
   background: #fbefdc;
   box-shadow: 0 0 0 1px #a5896033, 0 12px 35px #70573b25;
 }
-.envelope-letter > img { width: 100%; height: 100%; object-fit: cover; }
+.envelope-letter .villa-art { object-fit: contain; }
 .envelope-letter-copy { position: absolute; top: 34%; left: 5%; width: 90%; text-align: center; color: #785a3e; }
 .envelope-letter-copy p { font-size: 3.5cqw; font-style: italic; }
 .envelope-letter-names { display: block; font-size: 9cqw; line-height: 1.2; margin-top: 3cqw; letter-spacing: -.035em; white-space: nowrap; }

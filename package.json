@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "test": "node --test src/wedding.test.js src/scrollReveal.test.js src/calendar.test.js src/gallery.test.js src/coastalMotion.test.js",
+    "test": "node --test src/wedding.test.js src/scrollReveal.test.js src/calendar.test.js src/gallery.test.js src/coastalMotion.test.js src/coastalScene.test.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
