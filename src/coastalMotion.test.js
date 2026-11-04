@@ -40,12 +40,12 @@ test('water starts at rest and eases into full strength', () => {
   assert.equal(getCoastalWaterStrength(1.8), 1)
 })
 
-test('only the three transparent plant layers are given slow, small rotations', () => {
-  assert.deepEqual(COASTAL_PLANT_REGIONS.map(region => region.name), ['top', 'right', 'left'])
+test('the top and lower-right overlays visibly sway without adding the pink lower-left cluster', () => {
+  assert.deepEqual(COASTAL_PLANT_REGIONS.map(region => region.name), ['top', 'right'])
   for (const region of COASTAL_PLANT_REGIONS) {
-    assert.ok(region.seconds >= 12)
-    assert.ok(region.positive > 0 && region.positive < 1)
-    assert.ok(region.negative < 0 && region.negative > -1)
+    assert.ok(region.seconds >= 8 && region.seconds <= 10)
+    assert.ok(region.positive >= 3 && region.positive <= 4)
+    assert.ok(region.negative <= -2.5 && region.negative >= -4)
     assert.match(region.clip, /^inset\(/)
     assert.ok(region.origin.split(' ').every(value => value.endsWith('%')))
   }

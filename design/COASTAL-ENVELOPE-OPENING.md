@@ -29,9 +29,9 @@ The full opening is a keyboard-accessible button. The envelope has no added visi
 
 ## Coastal scene motion
 
-`CoastalScene.jsx` uses actual image layers. The original illustration remains the accessible still-image fallback. A clean background plate supplies the sky, linen, sea and villa behind the plants. A transparent cutout supplies the upper-left and lower corner foliage. Three CSS layers reuse that cutout, isolate their respective corner, and rotate around their stem anchors by less than one degree over 12–14.5 seconds. The background has no transform or animation. The earlier image-wide plant distortion is removed.
+`CoastalScene.jsx` displays the original illustration as its permanent visible base. Two transparent branch overlays sit on top of the upper-left and lower-right plants. Each corner therefore has the original stationary plant and an additional moving plant. The lower-left pink flower cutout is omitted. Branches rotate by about three to four degrees over 8.5–9.3 seconds, making their movement easy to see. The clean background plate is retained only as source artwork and is not imported or displayed.
 
-The water canvas is separate from the plants and background. It draws transparent pixels outside its shoreline-and-blue-stitch mask, with gentle ripples and restrained shimmer inside the sea. It clears to transparency before every frame. It never rotates or displaces the sky or villa. Without WebGL, the plants can still sway over the static sea.
+The water canvas samples the original image and overlays stronger ripples and shimmer on its sea at up to 72% opacity, leaving the original stationary water visible beneath. It draws transparent pixels outside its shoreline-and-blue-stitch mask and clears before every frame. It never rotates or displaces the sky or villa. Without WebGL, the plants can still sway over the original sea.
 
 All layers follow the original contain/cover scale, centering and phone crop. The water buffer is capped at native resolution and runs at up to 30 frames per second. Offscreen or hidden-tab motion pauses. Reduced-motion preferences and printing show the original still image; failed layer downloads also retain it. Replaying the envelope cleans up the water renderer and pauses the plant layers.
 
@@ -58,4 +58,4 @@ Plant extraction (transparent output):
 
 ## Verification
 
-The production build and behavior suite are required. Coastal motion tests verify phone and desktop image alignment, source-resolution limits, gradual water motion and small, slow plant-layer rotations. Server-rendered checks cover the original fallback, static background, three transparent plant layers, separate water canvas, envelope, paper layers, seal, accessibility markup, and timing. The source alpha channel and assembled still composite were inspected. Current browser automation is unavailable in the editing session, so live motion QA remains unverified.
+The production build and behavior suite are required. Coastal motion tests verify phone and desktop image alignment, source-resolution limits, water motion and stronger top/lower-right branch rotations. Server-rendered checks cover the original image base, two transparent branch overlays, omitted pink lower-left cutout, separate water canvas, envelope and invitation content. The source alpha channel was inspected. Current browser automation is unavailable in the editing session, so live motion QA remains unverified.

@@ -18,9 +18,8 @@ export function getCoastalImageLayout({ width, height, imageWidth, imageHeight, 
 }
 
 export const COASTAL_PLANT_REGIONS = [
-  { name: 'top', clip: 'inset(0 34% 65% 0)', origin: '1.5% 1.5%', positive: .7, negative: -.55, seconds: 12, delay: 0 },
-  { name: 'right', clip: 'inset(76% 0 0 55%)', origin: '99.5% 99%', positive: .85, negative: -.65, seconds: 14.5, delay: .7 },
-  { name: 'left', clip: 'inset(85% 70% 0 0)', origin: '.5% 99.5%', positive: .5, negative: -.45, seconds: 13.2, delay: 1.1 },
+  { name: 'top', clip: 'inset(0 34% 65% 0)', origin: '0% 7.5%', positive: 3.2, negative: -2.8, seconds: 8.5, delay: 0 },
+  { name: 'right', clip: 'inset(76% 0 0 55%)', origin: '100% 100%', positive: 3.8, negative: -3.1, seconds: 9.3, delay: .4 },
 ]
 
 export function getCoastalWaterStrength(seconds) {
@@ -70,19 +69,19 @@ void main() {
       + texture2D(u_image, uv - vec2(0.0, 0.005)).rgb) / 5.0;
     water = sea * smoothstep(0.015, 0.075, min(nearby.g, nearby.b) - nearby.r) * pin;
     float depth = mix(0.4, 1.0, smoothstep(shore, 0.94, uv.y));
-    float drift = sin(uv.y * 190.0 - u_time * 0.9)
-      + 0.3 * sin(uv.x * 84.0 + uv.y * 120.0 - u_time * 0.6);
-    float swell = sin(uv.y * 135.0 + uv.x * 22.0 - u_time * 0.72);
-    displaced += vec2(drift * 0.0035, swell * 0.0013) * water * depth * u_strength;
+    float drift = sin(uv.y * 190.0 - u_time * 1.25)
+      + 0.3 * sin(uv.x * 84.0 + uv.y * 120.0 - u_time * 0.95);
+    float swell = sin(uv.y * 135.0 + uv.x * 22.0 - u_time * 1.1);
+    displaced += vec2(drift * 0.010, swell * 0.0038) * water * depth * u_strength;
   }
 
-  // This canvas contains water only. The sky, linen and villa are never drawn
-  // or displaced here; the separate background image remains stationary.
+  // Overlay moving water on the original sea; all other artwork stays visible
+  // directly from the unmodified illustration underneath.
   if (water < 0.001) discard;
   vec4 color = texture2D(u_image, clamp(displaced, vec2(0.0), vec2(1.0)));
-  float shimmer = sin(uv.y * 320.0 - u_time * 0.8 + sin(uv.x * 26.0));
-  color.rgb *= 1.0 + shimmer * water * 0.025 * u_strength;
-  color.a *= water;
+  float shimmer = sin(uv.y * 320.0 - u_time * 1.15 + sin(uv.x * 26.0));
+  color.rgb *= 1.0 + shimmer * water * 0.055 * u_strength;
+  color.a *= water * 0.72;
   gl_FragColor = color;
 }`
 

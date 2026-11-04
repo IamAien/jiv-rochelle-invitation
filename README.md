@@ -28,7 +28,7 @@ The production output is in `dist/`.
 
 - The opening uses the supplied embroidered coastal envelope, including its original J&R wax seal. A tap gently unfolds the flap from its actual crease, pauses, glides out an illustrated letter, and reveals the invitation over ten seconds. The flap has a linen reverse, stitched border, and solid paper edges visible as it turns. See `design/COASTAL-ENVELOPE-OPENING.md`.
 - The second page uses the supplied coastal villa garden. Warm serif lettering sits in its clear linen area, with the names on one line and the selected Baskerville ampersand.
-- The coastal artwork has a stationary background and three transparent plant layers. Only the plants rotate gently; the sky, linen and villa stay still. A separate transparent canvas animates the sea. Motion pauses offscreen or in a hidden tab, and reduced-motion preferences use the original still image.
+- The original coastal illustration remains the visible base. Moving transparent branches sit over its upper-left and lower-right plants, creating one stationary and one moving plant at each corner. The lower-left pink cutout is omitted. A stronger moving sea overlay sits over the original water. Motion pauses offscreen or in a hidden tab, and reduced-motion preferences show the original image.
 - Portrait artwork fills the phone opening and keeps its proportions on desktop, with warm linen at either side. The invitation preserves the complete garden on wide screens and uses a centered crop on phones.
 - The opening supports keyboard activation, loading failure recovery, focus handoff, replay, and reduced-motion preferences. Page navigation unlocks after the transition.
 - Text fades in with a slight rise as visitors scroll. Short staggered delays create a soft sequence, and blocks remain visible when scrolling back.
@@ -49,7 +49,7 @@ The original names, date, ceremony and reception venues, love story, formal dres
 - `src/wedding.js`: countdown date, scroll calculations, and opening durations.
 - `src/components/EnvelopeOpening.jsx` and `EnvelopeOpening.css`: supplied envelope artwork, complementary flap and pocket masks, solid edges that stop before the seal, illustrated letter, loading/error handling, and opening animation.
 - `src/invitationArtwork.js`: current coastal garden artwork shared by the letter and second page.
-- `src/components/CoastalScene.jsx`, `CoastalScene.css`, `src/coastalMotion.js`, and `src/assets/coastal-layers/`: transparent plant layers, static background plate, independent water ripples, responsive registration, motion preferences and still-image fallback.
+- `src/components/CoastalScene.jsx`, `CoastalScene.css`, `src/coastalMotion.js`, and `src/assets/coastal-layers/`: moving transparent plant and sea overlays on the original illustration, responsive registration, motion preferences and still-image fallback.
 - `src/components/TimelineArtwork.jsx` and `src/assets/timeline/`: supplied timeline illustrations, original PNGs, optimized WebPs, and display sizing.
 - `src/App.jsx`: invitation text, timeline, venues, palettes, and opening lifecycle.
 - `src/App.css`: visual design and animations.
@@ -67,4 +67,4 @@ The illustrated coastal villa and garden are decorative invitation artwork; the 
 
 ## Verification
 
-The production build and 26 behavior tests cover the countdown, scroll reveals, calendar downloads, gallery, coastal artwork registration, plant-layer settings and gradual water motion. Server-rendered checks verify the original fallback, static background, three plant layers, separate water canvas, envelope and invitation content. Alpha-channel checks and an inspected composite verify transparent sky and linen around the plant cutouts. Browser preview is unavailable in the current session, so live motion has not had visual browser QA.
+The production build and 26 behavior tests cover the countdown, scroll reveals, calendar downloads, gallery, coastal artwork registration, plant-layer settings and water motion. Server-rendered checks verify the original image base, two plant overlays, omitted lower-left cutout, separate water canvas, envelope and invitation content. Alpha-channel checks verify transparent sky and linen around the plant cutouts. Browser preview is unavailable in the current session, so live motion has not had visual browser QA.

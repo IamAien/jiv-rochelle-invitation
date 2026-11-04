@@ -7,7 +7,6 @@ export default function CoastalScene({ enabled }) {
   const containerRef = useRef(null)
   const imageRef = useRef(null)
   const stackRef = useRef(null)
-  const backgroundRef = useRef(null)
   const plantsRef = useRef(null)
   const canvasRef = useRef(null)
 
@@ -16,11 +15,10 @@ export default function CoastalScene({ enabled }) {
     const container = containerRef.current
     const image = imageRef.current
     const stack = stackRef.current
-    const background = backgroundRef.current
     const plants = plantsRef.current
     const canvas = canvasRef.current
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const assets = [image, background, plants]
+    const assets = [image, plants]
     let renderer = null
     let inView = container.getBoundingClientRect().bottom > 0
     let waterUnavailable = false
@@ -53,7 +51,7 @@ export default function CoastalScene({ enabled }) {
       container.toggleAttribute('data-motion-running', running)
       if (!renderer && !waterUnavailable && !contextLost) {
         try {
-          renderer = createCoastalWaterRenderer(canvas, background, stack)
+          renderer = createCoastalWaterRenderer(canvas, image, stack)
           if (!renderer) waterUnavailable = true
           else container.setAttribute('data-water-ready', '')
         } catch (error) {
@@ -110,7 +108,6 @@ export default function CoastalScene({ enabled }) {
       alt="Embroidered coastal villa and flower-filled garden overlooking the blue sea, framed by ivory blossoms on warm linen" fetchPriority="high" />
     <img ref={plantsRef} className="coastal-plants-preload" src={COASTAL_LAYER_ARTWORK.plants} alt="" aria-hidden="true" />
     <div ref={stackRef} className="coastal-layer-stack" style={{ '--coastal-plants': `url(${COASTAL_LAYER_ARTWORK.plants})` }} aria-hidden="true">
-      <img ref={backgroundRef} className="coastal-background" src={COASTAL_LAYER_ARTWORK.background} width="941" height="1672" alt="" />
       <canvas ref={canvasRef} className="coastal-water-canvas" aria-hidden="true" />
       {COASTAL_PLANT_REGIONS.map(region => <div key={region.name} className="coastal-plant-layer" data-corner={region.name} style={{
         clipPath: region.clip, transformOrigin: region.origin,
