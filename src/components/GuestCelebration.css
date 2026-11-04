@@ -1,5 +1,10 @@
-.dress-section .palettes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 38px; max-width: 860px; margin-inline: auto; }
+.dress-section .palettes { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 38px; max-width: 860px; margin-inline: auto; }
 .dress-section .palette-group + .palette-group { margin-top: 0; }
+.palette-invitation { position: absolute; top: 100%; left: 50%; display: flex; align-items: center; gap: 4px; height: 25px; margin-top: 2px; color: #8a816d; font-size: 13px; font-style: italic; white-space: nowrap; pointer-events: none; opacity: 0; transform: translate(-50%, 3px); transition: opacity .5s ease, transform .5s ease; }
+.palette-invitation svg { width: 34px; height: 23px; fill: none; stroke: currentColor; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+.palettes[data-discovery-ready] .palette-invitation { opacity: .85; transform: translate(-50%, 0); }
+.palettes[data-discovery-ready] .palette-group:first-child .swatch:first-child .swatch-color { animation: palette-gentle-nudge 2.2s ease-in-out .6s 1; }
+@keyframes palette-gentle-nudge { 0%, 100% { box-shadow: 0 0 0 0 #98a38600; } 40% { box-shadow: 0 0 0 5px #98a38633; } 80% { box-shadow: 0 0 0 9px #98a38600; } }
 .guest-celebration { width: 92%; max-width: 760px; margin: 28px auto 0; }
 .guest-celebration-scene { position: relative; isolation: isolate; width: 100%; aspect-ratio: 1.9; background: radial-gradient(ellipse at 50% 91%, #b8a48b16, transparent 64%); }
 .celebration-person { position: absolute; left: var(--guest-x); bottom: 0; height: var(--guest-size); z-index: var(--guest-depth); transform: translateX(-50%); pointer-events: none; }
@@ -21,6 +26,9 @@
   .guest-celebration { margin-top: 28px; }
 }
 @media (prefers-reduced-motion: reduce), print {
+  .palettes[data-discovery-ready] .palette-group:first-child .swatch:first-child .swatch-color { animation: none; }
+  .palette-invitation { transition: none; }
   .guest-outfit-current.is-changing { animation: none; }
   .celebration-person .guest-outfit-previous { display: none; animation: none; }
 }
+@media print { .palette-invitation { display: none; } }
