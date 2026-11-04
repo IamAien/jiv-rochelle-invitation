@@ -88,7 +88,7 @@ export default function GuestPalette({ children }) {
       <div className="palette-preview-copy">
         <p className="preview-eyebrow">A shade for your celebration</p>
         <p className="selected-color" aria-live="polite" aria-atomic="true">{selected?.name ?? 'Find your favorite shade'}</p>
-        {selected ? <div className="palette-actions"><button type="button" onClick={copyColor}>Copy {selected.color.toUpperCase()}</button><button type="button" onClick={reset}>Reset</button></div> : <span className="palette-preview-note">Tap a stitched swatch to see it here.</span>}
+        {selected ? <div className="palette-actions"><button type="button" onClick={copyColor}>Copy {selected.color.toUpperCase()}</button><button type="button" onClick={reset}>Reset</button></div> : <span className="palette-preview-note">Tap a color to see how it looks.</span>}
       </div>
     </div>
     <div className="palette-status" role="status">{message}</div>
