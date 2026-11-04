@@ -40,11 +40,13 @@ export const COASTAL_CLOUDS = [
 ]
 
 export const COASTAL_PETALS = [
-  // A shared cycle keeps releases 32 seconds apart instead of bunching up over time.
-  // Each flight occupies less than half the cycle, with its own gusts and easing.
-  { shape: 'slender', left: 20, top: 11.8, width: 9.2, seconds: 96, delay: 2, drift: 70, fall: 142, gust: 10, lift: -3, easing: 'cubic-bezier(.32,.12,.68,.9)', flutter: 5.8, angle: -15, rock: 24, turn: 18, pinch: .78, mirror: 1 },
-  { shape: 'rounded', left: 10, top: 21, width: 10.5, seconds: 96, delay: 34, drift: 83, fall: 132, gust: -12, lift: 6, easing: 'cubic-bezier(.18,.18,.78,1)', flutter: 9.2, angle: 65, rock: 44, turn: 32, pinch: .62, mirror: -1 },
-  { shape: 'curled', left: 21, top: 12.3, width: 9.6, seconds: 96, delay: 66, drift: 64, fall: 150, gust: 16, lift: -7, easing: 'cubic-bezier(.4,.08,.72,.94)', flutter: 7.1, angle: -55, rock: 38, turn: 100, pinch: .55, mirror: 1 },
+  // Alternate a pair and a trio on a shared cycle, without accumulating a shower.
+  // Visible flights last about 25 seconds, with separate origins and wind paths.
+  { shape: 'slender', left: 20, top: 11.8, width: 9.2, seconds: 52, delay: 1, drift: 70, fall: 142, gust: 10, lift: -3, easing: 'cubic-bezier(.32,.12,.68,.9)', flutter: 4.8, angle: -15, rock: 24, turn: 18, pinch: .78, mirror: 1 },
+  { shape: 'rounded', left: 10, top: 21, width: 10.5, seconds: 52, delay: 3, drift: 83, fall: 132, gust: -12, lift: 6, easing: 'cubic-bezier(.18,.18,.78,1)', flutter: 6.2, angle: 65, rock: 44, turn: 32, pinch: .62, mirror: -1 },
+  { shape: 'curled', left: 21, top: 12.3, width: 9.6, seconds: 52, delay: 25, drift: 64, fall: 150, gust: 16, lift: -7, easing: 'cubic-bezier(.4,.08,.72,.94)', flutter: 5.1, angle: -55, rock: 38, turn: 100, pinch: .55, mirror: 1 },
+  { shape: 'slender', left: 9, top: 20.5, width: 8.8, seconds: 52, delay: 27, drift: 88, fall: 127, gust: -6, lift: 3, easing: 'cubic-bezier(.22,.1,.72,.98)', flutter: 5.8, angle: 40, rock: 34, turn: 26, pinch: .7, mirror: -1 },
+  { shape: 'rounded', left: 24, top: 12, width: 10, seconds: 52, delay: 29, drift: 60, fall: 148, gust: 7, lift: -9, easing: 'cubic-bezier(.38,.05,.64,.88)', flutter: 7.2, angle: -35, rock: 30, turn: 48, pinch: .66, mirror: 1 },
 ]
 
 export const COASTAL_BIRDS = [
