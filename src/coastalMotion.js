@@ -81,33 +81,42 @@ uniform sampler2D u_image;
 uniform float u_sea_offset;
 varying vec2 v_uv;
 
-void main() {
-  vec2 uv = v_uv;
-  vec4 original = texture2D(u_image, uv);
+float waterThread(vec3 color) {
+  // Accept blue thread and bright ivory wave crests, never olive foliage.
+  float blue = smoothstep(0.012, 0.045, min(color.g, color.b) - color.r);
+  float ivory = smoothstep(0.64, 0.80, min(color.r, min(color.g, color.b)));
+  float green = smoothstep(0.0, 0.025, color.g - max(color.r, color.b));
+  return max(blue, ivory) * (1.0 - green);
+}
 
+float waterCoverage(vec2 uv, vec3 color) {
   float edge = min(min(uv.x, 1.0 - uv.x), min(uv.y, 1.0 - uv.y));
   float pin = smoothstep(0.0, 0.012, edge);
-
-  // Follow the shoreline; nearby blue stitches include the ivory wave crests
-  // while excluding the warm stone, green planting and distant mountains.
   float shore = mix(0.79, 0.815, smoothstep(0.55, 1.0, uv.x));
   float sea = smoothstep(shore, shore + 0.018, uv.y)
     * (1.0 - smoothstep(0.925, 0.965, uv.y)) * smoothstep(0.51, 0.57, uv.x);
-  float water = 0.0;
-  if (sea > 0.0) {
-    vec3 nearby = (original.rgb
-      + texture2D(u_image, uv + vec2(0.009, 0.0)).rgb
-      + texture2D(u_image, uv - vec2(0.009, 0.0)).rgb
-      + texture2D(u_image, uv + vec2(0.0, 0.005)).rgb
-      + texture2D(u_image, uv - vec2(0.0, 0.005)).rgb) / 5.0;
-    water = sea * smoothstep(0.015, 0.075, min(nearby.g, nearby.b) - nearby.r) * pin;
-  }
+  if (sea <= 0.0) return 0.0;
+  vec3 nearby = (color
+    + texture2D(u_image, uv + vec2(0.009, 0.0)).rgb
+    + texture2D(u_image, uv - vec2(0.009, 0.0)).rgb
+    + texture2D(u_image, uv + vec2(0.0, 0.005)).rgb
+    + texture2D(u_image, uv - vec2(0.0, 0.005)).rgb) / 5.0;
+  return sea * smoothstep(0.015, 0.075, min(nearby.g, nearby.b) - nearby.r)
+    * waterThread(color) * pin;
+}
 
-  // Overlay moving water on the original sea; all other artwork stays visible
-  // directly from the unmodified illustration underneath.
+void main() {
+  vec2 uv = v_uv;
+  vec4 original = texture2D(u_image, uv);
+  float water = waterCoverage(uv, original.rgb);
   if (water < 0.001) discard;
-  vec2 displaced = uv + vec2(u_sea_offset, 0.0);
-  vec4 color = texture2D(u_image, clamp(displaced, vec2(0.0), vec2(1.0)));
+
+  vec2 displaced = clamp(uv + vec2(u_sea_offset, 0.0), vec2(0.0), vec2(1.0));
+  vec4 color = texture2D(u_image, displaced);
+  // Check BOTH ends of the shift: a water destination must never pull a tree
+  // or foreground leaf into the ocean. Leave the original pixel visible there.
+  water = min(water, waterCoverage(displaced, color.rgb));
+  if (water < 0.001) discard;
   color.a *= water * 0.72;
   gl_FragColor = color;
 }`
