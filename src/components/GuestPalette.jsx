@@ -52,8 +52,7 @@ export default function GuestPalette({ children }) {
     <h2 id="dress-title">Dressed <em>for love</em></h2>
     <p className="dress-code">Formal attire</p>
     <p className="body-copy">We invite you to dress for a day of love and celebration in shades of blue and pink.</p>
-    <p className="palette-hint" id="palette-hint">Choose a shade for the gentlemen and a shade for the ladies.</p>
-    <div className="palettes" aria-describedby="palette-hint">
+    <div className="palettes">
       {ATTIRE_PALETTES.map(palette => <div className="palette-group" key={palette.title} role="group" aria-labelledby={`palette-${palette.family}`}>
         <h3 id={`palette-${palette.family}`}>{palette.title}</h3>
         <p className="palette-audience">{palette.audience}</p>
