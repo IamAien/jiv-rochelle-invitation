@@ -2,13 +2,15 @@
 
 The 2026-11-04 revision replaces the flat line birds with textured embroidered gulls. Left and right wing cutouts rotate around their shoulders while a separate body stays stable. Each 3.8–4.7-second cycle has two short wingbeats followed by a longer glide. Flight crosses a shallow arc over 24–33 seconds; the bird slowly recedes and gently banks. The former inverted vertical scaling is removed.
 
-The sliding letter and hero share the same prepared full composition, including all plants, clouds and birds. Both stay still throughout the complete envelope opening, card slide and crossfade. The letter never plays scene motion; the hero begins only at `stage === 'done'`. Existing full-size plant assets remain unchanged, with the top branch placed at native (44, 70) and the bottom branch at (493, 1208), slightly farther inward near the original plants.
+The sliding letter and hero share the same prepared full composition, including plants, clouds, petals and birds. Both stay still throughout the complete envelope opening, card slide and crossfade. The letter never plays scene motion; the hero begins only at `stage === 'done'`. Existing full-size plant assets remain unchanged. The top stays at native (44, 70); the bottom is now at (493, 1226), moved 18 pixels down toward the bottom edge as requested. Its full sway still fits inside the frame.
 
-Five transparent embroidered clouds now occupy the scene: three in the upper-right sky and two near the distant coast. A stationary 421 × 630 clean-sky patch is registered at source coordinate (520, 0), with feathered left and bottom edges. It covers only the upper-right sky; the original illustration remains the base. The clouds are shown at 23–43% of the full artboard width and 94% maximum opacity. Each travels right by 10–16% of the artboard width over 22–44 seconds, then fades before resetting. Reduced motion and printing show the original image; hidden or offscreen scenes pause.
+Eight transparent embroidered clouds now occupy the scene: five in the upper-right sky and three near the distant coast. They use three genuinely different silhouettes: the original soft wisp, a long wind-swept filament and a compact rounded billow. Some are mirrored, with widths of 20–40%, opacities of 83–94%, and individual rightward travel of 8–16% over 22–49 seconds. A stationary 421 × 630 clean-sky patch remains registered at (520, 0), with feathered left and bottom edges. The original illustration remains the base. Clouds fade before resetting. Reduced motion and printing show the original image; hidden or offscreen scenes pause.
+
+Three small ivory embroidered petals detach from the upper blossoms after delays of 2, 11 and 20 seconds. Each follows a gentle lateral drift and a soft flutter over a 27–35-second cycle, fading before its invisible reset. The petals stay near the left side of the clear linen area. Both their fall and flutter are paused during the envelope sequence and obey the scene's visibility and reduced-motion settings.
 
 ## Saved assets
 
-Both new source images were created with the built-in `image_gen` tool, using the original coastal illustration as the texture/palette reference. No API/CLI image generation was used. FFmpeg only resizes, crops the technical sky patch and encodes WebP; alpha is preserved for the gull.
+The source images were created with the built-in `image_gen` tool, using the original coastal illustration as the texture/palette reference. No API/CLI image generation was used. FFmpeg only resizes, crops the technical sky patch and encodes WebP; transparency is preserved.
 
 - [Gull source PNG](../src/assets/coastal-layers/embroidered-gull-source.png)
 - [Gull WebP](../src/assets/coastal-layers/embroidered-gull.webp): 640 × 320, true alpha, quality 96; used by all three articulated parts.
@@ -17,6 +19,8 @@ Both new source images were created with the built-in `image_gen` tool, using th
 - [Existing cloud cutout](../src/assets/coastal-layers/cloud-wisp.webp): reused at a larger, more visible size.
 
 ## Final generation prompts
+
+The two additional cloud silhouettes and petal, including their source paths and exact generation/edit prompts, are recorded in [COASTAL-CLOUD-PETAL-ASSETS.json](COASTAL-CLOUD-PETAL-ASSETS.json). Runtime files are [cloud-filament.webp](../src/assets/coastal-layers/cloud-filament.webp), [cloud-rounded.webp](../src/assets/coastal-layers/cloud-rounded.webp) and [ivory-petal.webp](../src/assets/coastal-layers/ivory-petal.webp). Their full PNG sources are stored beside them. The petal alpha channel was inspected to verify that the surrounding haze is fully transparent.
 
 ### Gull
 
@@ -32,4 +36,4 @@ Edit target: `src/assets/embroidered-coastal-garden.webp`. Opaque output.
 
 ## Verification
 
-The generated assets and an offline composite were visually inspected. The sky patch has no visible rectangular edge, and the birds use the scene's ivory/slate thread texture. The 36 behavior tests, production build and server-rendered markup checks cover the invitation, paused scene preparation and the identical five-cloud composition in the letter and hero. Browser automation is unavailable in this session, so real-time visual motion remains unverified.
+The generated assets, petal alpha channel and an offline composite were visually inspected. The 36 behavior tests, production build and server-rendered markup checks cover the invitation, paused scene preparation and the identical composition in the letter and hero, including eight clouds of three shapes and three petals. Browser automation is unavailable in this session, so real-time visual motion remains unverified.

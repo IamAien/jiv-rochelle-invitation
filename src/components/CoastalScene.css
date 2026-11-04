@@ -8,15 +8,31 @@
 .coastal-plant-placement { position: absolute; }
 .coastal-plant-layer { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; animation: coastal-plant-sway ease-in-out infinite both paused; }
 .coastal-cloud { position: absolute; height: auto; animation: coastal-cloud-drift linear infinite both paused; }
+.coastal-petal { position: absolute; z-index: 1; opacity: 0; animation: coastal-petal-fall linear infinite both paused; }
+.coastal-petal-art { display: block; width: 100%; height: auto; animation: coastal-petal-flutter var(--petal-flutter) ease-in-out infinite both paused; animation-delay: inherit; }
 .coastal-bird { position: absolute; aspect-ratio: 2 / 1; animation: coastal-bird-flight linear infinite both paused; }
 .coastal-bird-part { position: absolute; inset: 0; background-image: var(--coastal-bird); background-size: 100% 100%; background-repeat: no-repeat; }
 .coastal-bird-wing { animation: coastal-wingbeat var(--wing-period) ease-in-out infinite both paused; animation-delay: inherit; }
 .coastal-bird-wing-left { clip-path: inset(0 50% 0 0); transform-origin: 48% 55%; --wing-direction: 1; }
 .coastal-bird-wing-right { clip-path: inset(0 0 0 50%); transform-origin: 52% 55%; --wing-direction: -1; }
 .coastal-bird-body { clip-path: inset(0 44% 0 44%); }
-.coastal-scene[data-motion-running] :is(.coastal-plant-layer, .coastal-cloud, .coastal-bird, .coastal-bird-wing) { animation-play-state: running; }
+.coastal-scene[data-motion-running] :is(.coastal-plant-layer, .coastal-cloud, .coastal-bird, .coastal-bird-wing, .coastal-petal, .coastal-petal-art) { animation-play-state: running; }
 @keyframes coastal-plant-sway { 0%, 100% { transform: rotate(0deg); } 30% { transform: rotate(var(--sway-positive)); } 72% { transform: rotate(var(--sway-negative)); } }
-@keyframes coastal-cloud-drift { 0% { transform: translateX(0); opacity: 0; } 8%, 82% { opacity: .94; } 100% { transform: translateX(var(--cloud-travel)); opacity: 0; } }
+@keyframes coastal-cloud-drift { 0% { transform: translateX(0) scaleX(var(--cloud-mirror)); opacity: 0; } 8%, 82% { opacity: var(--cloud-opacity); } 100% { transform: translateX(var(--cloud-travel)) scaleX(var(--cloud-mirror)); opacity: 0; } }
+@keyframes coastal-petal-fall {
+  0% { transform: translate(0, 0); opacity: 0; }
+  6% { opacity: .9; }
+  25% { transform: translate(calc(var(--petal-drift) * .35 + .8cqw), calc(var(--petal-fall) * .25)); }
+  50% { transform: translate(calc(var(--petal-drift) * .5 - .8cqw), calc(var(--petal-fall) * .5)); }
+  70% { opacity: .72; }
+  82% { opacity: 0; }
+  100% { transform: translate(var(--petal-drift), var(--petal-fall)); opacity: 0; }
+}
+@keyframes coastal-petal-flutter {
+  0%, 100% { transform: rotate(var(--petal-angle)) scaleX(1); }
+  35% { transform: rotate(calc(var(--petal-angle) - 28deg)) scaleX(.82); }
+  70% { transform: rotate(calc(var(--petal-angle) + 18deg)) scaleX(.94); }
+}
 @keyframes coastal-bird-flight {
   0% { transform: translate(-18cqw, 1.5cqw) rotate(-2deg) scale(1); opacity: 0; }
   8% { opacity: .94; }
@@ -34,5 +50,5 @@
 }
 @media (prefers-reduced-motion: reduce), print {
   .coastal-layer-stack, .coastal-art-preload { display: none; }
-  .coastal-plant-layer, .coastal-cloud, .coastal-bird, .coastal-bird-wing { animation: none; }
+  .coastal-plant-layer, .coastal-cloud, .coastal-bird, .coastal-bird-wing, .coastal-petal, .coastal-petal-art { animation: none; }
 }

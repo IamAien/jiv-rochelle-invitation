@@ -1,0 +1,22 @@
+{
+  "mode": "Built-in image_gen with transparent_background=true",
+  "reference": "src/assets/embroidered-coastal-garden.webp",
+  "assets": [
+    {
+      "source": "src/assets/coastal-layers/cloud-filament-source.png",
+      "runtime": "src/assets/coastal-layers/cloud-filament.webp",
+      "prompt": "Use case: stylized-concept. Asset type: genuinely transparent embroidered cloud overlay for the attached coastal wedding illustration. The image is a strict texture, material and color reference, not an edit target. Generate ONE isolated LOW, LONG, WIND-SWEPT CLOUD, with a delicate narrow horizontal silhouette, three uneven wispy tails and open notches between thin cloud tufts. Much flatter and more asymmetrical than a puffy three-hump cartoon cloud. Wide 3:1 composition, a little clear margin, entire subject visible. Match the reference's fine shallow cotton-thread embroidery: warm ivory stitches, pale oatmeal thread shadows, occasional faint dusty-blue stitches underneath, muted low contrast and fine sewn irregular edges. Clear little parallel thread ridges. Soft and elegant; the sky must not be included. Actual alpha transparency everywhere around and through the cloud, no blue/cream sky patch, no linen rectangle, no shadow rectangle, fake checkerboard, text, border or watermark. Only one cloud, no sheet or collection."
+    },
+    {
+      "source": "src/assets/coastal-layers/cloud-rounded-source.png",
+      "runtime": "src/assets/coastal-layers/cloud-rounded.webp",
+      "prompt": "Use case: stylized-concept. Asset type: transparent embroidered cloud variation for the referenced coastal wedding illustration. The reference is strictly for texture, palette and material. Generate ONE isolated compact, asymmetrical ivory cumulus cloud with a TALL SOFT CENTRAL BILLow, a small rounded lobe on the left and a low broken taper on the right, a soft uneven flat underside. Its overall silhouette is about twice as wide as tall, visibly different from a long low wisp or repeated three equal humps. Full subject visible with a modest transparent margin. Fine flat hand embroidery, warm ivory cotton stitches following the lobes, pale oatmeal shadows and a few muted dusty-blue stitches under the cloud, shallow thread relief matching the reference, fine irregular sewn edges. Quiet low contrast. Actual alpha transparency around the entire cloud and through any small gaps. No sky, fabric, cream matte, drop-shadow rectangle, checkerboard, text, watermark, border, extra clouds or objects."
+    },
+    {
+      "source": "src/assets/coastal-layers/ivory-petal-source.png",
+      "runtime": "src/assets/coastal-layers/ivory-petal.webp",
+      "initialPrompt": "Use case: stylized-concept. Asset type: ONE transparent ivory flower petal for a gentle falling-petal animation on the referenced embroidered wedding invitation. Use the reference only as a strict material and muted color guide, matching the ivory blossoms in its upper-left plant. One detached small slightly curled elongated oval petal, softly rounded broad tip and narrow base, tilted diagonally. Fine cotton-thread hand embroidery, parallel warm ivory and pale oatmeal stitches running from narrow base to tip, a quiet beige stitched edge and shallow central crease; restrained fine thread detail, flat shallow relief. Entire single petal tightly framed with a little transparent margin. Natural asymmetry, elegant and delicate, no face, no leaf veins, no whole flower, no stem, no extra petals. Actual alpha transparency everywhere outside the petal; absolutely no linen patch, sky, cream background, drop shadow rectangle, fake checkerboard, text, watermark or border.",
+      "finalEditPrompt": "Use case: background-extraction. EDIT TARGET: the attached embroidered ivory petal. Remove ALL surrounding tan haze, glow and cast shadow completely, right up to the sewn outer edge. Preserve the petal itself exactly: same outline, size, diagonal angle, ivory/oatmeal cotton stitches, central crease and border. Only the physical petal and a few tiny thread fibers along its edge may be opaque. Everything outside the true petal silhouette MUST be alpha=0 transparent, with no partially opaque halo, beige haze, shadow, matte, backdrop or gradient. Keep it centered with a small transparent margin. No other changes, objects or text."
+    }
+  ]
+}
