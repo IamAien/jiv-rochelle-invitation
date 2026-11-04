@@ -18,14 +18,31 @@ export function getCoastalImageLayout({ width, height, imageWidth, imageHeight, 
 }
 
 export const COASTAL_PLANT_REGIONS = [
-  { name: 'top', clip: 'inset(0 34% 65% 0)', origin: '0% 7.5%', positive: 3.2, negative: -2.8, seconds: 8.5, delay: 0 },
+  { name: 'top', clip: 'inset(0)', origin: '0% 38%', positive: 3.2, negative: -2.8, seconds: 8.5, delay: 0 },
   { name: 'right', clip: 'inset(76% 0 0 55%)', origin: '100% 100%', positive: 3.8, negative: -3.1, seconds: 9.3, delay: .4 },
+]
+
+export const COASTAL_CLOUDS = [
+  { left: 67, top: 9, width: 19, seconds: 42, delay: -9 },
+  { left: 88, top: 25, width: 13, seconds: 54, delay: -24 },
+]
+
+export const COASTAL_BIRDS = [
+  { left: 64, top: 70.5, width: 2.3, seconds: 48, delay: -10, wing: 1.1 },
+  { left: 69, top: 69, width: 1.9, seconds: 55, delay: -17, wing: 1.35 },
+  { left: 73, top: 71.5, width: 1.7, seconds: 61, delay: -6, wing: 1.55 },
 ]
 
 export function getCoastalWaterStrength(seconds) {
   const time = Math.max(0, seconds)
   const arrival = Math.min(1, time / 1.8)
   return arrival * arrival * (3 - 2 * arrival)
+}
+
+export function getCoastalSeaOffset(seconds) {
+  const time = Math.max(0, seconds)
+  // One uniform horizontal translation: left, then right, with no vertical warp.
+  return Math.sin(time * Math.PI * 2 / 10) * .012 * getCoastalWaterStrength(time)
 }
 
 const VERTEX_SHADER = `
@@ -43,8 +60,7 @@ precision highp float;
 precision mediump float;
 #endif
 uniform sampler2D u_image;
-uniform float u_time;
-uniform float u_strength;
+uniform float u_sea_offset;
 varying vec2 v_uv;
 
 void main() {
@@ -53,7 +69,6 @@ void main() {
 
   float edge = min(min(uv.x, 1.0 - uv.x), min(uv.y, 1.0 - uv.y));
   float pin = smoothstep(0.0, 0.012, edge);
-  vec2 displaced = uv;
 
   // Follow the shoreline; nearby blue stitches include the ivory wave crests
   // while excluding the warm stone, green planting and distant mountains.
@@ -68,19 +83,13 @@ void main() {
       + texture2D(u_image, uv + vec2(0.0, 0.005)).rgb
       + texture2D(u_image, uv - vec2(0.0, 0.005)).rgb) / 5.0;
     water = sea * smoothstep(0.015, 0.075, min(nearby.g, nearby.b) - nearby.r) * pin;
-    float depth = mix(0.4, 1.0, smoothstep(shore, 0.94, uv.y));
-    float drift = sin(uv.y * 190.0 - u_time * 1.25)
-      + 0.3 * sin(uv.x * 84.0 + uv.y * 120.0 - u_time * 0.95);
-    float swell = sin(uv.y * 135.0 + uv.x * 22.0 - u_time * 1.1);
-    displaced += vec2(drift * 0.010, swell * 0.0038) * water * depth * u_strength;
   }
 
   // Overlay moving water on the original sea; all other artwork stays visible
   // directly from the unmodified illustration underneath.
   if (water < 0.001) discard;
+  vec2 displaced = uv + vec2(u_sea_offset, 0.0);
   vec4 color = texture2D(u_image, clamp(displaced, vec2(0.0), vec2(1.0)));
-  float shimmer = sin(uv.y * 320.0 - u_time * 1.15 + sin(uv.x * 26.0));
-  color.rgb *= 1.0 + shimmer * water * 0.055 * u_strength;
   color.a *= water * 0.72;
   gl_FragColor = color;
 }`
@@ -139,14 +148,12 @@ export function createCoastalWaterRenderer(canvas, image, container) {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image)
     gl.uniform1i(gl.getUniformLocation(program, 'u_image'), 0)
-    const timeLocation = gl.getUniformLocation(program, 'u_time')
-    const strengthLocation = gl.getUniformLocation(program, 'u_strength')
+    const offsetLocation = gl.getUniformLocation(program, 'u_sea_offset')
 
     const draw = seconds => {
       gl.clearColor(0, 0, 0, 0)
       gl.clear(gl.COLOR_BUFFER_BIT)
-      gl.uniform1f(timeLocation, seconds)
-      gl.uniform1f(strengthLocation, getCoastalWaterStrength(seconds))
+      gl.uniform1f(offsetLocation, getCoastalSeaOffset(seconds))
       gl.drawArrays(gl.TRIANGLES, 0, 6)
     }
     const resize = () => {
@@ -167,7 +174,7 @@ export function createCoastalWaterRenderer(canvas, image, container) {
     }
     const tick = now => {
       if (!playing) return
-      // Thirty frames per second keeps the slow breeze smooth on phones.
+      // Thirty frames per second keeps the lateral sea movement smooth on phones.
       if (now - lastFrame >= 1000 / 30) {
         draw((elapsed + now - startedAt) / 1000)
         lastFrame = now

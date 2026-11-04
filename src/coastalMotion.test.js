@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { COASTAL_PLANT_REGIONS, getCoastalWaterStrength, getCoastalImageLayout } from './coastalMotion.js'
+import { COASTAL_PLANT_REGIONS, getCoastalSeaOffset, getCoastalWaterStrength, getCoastalImageLayout } from './coastalMotion.js'
 
 const close = (actual, expected) => assert.ok(Math.abs(actual - expected) < 1e-7, `${actual} should equal ${expected}`)
 
@@ -38,6 +38,19 @@ test('water starts at rest and eases into full strength', () => {
   assert.equal(getCoastalWaterStrength(-5), 0)
   assert.ok(getCoastalWaterStrength(.2) < getCoastalWaterStrength(.9))
   assert.equal(getCoastalWaterStrength(1.8), 1)
+})
+
+test('the sea moves left and right as one horizontal sheet without abrupt resets', () => {
+  assert.equal(getCoastalSeaOffset(0), 0)
+  assert.equal(getCoastalSeaOffset(-2), 0)
+  assert.ok(getCoastalSeaOffset(2.5) > 0)
+  assert.ok(getCoastalSeaOffset(7.5) < 0)
+  close(getCoastalSeaOffset(10), 0)
+  for (let frame = 1; frame < 600; frame++) {
+    const offset = getCoastalSeaOffset(frame / 30)
+    assert.ok(Math.abs(offset) <= .012)
+    assert.ok(Math.abs(offset - getCoastalSeaOffset((frame - 1) / 30)) < .001)
+  }
 })
 
 test('the top and lower-right overlays visibly sway without adding the pink lower-left cluster', () => {

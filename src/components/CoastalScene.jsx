@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { COASTAL_LAYER_ARTWORK, INVITATION_ARTWORK } from '../invitationArtwork.js'
-import { COASTAL_PLANT_REGIONS, createCoastalWaterRenderer, getCoastalImageLayout } from '../coastalMotion.js'
+import { COASTAL_BIRDS, COASTAL_CLOUDS, COASTAL_PLANT_REGIONS, createCoastalWaterRenderer, getCoastalImageLayout } from '../coastalMotion.js'
 import './CoastalScene.css'
 
 export default function CoastalScene({ enabled }) {
@@ -8,6 +8,8 @@ export default function CoastalScene({ enabled }) {
   const imageRef = useRef(null)
   const stackRef = useRef(null)
   const plantsRef = useRef(null)
+  const topPlantRef = useRef(null)
+  const cloudRef = useRef(null)
   const canvasRef = useRef(null)
 
   useEffect(() => {
@@ -16,9 +18,11 @@ export default function CoastalScene({ enabled }) {
     const image = imageRef.current
     const stack = stackRef.current
     const plants = plantsRef.current
+    const topPlant = topPlantRef.current
+    const cloud = cloudRef.current
     const canvas = canvasRef.current
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const assets = [image, plants]
+    const assets = [image, plants, topPlant, cloud]
     let renderer = null
     let inView = container.getBoundingClientRect().bottom > 0
     let waterUnavailable = false
@@ -109,11 +113,24 @@ export default function CoastalScene({ enabled }) {
     <img ref={plantsRef} className="coastal-plants-preload" src={COASTAL_LAYER_ARTWORK.plants} alt="" aria-hidden="true" />
     <div ref={stackRef} className="coastal-layer-stack" style={{ '--coastal-plants': `url(${COASTAL_LAYER_ARTWORK.plants})` }} aria-hidden="true">
       <canvas ref={canvasRef} className="coastal-water-canvas" aria-hidden="true" />
-      {COASTAL_PLANT_REGIONS.map(region => <div key={region.name} className="coastal-plant-layer" data-corner={region.name} style={{
+      {COASTAL_CLOUDS.map((cloud, index) => <img key={index} ref={index === 0 ? cloudRef : undefined} className="coastal-cloud" src={COASTAL_LAYER_ARTWORK.cloud} alt="" style={{
+        left: `${cloud.left}%`, top: `${cloud.top}%`, width: `${cloud.width}%`,
+        animationDuration: `${cloud.seconds}s`, animationDelay: `${cloud.delay}s`,
+      }} />)}
+      {COASTAL_BIRDS.map((bird, index) => <div key={index} className="coastal-bird" style={{
+        left: `${bird.left}%`, top: `${bird.top}%`, width: `${bird.width}%`,
+        animationDuration: `${bird.seconds}s`, animationDelay: `${bird.delay}s`, '--wing-period': `${bird.wing}s`,
+      }}>
+        <svg viewBox="0 0 32 16" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true">
+          <g className="coastal-bird-wings"><path d="M16 9 Q9 1 2 5" /><path d="M16 9 Q23 1 30 5" /></g>
+          <path d="M15 9h2" />
+        </svg>
+      </div>)}
+      {COASTAL_PLANT_REGIONS.map(region => <div key={region.name} className={`coastal-plant-layer ${region.name === 'top' ? 'coastal-top-sprig' : 'coastal-corner-branch'}`} data-corner={region.name} style={{
         clipPath: region.clip, transformOrigin: region.origin,
         '--sway-positive': `${region.positive}deg`, '--sway-negative': `${region.negative}deg`,
         animationDuration: `${region.seconds}s`, animationDelay: `${region.delay}s`,
-      }} />)}
+      }}>{region.name === 'top' && <img ref={topPlantRef} src={COASTAL_LAYER_ARTWORK.topPlant} alt="" />}</div>)}
     </div>
   </div>
 }
