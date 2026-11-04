@@ -1,7 +1,7 @@
 import { createCoastalWaterRenderer, getCoastalElementSize, getCoastalImageLayout } from './coastalMotion.js'
 
 // The envelope and page prepare the same still frame before playback starts.
-export function setupCoastalScene({ container, image, stack, assets, canvas, onReady, createWaterRenderer = createCoastalWaterRenderer, environment = window }) {
+export function setupCoastalScene({ container, image, stack, foreground, assets, canvas, onReady, createWaterRenderer = createCoastalWaterRenderer, environment = window }) {
   const document = environment.document
   const reducedMotion = environment.matchMedia('(prefers-reduced-motion: reduce)')
   let renderer = null
@@ -24,7 +24,9 @@ export function setupCoastalScene({ container, image, stack, assets, canvas, onR
     const { width, height } = getCoastalElementSize(container, environment)
     if (!width || !height) return
     const layout = getCoastalImageLayout({ width, height, imageWidth: image.naturalWidth, imageHeight: image.naturalHeight, fit: environment.getComputedStyle(image).objectFit })
-    Object.assign(stack.style, { width: `${layout.width}px`, height: `${layout.height}px`, left: `${layout.left}px`, top: `${layout.top}px` })
+    for (const layer of [stack, foreground].filter(Boolean)) {
+      Object.assign(layer.style, { width: `${layout.width}px`, height: `${layout.height}px`, left: `${layout.left}px`, top: `${layout.top}px` })
+    }
     renderer?.resize()
   }
   const sync = () => {

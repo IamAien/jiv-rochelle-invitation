@@ -1,6 +1,7 @@
-.coastal-scene { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.coastal-scene { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .coastal-art-preload { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-.coastal-layer-stack { container-type: inline-size; position: absolute; overflow: hidden; opacity: 0; pointer-events: none; }
+.coastal-layer-stack { container-type: inline-size; position: absolute; z-index: 0; overflow: hidden; opacity: 0; pointer-events: none; }
+.coastal-petal-stack { z-index: 3; }
 .coastal-scene[data-layers-ready] .coastal-layer-stack { opacity: 1; }
 .coastal-sky-plate { position: absolute; left: 55.2604%; top: 0; width: 44.7396%; height: 37.6794%; mask-image: linear-gradient(to right, transparent, #000 10%), linear-gradient(to bottom, #000 85%, transparent); mask-composite: intersect; }
 .coastal-water-canvas { position: absolute; display: block; opacity: 0; pointer-events: none; }

@@ -45,6 +45,7 @@ function makeElement() {
 function makeScene({ loaded = true, reducedMotion = false, cachedFailure = false } = {}) {
   const container = makeElement()
   const stack = makeElement()
+  const foreground = makeElement()
   const canvas = new TrackedTarget()
   const assets = Array.from({ length: 5 }, () => Object.assign(new TrackedTarget(), {
     complete: loaded, naturalWidth: loaded ? 941 : 0, naturalHeight: loaded ? 1672 : 0,
@@ -69,12 +70,12 @@ function makeScene({ loaded = true, reducedMotion = false, cachedFailure = false
   }
   const readiness = []
   const controller = setupCoastalScene({
-    container, image, stack, assets, canvas, environment,
+    container, image, stack, foreground, assets, canvas, environment,
     onReady: ready => readiness.push(ready),
     createWaterRenderer: () => { calls.create++; return renderer },
   })
   return {
-    container, stack, canvas, assets, document, media, environment, calls, readiness, controller,
+    container, stack, foreground, canvas, assets, document, media, environment, calls, readiness, controller,
     readyCount: () => readiness.filter(Boolean).length,
     playing: () => playing,
     load(asset) { Object.assign(asset, { complete: true, naturalWidth: 941, naturalHeight: 1672 }); asset.emit('load') },
@@ -124,7 +125,12 @@ test('readiness waits for every coastal asset before exposing the composition', 
   assert.ok(scene.container.hasAttribute('data-layers-ready'))
   assert.equal(scene.calls.create, 1)
   assert.equal(scene.playing(), false)
+  const placement = element => ['width', 'height', 'left', 'top'].map(property => element.style[property])
+  assert.deepEqual(placement(scene.foreground), placement(scene.stack), 'Foreground petals must align with the background artwork')
+  scene.environment.getComputedStyle = () => ({ width: '470.5px', height: '836px', objectFit: 'contain' })
   scene.environment.emit('resize')
+  assert.equal(scene.foreground.style.width, '470.5px')
+  assert.deepEqual(placement(scene.foreground), placement(scene.stack), 'Both layers must stay aligned after resizing')
   assert.equal(scene.readyCount(), 1)
   scene.controller.destroy()
 })

@@ -42,14 +42,14 @@ body { background: var(--ivory); }
 .flourish i::after { right: 0; top: 2px; transform: rotate(-16deg); }
 .invitation-cover { position: relative; height: max(730px, calc(100svh - 64px)); background: #f9ecda; background-image: linear-gradient(#f9ecdad9, #f9ecdad9), var(--linen); scroll-margin-top: 64px; }
 .villa-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; }
-.invitation-text { position: absolute; top: 34%; left: 50%; transform: translateX(-50%); width: min(84%, 480px); text-align: center; color: #785a3e; text-shadow: 0 1px #fff9; }
+.invitation-text { position: absolute; z-index: 1; top: 34%; left: 50%; transform: translateX(-50%); width: min(84%, 480px); text-align: center; color: #785a3e; text-shadow: 0 1px #fff9; }
 .invite-prelude { font-size: 15px; line-height: 1.5; font-style: italic; }
 .invitation-text h1 { font-size: clamp(38px, 8.8vw, 56px); font-weight: 500; line-height: 1.12; margin-top: 22px; letter-spacing: -.035em; white-space: nowrap; outline: none; }
 .invitation-text h1 .ampersand { display: inline-block; font-size: .5em; line-height: 1; margin: 0 .24em; }
 .invitation-text h1 .ampersand svg { width: .74em; height: .74em; }
 .wedding-date { display: block; font-size: 18px; letter-spacing: .09em; margin-top: 24px; }
 .cover-location { font: 8px/1.6 var(--sans); text-transform: uppercase; letter-spacing: .25em; margin-top: 12px; }
-.discover-link { position: absolute; bottom: 4%; left: 50%; transform: translateX(-50%); white-space: nowrap; font: 8px var(--sans); letter-spacing: .14em; padding: 12px 17px; color: #785a3e; background: #fcf0dfe6; border: 1px solid #a98a6533; }
+.discover-link { position: absolute; z-index: 4; bottom: 4%; left: 50%; transform: translateX(-50%); white-space: nowrap; font: 8px var(--sans); letter-spacing: .14em; padding: 12px 17px; color: #785a3e; background: #fcf0dfe6; border: 1px solid #a98a6533; }
 .discover-link span { margin-left: 14px; }
 .has-started .invitation-text { animation: invitation-appear 2s ease-in-out var(--page-reveal-delay) both; }
 .is-open:not(.has-started) .invitation-text { animation: invitation-appear 1.4s ease both; }

@@ -8,6 +8,7 @@ export default function CoastalScene({ enabled = false, onReady }) {
   const containerRef = useRef(null)
   const imageRef = useRef(null)
   const stackRef = useRef(null)
+  const foregroundRef = useRef(null)
   const plantRefs = useRef([])
   const cloudRefs = useRef([])
   const petalRefs = useRef([])
@@ -18,7 +19,7 @@ export default function CoastalScene({ enabled = false, onReady }) {
 
   useEffect(() => {
     const controller = setupCoastalScene({
-      container: containerRef.current, image: imageRef.current, stack: stackRef.current, canvas: canvasRef.current,
+      container: containerRef.current, image: imageRef.current, stack: stackRef.current, foreground: foregroundRef.current, canvas: canvasRef.current,
       assets: [imageRef.current, birdRef.current, skyRef.current, ...plantRefs.current, ...cloudRefs.current, ...petalRefs.current], onReady,
     })
     controllerRef.current = controller
@@ -46,12 +47,6 @@ export default function CoastalScene({ enabled = false, onReady }) {
         <span className="coastal-bird-part coastal-bird-wing coastal-bird-wing-right" />
         <span className="coastal-bird-part coastal-bird-body" />
       </div>)}
-      {COASTAL_PETALS.map((petal, index) => <span key={index} className="coastal-petal" data-petal-shape={petal.shape} style={{
-        left: `${petal.left}%`, top: `${petal.top}%`, width: `${petal.width}%`, animationDuration: `${petal.seconds}s`, animationDelay: `${petal.delay}s`, animationTimingFunction: petal.easing,
-        '--petal-drift': `${petal.drift}cqw`, '--petal-fall': `${petal.fall}cqw`, '--petal-flutter': `${petal.flutter}s`, '--petal-angle': `${petal.angle}deg`,
-        '--petal-gust': `${petal.gust}cqw`, '--petal-lift': `${petal.lift}cqw`,
-        '--petal-rock': `${petal.rock}deg`, '--petal-turn': `${petal.turn}deg`, '--petal-pinch': petal.pinch, '--petal-mirror': petal.mirror,
-      }}><img ref={element => { petalRefs.current[index] = element }} className="coastal-petal-art" src={COASTAL_LAYER_ARTWORK.petals[petal.shape]} alt="" /></span>)}
       {COASTAL_PLANT_REGIONS.map((region, index) => <div key={region.name} className="coastal-plant-placement" style={{
         left: `${region.x / INVITATION_ARTWORK.width * 100}%`, top: `${region.y / INVITATION_ARTWORK.height * 100}%`,
         width: `${region.width / INVITATION_ARTWORK.width * 100}%`, height: `${region.height / INVITATION_ARTWORK.height * 100}%`,
@@ -62,6 +57,14 @@ export default function CoastalScene({ enabled = false, onReady }) {
           animationDuration: `${region.seconds}s`, animationDelay: `${region.delay}s`,
         }} />
       </div>)}
+    </div>
+    <div ref={foregroundRef} className="coastal-layer-stack coastal-petal-stack" aria-hidden="true">
+      {COASTAL_PETALS.map((petal, index) => <span key={index} className="coastal-petal" data-petal-shape={petal.shape} style={{
+        left: `${petal.left}%`, top: `${petal.top}%`, width: `${petal.width}%`, animationDuration: `${petal.seconds}s`, animationDelay: `${petal.delay}s`, animationTimingFunction: petal.easing,
+        '--petal-drift': `${petal.drift}cqw`, '--petal-fall': `${petal.fall}cqw`, '--petal-flutter': `${petal.flutter}s`, '--petal-angle': `${petal.angle}deg`,
+        '--petal-gust': `${petal.gust}cqw`, '--petal-lift': `${petal.lift}cqw`,
+        '--petal-rock': `${petal.rock}deg`, '--petal-turn': `${petal.turn}deg`, '--petal-pinch': petal.pinch, '--petal-mirror': petal.mirror,
+      }}><img ref={element => { petalRefs.current[index] = element }} className="coastal-petal-art" src={COASTAL_LAYER_ARTWORK.petals[petal.shape]} alt="" /></span>)}
     </div>
   </div>
 }
