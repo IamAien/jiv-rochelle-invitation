@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { COASTAL_PLANT_REGIONS, getCoastalSeaOffsets, getCoastalWaterStrength, getCoastalImageLayout } from './coastalMotion.js'
+import { COASTAL_PLANT_REGIONS, getCoastalSeaCurrents, getCoastalWaterStrength, getCoastalImageLayout } from './coastalMotion.js'
 
 const close = (actual, expected) => assert.ok(Math.abs(actual - expected) < 1e-7, `${actual} should equal ${expected}`)
 
@@ -40,19 +40,31 @@ test('water starts at rest and eases into full strength', () => {
   assert.equal(getCoastalWaterStrength(1.8), 1)
 })
 
-test('three sea bands alternate direction, vary speed and reverse without abrupt resets', () => {
-  for (const offset of [...getCoastalSeaOffsets(0), ...getCoastalSeaOffsets(-2), ...getCoastalSeaOffsets(10)]) close(offset, 0)
-  const forward = getCoastalSeaOffsets(2.5)
-  const reverse = getCoastalSeaOffsets(7.5)
-  assert.ok(forward[0] > 0 && forward[1] < 0 && forward[2] > 0)
-  assert.ok(reverse[0] < 0 && reverse[1] > 0 && reverse[2] < 0)
-  assert.equal(new Set(forward.map(Math.abs)).size, 3, 'Each current must have a different travel distance and speed')
-  for (let frame = 1; frame < 600; frame++) {
-    const offsets = getCoastalSeaOffsets(frame / 30)
-    const previous = getCoastalSeaOffsets((frame - 1) / 30)
-    offsets.forEach((offset, band) => {
-      assert.ok(Math.abs(offset) <= .016)
-      assert.ok(Math.abs(offset - previous[band]) < .001)
+test('separate sea currents flow right-left-right at independent speeds with invisible resets', () => {
+  for (const current of [...getCoastalSeaCurrents(0), ...getCoastalSeaCurrents(-2)]) {
+    close(current.offsetA, 0)
+    close(current.offsetB, 0)
+  }
+  const before = getCoastalSeaCurrents(2)
+  const after = getCoastalSeaCurrents(2.01)
+  const speeds = after.map((current, band) => current.offsetA - before[band].offsetA)
+  assert.ok(speeds[0] > 0 && speeds[1] < 0 && speeds[2] > 0)
+  assert.equal(new Set(speeds).size, 3, 'Currents must advance independently')
+  const texture = offset => Math.sin(offset * 180) + .3 * Math.cos(offset * 310)
+  const sample = current => texture(current.offsetB) * (1 - current.blend) + texture(current.offsetA) * current.blend
+  for (let frame = 1; frame < 1560; frame++) {
+    const currents = getCoastalSeaCurrents(frame / 30)
+    const previous = getCoastalSeaCurrents((frame - 1) / 30)
+    currents.forEach((current, band) => {
+      assert.ok(Math.abs(current.offsetA) <= .016 && Math.abs(current.offsetB) <= .016)
+      assert.ok(current.blend >= 0 && current.blend <= 1)
+      assert.ok(Math.abs(sample(current) - sample(previous[band])) < .08, 'Texture must remain continuous across wraps')
+      if (frame > 60) {
+        for (const key of ['offsetA', 'offsetB']) {
+          const movement = current[key] - previous[band][key]
+          if (Math.abs(movement) < .02) assert.ok(movement * [1, -1, 1][band] > 0, 'Each visible sample must keep its flow direction')
+        }
+      }
     })
   }
 })

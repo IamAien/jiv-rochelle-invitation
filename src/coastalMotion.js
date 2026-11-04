@@ -60,12 +60,20 @@ export function getCoastalWaterStrength(seconds) {
   return arrival * arrival * (3 - 2 * arrival)
 }
 
-export function getCoastalSeaOffsets(seconds) {
+export function getCoastalSeaCurrents(seconds) {
   const time = Math.max(0, seconds)
-  const drift = Math.sin(time * Math.PI * 2 / 10) * .016 * getCoastalWaterStrength(time)
-  // Distant and foreground water travel together; the middle current opposes
-  // them. Different amplitudes vary the speed without any vertical distortion.
-  return [drift, -drift * .85, drift * .7]
+  const strength = getCoastalWaterStrength(time)
+  // Independent one-way flows: right, left, right. Two staggered texture
+  // samples hide each reset, so no band has to stop or reverse direction.
+  return [[8, 1], [10.5, -1], [13, 1]].map(([period, direction]) => {
+    const phase = (time / period) % 1
+    const alternate = (phase + .5) % 1
+    return {
+      offsetA: (phase - .5) * .032 * direction * strength,
+      offsetB: (alternate - .5) * .032 * direction * strength,
+      blend: 1 - Math.abs(phase * 2 - 1),
+    }
+  })
 }
 
 const VERTEX_SHADER = `
@@ -83,7 +91,9 @@ precision highp float;
 precision mediump float;
 #endif
 uniform sampler2D u_image;
-uniform vec3 u_sea_offsets;
+uniform vec3 u_sea_offsets_a;
+uniform vec3 u_sea_offsets_b;
+uniform vec3 u_sea_blend;
 varying vec2 v_uv;
 
 float waterThread(vec3 color) {
@@ -117,6 +127,10 @@ vec4 sampleCurrent(vec2 uv, float offset) {
   return vec4(color.rgb * coverage, coverage);
 }
 
+vec4 flowingCurrent(vec2 uv, float offsetA, float offsetB, float blend) {
+  return mix(sampleCurrent(uv, offsetB), sampleCurrent(uv, offsetA), blend);
+}
+
 void main() {
   vec2 uv = v_uv;
   vec4 original = texture2D(u_image, uv);
@@ -125,11 +139,11 @@ void main() {
 
   // Crossfade complete horizontal translations at the band edges rather than
   // bending the threads between offsets. Every source sample rejects foliage.
-  vec4 distant = sampleCurrent(uv, u_sea_offsets.x);
-  vec4 middle = sampleCurrent(uv, u_sea_offsets.y);
-  vec4 foreground = sampleCurrent(uv, u_sea_offsets.z);
-  vec4 currents = mix(distant, middle, smoothstep(0.846, 0.862, uv.y));
-  currents = mix(currents, foreground, smoothstep(0.895, 0.911, uv.y));
+  vec4 distant = flowingCurrent(uv, u_sea_offsets_a.x, u_sea_offsets_b.x, u_sea_blend.x);
+  vec4 middle = flowingCurrent(uv, u_sea_offsets_a.y, u_sea_offsets_b.y, u_sea_blend.y);
+  vec4 foreground = flowingCurrent(uv, u_sea_offsets_a.z, u_sea_offsets_b.z, u_sea_blend.z);
+  vec4 currents = mix(distant, middle, smoothstep(0.852, 0.858, uv.y));
+  currents = mix(currents, foreground, smoothstep(0.900, 0.906, uv.y));
   if (currents.a < 0.001) discard;
   gl_FragColor = vec4(currents.rgb / currents.a, min(water, currents.a) * 0.72);
 }`
@@ -188,12 +202,17 @@ export function createCoastalWaterRenderer(canvas, image, container) {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image)
     gl.uniform1i(gl.getUniformLocation(program, 'u_image'), 0)
-    const offsetLocation = gl.getUniformLocation(program, 'u_sea_offsets')
+    const offsetALocation = gl.getUniformLocation(program, 'u_sea_offsets_a')
+    const offsetBLocation = gl.getUniformLocation(program, 'u_sea_offsets_b')
+    const blendLocation = gl.getUniformLocation(program, 'u_sea_blend')
 
     const draw = seconds => {
       gl.clearColor(0, 0, 0, 0)
       gl.clear(gl.COLOR_BUFFER_BIT)
-      gl.uniform3f(offsetLocation, ...getCoastalSeaOffsets(seconds))
+      const currents = getCoastalSeaCurrents(seconds)
+      gl.uniform3f(offsetALocation, ...currents.map(current => current.offsetA))
+      gl.uniform3f(offsetBLocation, ...currents.map(current => current.offsetB))
+      gl.uniform3f(blendLocation, ...currents.map(current => current.blend))
       gl.drawArrays(gl.TRIANGLES, 0, 6)
     }
     const resize = () => {
