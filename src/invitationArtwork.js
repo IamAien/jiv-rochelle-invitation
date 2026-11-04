@@ -1,5 +1,5 @@
 import coastalGarden from './assets/embroidered-coastal-garden.webp'
-import topPlant from './assets/coastal-layers/top-branch.webp'
+import topPlant from './assets/coastal-layers/top-branch-complete.webp'
 import bottomPlant from './assets/coastal-layers/bottom-branch.webp'
 import cloud from './assets/coastal-layers/cloud-wisp.webp'
 import cloudFilament from './assets/coastal-layers/cloud-filament.webp'

@@ -60,7 +60,9 @@ test('the top and lower-right overlays visibly sway without adding the pink lowe
     assert.ok(region.positive >= 3 && region.positive <= 4)
     assert.ok(region.negative <= -2.5 && region.negative >= -4)
     assert.ok(region.origin.split(' ').every(value => value.endsWith('%')))
-    // The complete plant image must fit even at either sway limit.
+    // Only the top stem intentionally crosses the left frame edge. The top,
+    // right and bottom edges must not clip either branch during its sway.
+    if (region.name === 'top') assert.ok(region.x < 0, 'The top stem must enter from outside the left edge')
     const [originX, originY] = region.origin.split(' ').map(parseFloat)
     const pivotX = region.width * originX / 100
     const pivotY = region.height * originY / 100
@@ -69,7 +71,7 @@ test('the top and lower-right overlays visibly sway without adding the pink lowe
       for (const x of [0, region.width]) for (const y of [0, region.height]) {
         const rotatedX = region.x + pivotX + (x - pivotX) * Math.cos(angle) - (y - pivotY) * Math.sin(angle)
         const rotatedY = region.y + pivotY + (x - pivotX) * Math.sin(angle) + (y - pivotY) * Math.cos(angle)
-        assert.ok(rotatedX >= 0 && rotatedX <= 941 && rotatedY >= 0 && rotatedY <= 1672, `${region.name} plant must fit at ${degrees} degrees`)
+        assert.ok((region.name === 'top' || rotatedX >= 0) && rotatedX <= 941 && rotatedY >= 0 && rotatedY <= 1672, `${region.name} plant must clear its other frame edges at ${degrees} degrees`)
       }
     }
   }

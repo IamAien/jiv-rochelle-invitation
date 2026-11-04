@@ -18,7 +18,7 @@ export function getCoastalImageLayout({ width, height, imageWidth, imageHeight, 
 }
 
 export const COASTAL_PLANT_REGIONS = [
-  { name: 'top', x: 44, y: 70, width: 600, height: 550, origin: '0% 22.8%', positive: 3.2, negative: -2.8, seconds: 8.5, delay: 0 },
+  { name: 'top', x: -28, y: 38, width: 650, height: 650, origin: '0% 32.5%', positive: 3.2, negative: -2.8, seconds: 8.5, delay: 0 },
   { name: 'right', x: 493, y: 1226, width: 400, height: 420, origin: '100% 100%', positive: 3.8, negative: -3.1, seconds: 9.3, delay: .4 },
 ]
 
@@ -40,9 +40,9 @@ export const COASTAL_CLOUDS = [
 ]
 
 export const COASTAL_PETALS = [
-  { left: 24, top: 11, width: 2.8, seconds: 27, delay: 2, drift: -6, fall: 56, flutter: 6.5, angle: -15 },
-  { left: 15, top: 20, width: 2.4, seconds: 31, delay: 11, drift: 5, fall: 50, flutter: 7.8, angle: 22 },
-  { left: 26, top: 11.5, width: 2.6, seconds: 35, delay: 20, drift: -9, fall: 66, flutter: 8.7, angle: -28 },
+  { left: 21, top: 13, width: 2.8, seconds: 27, delay: 2, drift: -6, fall: 56, flutter: 6.5, angle: -15 },
+  { left: 10, top: 22.4, width: 2.4, seconds: 31, delay: 11, drift: 5, fall: 50, flutter: 7.8, angle: 22 },
+  { left: 22, top: 13.5, width: 2.6, seconds: 35, delay: 20, drift: -9, fall: 66, flutter: 8.7, angle: -28 },
 ]
 
 export const COASTAL_BIRDS = [

@@ -1,0 +1,15 @@
+{
+  "mode": "Built-in image_gen, transparent_background=true",
+  "editTarget": "src/assets/coastal-layers/top-branch.webp",
+  "textureReference": "src/assets/embroidered-coastal-garden.webp",
+  "source": "src/assets/coastal-layers/top-branch-complete-source.png",
+  "runtime": "src/assets/coastal-layers/top-branch-complete.webp",
+  "display": {
+    "x": -28,
+    "y": 38,
+    "width": 650,
+    "height": 650,
+    "origin": "0% 32.5%"
+  },
+  "prompt": "Use case: precise-object-edit / outpainting. Image 1 is the EDIT TARGET: the current transparent ivory-blossom and olive-leaf branch cutout. Image 2 is a strict palette and embroidery texture reference, the original wedding invitation. Repair the target's visibly chopped-off UPPER LEAVES and buds: extend the canvas upward and reconstruct their missing natural tapered tips and connected upper stems. Keep the SAME branch, TWO ivory flowers, their shapes, relative spacing, leaf type, olive/sage colors, warm oatmeal stems and tiny cream buds. Preserve the existing plant's full-size proportions and fine cotton-thread stitch detail; do not create a new botanical variation, make it sparse, recolor it, add blossoms, add a sky or change to painting. The result should feel like the same original branch, simply complete. Composition: one coherent upper-left framing branch, long horizontal arm to the right and hanging leafy arm down the left. A short bare main stem enters from the LEFT edge, suitable for placing partly offscreen so it grows in from outside the frame. ALL leaf tips, petals and buds, especially along the TOP, must be fully formed and surrounded by at least 35 pixels of true transparent breathing room. No horizontal chopped leaf edges anywhere. Enlarge the transparent canvas as necessary rather than squeezing or clipping the plant; approximately square canvas, show only this one branch, no other corner plants. Match the original reference's muted ivory/olive cotton embroidery with shallow thread relief and fine parallel sewn fibers, no glossy or puffy plastic look. Output actual alpha transparency around and between every part of the plant. No linen, sky, backdrop, opaque matte, shadow rectangle, fake checkerboard, text, border, frame or watermark."
+}
