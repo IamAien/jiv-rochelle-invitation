@@ -2,8 +2,6 @@
 // Leave src empty to keep the linen placeholder until a photo is ready.
 export const REVEAL_PHOTOS = [
   { src: '', caption: 'Law school days', alt: 'Jiv and Rochelle during their law school days' },
-  { src: '', caption: 'The walk that started it all', alt: 'A memory of Jiv and Rochelle after the Bar exams' },
-  { src: '', caption: 'Falling in love', alt: 'A favorite memory of Jiv and Rochelle together' },
 ]
 
 export const MEMORY_PHOTOS = [
@@ -31,13 +29,18 @@ export function getPhotoSwipe(delta, width) {
 }
 
 // Track erased cells instead of reading every pixel on every pointer movement.
-export function createScratchGrid(width, height) {
+export function createScratchGrid(width, height, shape = 'rectangle') {
   const columns = 20
-  return { width, height, columns, rows: width > 0 ? Math.max(8, Math.round(columns * height / width)) : 8, hits: new Set() }
+  const rows = width > 0 ? Math.max(8, Math.round(columns * height / width)) : 8
+  const active = new Set()
+  for (let row = 0; row < rows; row++) for (let column = 0; column < columns; column++) {
+    if (shape !== 'ellipse' || ((column + .5) / columns * 2 - 1) ** 2 + ((row + .5) / rows * 2 - 1) ** 2 <= 1) active.add(row * columns + column)
+  }
+  return { width, height, columns, rows, active, hits: new Set() }
 }
 
 export function recordScratchStroke(grid, from, to, radius) {
-  const { width, height, columns, rows, hits } = grid
+  const { width, height, columns, rows, active, hits } = grid
   if (width <= 0 || height <= 0 || radius <= 0) return 0
   const steps = Math.max(1, Math.ceil(Math.hypot(to.x - from.x, to.y - from.y) / (radius * 0.4)))
   for (let step = 0; step <= steps; step++) {
@@ -51,9 +54,10 @@ export function recordScratchStroke(grid, from, to, radius) {
       for (let column = firstColumn; column <= lastColumn; column++) {
         const centerX = (column + 0.5) * width / columns
         const centerY = (row + 0.5) * height / rows
-        if (Math.hypot(centerX - x, centerY - y) <= radius) hits.add(row * columns + column)
+        const cell = row * columns + column
+        if (active.has(cell) && Math.hypot(centerX - x, centerY - y) <= radius) hits.add(cell)
       }
     }
   }
-  return hits.size / (columns * rows)
+  return hits.size / active.size
 }

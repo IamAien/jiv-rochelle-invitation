@@ -63,3 +63,23 @@ test('scratch coverage survives a proportional resize without counting areas twi
   assert.equal(after, before)
   assert.equal(recordScratchStroke(createScratchGrid(0, 0), { x: 0, y: 0 }, { x: 0, y: 0 }, 24), 0)
 })
+
+test('oval scratch coverage ignores hidden corner strokes', () => {
+  const grid = createScratchGrid(240, 300, 'ellipse')
+  for (const point of [{ x: 8, y: 8 }, { x: 232, y: 8 }, { x: 8, y: 292 }, { x: 232, y: 292 }]) {
+    assert.equal(recordScratchStroke(grid, point, point, 10), 0)
+  }
+  assert.ok(recordScratchStroke(grid, { x: 120, y: 150 }, { x: 120, y: 150 }, 24) > 0)
+})
+
+test('oval coverage measures the visible photo and survives resizing', () => {
+  const oval = createScratchGrid(240, 300, 'ellipse')
+  const rectangle = createScratchGrid(240, 300)
+  const before = recordScratchStroke(oval, { x: 0, y: 150 }, { x: 240, y: 150 }, 24)
+  assert.ok(before > recordScratchStroke(rectangle, { x: 0, y: 150 }, { x: 240, y: 150 }, 24))
+  oval.width = 480
+  oval.height = 600
+  assert.equal(recordScratchStroke(oval, { x: 0, y: 300 }, { x: 480, y: 300 }, 48), before)
+  for (let y = 0; y <= 600; y += 30) recordScratchStroke(oval, { x: 0, y }, { x: 480, y }, 48)
+  assert.ok(oval.hits.size / oval.active.size >= .98)
+})

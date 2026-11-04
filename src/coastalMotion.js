@@ -19,7 +19,7 @@ export function getCoastalImageLayout({ width, height, imageWidth, imageHeight, 
 
 export const COASTAL_PLANT_REGIONS = [
   { name: 'top', x: -28, y: 38, width: 650, height: 650, origin: '0% 32.5%', positive: 3.2, negative: -2.8, seconds: 8.5, delay: 0 },
-  { name: 'right', x: 493, y: 1226, width: 400, height: 420, origin: '100% 100%', positive: 3.8, negative: -3.1, seconds: 9.3, delay: .4 },
+  { name: 'right', x: 493, y: 1260, width: 400, height: 420, origin: '87.5% 100%', positive: 3.8, negative: -3.1, seconds: 9.3, delay: .4 },
 ]
 
 // Layout size stays stable while the envelope translates its invitation card.
@@ -34,15 +34,15 @@ export const COASTAL_CLOUDS = [
   { shape: 'filament', left: 60, top: 12, width: 35, seconds: 38, delay: -17, travel: 14, opacity: .91 },
   { shape: 'wisp', left: 78, top: 20, width: 26, seconds: 34, delay: -10, travel: 12, opacity: .92 },
   { shape: 'filament', left: 81, top: 27, width: 22, seconds: 42, delay: -20, travel: 10, opacity: .86, mirror: true },
-  { shape: 'filament', left: 61, top: 70, width: 33, seconds: 42, delay: -8, travel: 10, opacity: .87, mirror: true },
-  { shape: 'rounded', left: 76, top: 73, width: 23, seconds: 46, delay: -22, travel: 10, opacity: .90 },
-  { shape: 'wisp', left: 83, top: 76, width: 20, seconds: 49, delay: -15, travel: 8, opacity: .83 },
+  { shape: 'filament', left: 61, top: 70, width: 33, seconds: 32, delay: -8, travel: 10, opacity: .87, mirror: true },
+  { shape: 'rounded', left: 76, top: 73, width: 23, seconds: 35, delay: -22, travel: 10, opacity: .90 },
+  { shape: 'wisp', left: 83, top: 76, width: 20, seconds: 37, delay: -15, travel: 8, opacity: .83 },
 ]
 
 export const COASTAL_PETALS = [
-  { left: 21, top: 13, width: 2.8, seconds: 27, delay: 2, drift: -6, fall: 56, flutter: 6.5, angle: -15 },
-  { left: 10, top: 22.4, width: 2.4, seconds: 31, delay: 11, drift: 5, fall: 50, flutter: 7.8, angle: 22 },
-  { left: 22, top: 13.5, width: 2.6, seconds: 35, delay: 20, drift: -9, fall: 66, flutter: 8.7, angle: -28 },
+  { left: 21, top: 13, width: 7.2, seconds: 27, delay: 2, drift: -6, fall: 56, flutter: 6.5, angle: -15 },
+  { left: 10, top: 22.4, width: 6.3, seconds: 31, delay: 11, drift: 5, fall: 50, flutter: 7.8, angle: 22 },
+  { left: 22, top: 13.5, width: 6.8, seconds: 35, delay: 20, drift: -9, fall: 66, flutter: 8.7, angle: -28 },
 ]
 
 export const COASTAL_BIRDS = [

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { createScratchGrid, getPhotoSource, getPhotoSwipe, MEMORY_PHOTOS, recordScratchStroke, REVEAL_PHOTOS, wrapPhotoIndex } from '../gallery.js'
 import './WeddingGallery.css'
 import Ampersand from './Ampersand.jsx'
+import ovalFrame from '../assets/oval-photo-frame.webp'
 
 function GalleryPhoto({ photo, decorative = false, tone = 0 }) {
   const [failed, setFailed] = useState(false)
@@ -14,7 +15,7 @@ function GalleryPhoto({ photo, decorative = false, tone = 0 }) {
   </div>
 }
 
-function RevealPhoto({ photo, index }) {
+function RevealPhoto({ photo }) {
   const canvasRef = useRef(null)
   const scratch = useRef({ grid: null, last: null, pointer: null, revealed: false })
   const [revealed, setRevealed] = useState(false)
@@ -51,8 +52,7 @@ function RevealPhoto({ photo, index }) {
       return
     }
     const { width, height } = bounds
-    const colors = ['#e8dfcf', '#dce2d8', '#eadbd6']
-    context.fillStyle = colors[index % colors.length]
+    context.fillStyle = '#f5ead8'
     context.fillRect(0, 0, width, height)
     context.lineWidth = 0.6
     for (let x = 0; x < width; x += 4) {
@@ -66,17 +66,19 @@ function RevealPhoto({ photo, index }) {
     context.strokeStyle = '#8d897688'
     context.setLineDash([3, 5])
     context.lineWidth = 1
-    context.strokeRect(13, 13, width - 26, height - 26)
+    context.beginPath()
+    context.ellipse(width / 2, height / 2, width * .43, height * .43, 0, 0, Math.PI * 2)
+    context.stroke()
     context.setLineDash([])
     context.fillStyle = '#665b49'
     context.textAlign = 'center'
-    context.font = `italic ${Math.max(23, width / 10)}px Georgia, serif`
+    context.font = `italic ${Math.max(21, Math.min(36, width / 10))}px Georgia, serif`
     context.fillText('Brush to reveal', width / 2, height / 2)
     context.font = '10px Georgia, serif'
-    context.fillText(`—  0${index + 1}  —`, width / 2, height / 2 + 32)
-    scratch.current.grid = createScratchGrid(width, height)
+    context.fillText('Jiv & Rochelle', width / 2, height / 2 + 32)
+    scratch.current.grid = createScratchGrid(width, height, 'ellipse')
     scratch.current.last = null
-  }, [index, reveal])
+  }, [reveal])
 
   useEffect(() => {
     paint()
@@ -123,10 +125,13 @@ function RevealPhoto({ photo, index }) {
     paint()
   }
 
-  return <figure className={`memory-reveal-card ${revealed ? 'is-revealed' : ''}`} style={{ '--photo-tilt': `${[-1.5, 1.1, -0.8][index % 3]}deg` }}>
-    <div className="memory-photo-window">
-      <GalleryPhoto key={photo.src} photo={photo} tone={index} />
-      <canvas className="memory-veil" ref={canvasRef} aria-hidden="true" onPointerDown={down} onPointerMove={brush} onPointerUp={stop} onPointerCancel={stop} onPointerLeave={stop} />
+  return <figure className={`memory-reveal-card ${revealed ? 'is-revealed' : ''}`}>
+    <div className="memory-framed-art">
+      <div className="memory-photo-window">
+        <GalleryPhoto key={photo.src} photo={photo} />
+        <canvas className="memory-veil" ref={canvasRef} aria-hidden="true" onPointerDown={down} onPointerMove={brush} onPointerUp={stop} onPointerCancel={stop} onPointerLeave={stop} />
+      </div>
+      <img className="memory-oval-frame" src={ovalFrame} width="1054" height="1492" alt="" aria-hidden="true" loading="lazy" draggable="false" />
     </div>
     <figcaption className="memory-reveal-caption">
       <span>{photo.caption}</span>
@@ -225,7 +230,7 @@ export default function WeddingGallery() {
     <h2 id="gallery-title">Little moments.<br /><em>A love to keep.</em></h2>
     <p className="section-intro">A few pages from our story, with many more to come.</p>
     <p className="gallery-hint">Brush gently to uncover a memory, or choose “Reveal photo.”</p>
-    <div className="memory-reveal-grid">{REVEAL_PHOTOS.map((photo, index) => <RevealPhoto key={photo.caption} photo={photo} index={index} />)}</div>
+    <div className="memory-reveal-grid">{REVEAL_PHOTOS.map(photo => <RevealPhoto key={photo.caption} photo={photo} />)}</div>
     <div className="flourish gallery-flourish" aria-hidden="true"><span /><i /><span /></div>
     <MemoryStack photos={MEMORY_PHOTOS} />
   </section>
