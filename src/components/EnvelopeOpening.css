@@ -67,7 +67,7 @@
 .envelope-letter-date { display: block; margin-top: 4cqw; font-size: 4.1cqw; letter-spacing: .08em; }
 .envelope-trigger { position: absolute; z-index: 5; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; cursor: pointer; }
 .envelope-trigger:disabled { cursor: default; }
-.envelope-trigger:focus-visible { outline: 1px solid #947250; outline-offset: -12px; }
+.envelope-trigger:focus-visible { outline: none; }
 .envelope-fallback { position: absolute; z-index: 6; bottom: max(24px, env(safe-area-inset-bottom)); padding: 12px 20px; border: 1px solid #ae917355; color: #785a3e; background: #fcf0df; }
 .envelope-opening.is-opening { animation: envelope-depart var(--opening-duration) linear both; pointer-events: none; }
 .is-opening .envelope-flap { animation: envelope-unfold var(--opening-duration) cubic-bezier(.45, 0, .3, 1) both, envelope-flap-layer var(--opening-duration) step-end both; }

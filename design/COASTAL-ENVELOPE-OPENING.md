@@ -77,3 +77,5 @@ Cloud extraction (transparent output, built-in `image_gen`; original coastal ima
 ## Verification
 
 The production build and 38 behavior tests cover phone and desktop image alignment, source-resolution limits, independent one-way sea sections with seamless sample resets, full-size plant boundaries and scene preparation/playback/fallback/cleanup alongside the other invitation behavior. Server-rendered checks cover the identical complete scene in the letter and hero, including two matching branches, eight clouds of three shapes, five prepared falling petals and three wing-flapping birds. Asset alpha channels and a still composite were inspected. Current browser automation is unavailable in the editing session, so live motion QA remains unverified.
+
+The full-screen opening button no longer draws an inset focus outline. Its programmatic focus had made a thin rectangular frame visible around the opening screen on both phones and desktop. Removing that outline leaves the supplied envelope artwork unobstructed; keyboard activation and the opening sequence remain unchanged.
