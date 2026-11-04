@@ -3,7 +3,23 @@
 .memory-reveal-grid { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 520px; margin: 48px auto 0; }
 .memory-reveal-card { position: relative; margin: 0; min-width: 0; }
 .memory-framed-art { position: relative; width: 100%; aspect-ratio: 1054 / 1492; }
-.memory-photo-window { position: absolute; isolation: isolate; left: 6.5%; top: 7.5%; width: 88%; height: 84%; overflow: hidden; clip-path: ellipse(50% 50%); background: #ded5c4; }
+.memory-photo-window { container-type: inline-size; position: absolute; isolation: isolate; left: 6.5%; top: 7.5%; width: 88%; height: 84%; overflow: hidden; clip-path: ellipse(50% 50%); background: #ded5c4; }
+.memory-frame-petals { position: absolute; z-index: 2; inset: 0; pointer-events: none; user-select: none; }
+.memory-frame-petal { position: absolute; top: -8%; opacity: 0; animation: memory-frame-petal-fall ease-in-out infinite both paused; }
+.memory-frame-petal img { display: block; width: 100%; height: auto; animation: memory-frame-petal-flutter var(--frame-petal-flutter) ease-in-out infinite both paused; animation-delay: inherit; }
+.memory-frame-petals[data-running] :is(.memory-frame-petal, .memory-frame-petal img) { animation-play-state: running; }
+@keyframes memory-frame-petal-fall {
+  0% { transform: translate(0, 0); opacity: 0; }
+  10%, 78% { opacity: .95; }
+  30% { transform: translate(calc(var(--frame-petal-drift) * .25 + var(--frame-petal-gust)), 42cqw); }
+  60% { transform: translate(calc(var(--frame-petal-drift) * .6 - var(--frame-petal-gust) * .4), 94cqw); }
+  92%, 100% { transform: translate(var(--frame-petal-drift), 154cqw); opacity: 0; }
+}
+@keyframes memory-frame-petal-flutter {
+  0%, 100% { transform: rotate(var(--frame-petal-angle)) scaleX(1); }
+  35% { transform: rotate(calc(var(--frame-petal-angle) - 32deg)) scaleX(.68); }
+  70% { transform: rotate(calc(var(--frame-petal-angle) + 40deg)) scaleX(.92); }
+}
 .memory-oval-frame { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; user-select: none; }
 .memory-photo-window > img, .memory-stack-photo > img { width: 100%; height: 100%; object-fit: cover; user-select: none; }
 .memory-veil { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; touch-action: pan-y; cursor: crosshair; opacity: 1; transition: opacity .8s ease; }
@@ -60,6 +76,8 @@
   .album-controls button { font-size: 8px; gap: 8px; }
 }
 @media (prefers-reduced-motion: reduce), print {
+  .memory-frame-petals { display: none; }
+  .memory-frame-petal, .memory-frame-petal img { animation: none; }
   .memory-stack-card { transition: none; }
 }
 @media print {

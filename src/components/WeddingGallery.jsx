@@ -3,6 +3,39 @@ import { createScratchGrid, getPhotoSource, getPhotoSwipe, MEMORY_PHOTOS, record
 import './WeddingGallery.css'
 import Ampersand from './Ampersand.jsx'
 import ovalFrame from '../assets/oval-photo-frame.webp'
+import slenderPetal from '../assets/coastal-layers/flower-petal-slender.webp'
+import roundedPetal from '../assets/coastal-layers/flower-petal-rounded.webp'
+import curledPetal from '../assets/coastal-layers/flower-petal-curled.webp'
+
+const FRAME_PETALS = [
+  { src: slenderPetal, left: 20, width: 7, seconds: 19, delay: -3, drift: 32, gust: 5, angle: -25, flutter: 5.4 },
+  { src: roundedPetal, left: 32, width: 8, seconds: 24, delay: -15, drift: 24, gust: -7, angle: 40, flutter: 7.2 },
+  { src: curledPetal, left: 45, width: 7.5, seconds: 21, delay: -9, drift: 28, gust: 8, angle: -55, flutter: 6.1 },
+  { src: slenderPetal, left: 16, width: 6.5, seconds: 27, delay: -22, drift: 38, gust: -4, angle: 65, flutter: 8.3 },
+]
+
+function FramePetals() {
+  const layerRef = useRef(null)
+  useEffect(() => {
+    const layer = layerRef.current
+    let inView = typeof IntersectionObserver !== 'function'
+    const update = () => layer.toggleAttribute('data-running', inView && !document.hidden)
+    const observer = typeof IntersectionObserver === 'function' ? new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting
+      update()
+    }) : null
+    observer?.observe(layer)
+    document.addEventListener('visibilitychange', update)
+    update()
+    return () => { observer?.disconnect(); document.removeEventListener('visibilitychange', update) }
+  }, [])
+  return <div ref={layerRef} className="memory-frame-petals" aria-hidden="true">
+    {FRAME_PETALS.map((petal, index) => <span key={index} className="memory-frame-petal" style={{
+      left: `${petal.left}%`, width: `${petal.width}%`, animationDuration: `${petal.seconds}s`, animationDelay: `${petal.delay}s`,
+      '--frame-petal-drift': `${petal.drift}cqw`, '--frame-petal-gust': `${petal.gust}cqw`, '--frame-petal-angle': `${petal.angle}deg`, '--frame-petal-flutter': `${petal.flutter}s`,
+    }}><img src={petal.src} alt="" loading="lazy" draggable="false" /></span>)}
+  </div>
+}
 
 function GalleryPhoto({ photo, decorative = false, tone = 0 }) {
   const [failed, setFailed] = useState(false)
@@ -130,6 +163,7 @@ function RevealPhoto({ photo }) {
       <div className="memory-photo-window">
         <GalleryPhoto key={photo.src} photo={photo} />
         <canvas className="memory-veil" ref={canvasRef} aria-hidden="true" onPointerDown={down} onPointerMove={brush} onPointerUp={stop} onPointerCancel={stop} onPointerLeave={stop} />
+        <FramePetals />
       </div>
       <img className="memory-oval-frame" src={ovalFrame} width="1054" height="1492" alt="" aria-hidden="true" loading="lazy" draggable="false" />
     </div>

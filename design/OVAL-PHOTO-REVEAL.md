@@ -2,6 +2,8 @@
 
 The gallery now has one brush reveal, framed by the supplied floral oval. The photograph and linen brush canvas share a clipped elliptical opening beneath the transparent frame. Scratch coverage counts only visible oval cells; hidden corners cannot trigger completion. Reveal and Cover buttons remain available, and the five-photo draggable album is unchanged.
 
+Four decorative embroidered petals now drift diagonally across the oval opening, above the photo and brush veil and below the frame ribbon. They reuse the flower-matched slender, rounded and curled WebP assets, with different 19–27-second fall periods, flutter periods, angles and wind paths. The layer ignores pointer events, so brushing and touch scrolling remain available. IntersectionObserver and document visibility pause the animation offscreen or in a hidden tab, with cleanup on unmount. Reduced motion and print hide the petals. No new artwork was generated for this change.
+
 The photo is currently a labeled placeholder because no actual photograph has been configured. Set the first REVEAL_PHOTOS entry in src/gallery.js to the desired photo in public/photos/.
 
 ## Assets and generation
