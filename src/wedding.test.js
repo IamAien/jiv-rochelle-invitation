@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { getCountdown, getTimelineProgress, WEDDING_TIMESTAMP } from './wedding.js'
+import { getCountdown, getTimelineProgress, getTimelineActiveIndex, WEDDING_TIMESTAMP } from './wedding.js'
 
 test('the wedding starts at 1 PM in Cebu regardless of the guest’s timezone', () => {
   assert.equal(WEDDING_TIMESTAMP, Date.UTC(2027, 1, 7, 5))
@@ -52,4 +52,16 @@ test('scrolling forward moves the pearl down, and scrolling back reverses it', (
 
 test('the scroll position adapts to a resized viewport', () => {
   assert.ok(getTimelineProgress(0, 900, 1000) > getTimelineProgress(0, 900, 600))
+})
+
+test('timeline focus follows the pearl in either scroll direction using measured event positions', () => {
+  const markers = [66, 301, 566, 801]
+  assert.equal(getTimelineActiveIndex(0, markers), 0)
+  assert.equal(getTimelineActiveIndex(290, markers), 1)
+  assert.equal(getTimelineActiveIndex(545, markers), 2)
+  assert.equal(getTimelineActiveIndex(860, markers), 3)
+  assert.equal(getTimelineActiveIndex(290, markers), 1)
+  assert.equal(getTimelineActiveIndex(100, markers), 0)
+  assert.equal(getTimelineActiveIndex(280, [42, 277, 512, 747]), 1)
+  assert.equal(getTimelineActiveIndex(0, []), -1)
 })

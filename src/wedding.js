@@ -20,3 +20,13 @@ export function getTimelineProgress(top, height, viewportHeight) {
   if (height <= 0) return 0
   return Math.min(1, Math.max(0, (viewportHeight * 0.52 - top) / height))
 }
+
+export function getTimelineActiveIndex(pearlY, markers) {
+  let active = -1
+  let distance = Infinity
+  markers.forEach((marker, index) => {
+    const nextDistance = Math.abs(pearlY - marker)
+    if (nextDistance < distance) { active = index; distance = nextDistance }
+  })
+  return active
+}

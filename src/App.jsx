@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ENVELOPE_OPENING_MS, ENVELOPE_CROSSFADE_MS, getCountdown, getTimelineProgress, WEDDING_DATE } from './wedding.js'
+import { ENVELOPE_OPENING_MS, ENVELOPE_CROSSFADE_MS, getCountdown, getTimelineProgress, getTimelineActiveIndex, WEDDING_DATE } from './wedding.js'
 import countdownFrame from './assets/embroidered-countdown-frame.webp'
 import EnvelopeOpening from './components/EnvelopeOpening.jsx'
 import CoastalScene from './components/CoastalScene.jsx'
@@ -54,25 +54,43 @@ function Timeline() {
   const trackRef = useRef(null)
   useEffect(() => {
     const track = trackRef.current
+    const events = [...track.querySelectorAll('.timeline-event')]
     let frame = 0
+    let active = -1
+    const focusEvent = next => {
+      if (next === active) return
+      active = next
+      events.forEach((event, index) => {
+        event.toggleAttribute('data-current', index === next)
+        if (index === next) event.setAttribute('aria-current', 'step')
+        else event.removeAttribute('aria-current')
+      })
+    }
     const update = () => {
       const bounds = track.getBoundingClientRect()
       const progress = getTimelineProgress(bounds.top, bounds.height, window.innerHeight)
+      const pearlY = progress * Math.max(0, bounds.height - 5)
       track.style.setProperty('--progress', progress)
-      track.style.setProperty('--pearl-y', `${progress * Math.max(0, bounds.height - 5)}px`)
+      track.style.setProperty('--pearl-y', `${pearlY}px`)
+      const inView = bounds.bottom > 0 && bounds.top < window.innerHeight
+      track.toggleAttribute('data-focus-ready', inView)
+      const markers = events.map(event => event.offsetTop + (event.querySelector('.timeline-artwork')?.offsetHeight ?? 0) / 2)
+      focusEvent(inView ? getTimelineActiveIndex(pearlY, markers) : -1)
       frame = 0
     }
     const queueUpdate = () => { if (!frame) frame = window.requestAnimationFrame(update) }
     update()
     window.addEventListener('scroll', queueUpdate, { passive: true })
     window.addEventListener('resize', queueUpdate)
-    const observer = new ResizeObserver(queueUpdate)
-    observer.observe(track)
+    const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(queueUpdate) : null
+    observer?.observe(track)
     return () => {
       window.cancelAnimationFrame(frame)
       window.removeEventListener('scroll', queueUpdate)
       window.removeEventListener('resize', queueUpdate)
-      observer.disconnect()
+      observer?.disconnect()
+      track.removeAttribute('data-focus-ready')
+      events.forEach(event => { event.removeAttribute('data-current'); event.removeAttribute('aria-current') })
     }
   }, [])
   return <section className="timeline-section section" id="timeline" aria-labelledby="timeline-title">
