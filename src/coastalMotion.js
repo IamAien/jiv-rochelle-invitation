@@ -42,9 +42,9 @@ export const COASTAL_CLOUDS = [
 export const COASTAL_PETALS = [
   // A shared cycle keeps releases 32 seconds apart instead of bunching up over time.
   // Each flight occupies less than half the cycle, with its own gusts and easing.
-  { left: 20, top: 11.8, width: 9.2, seconds: 96, delay: 2, drift: 70, fall: 142, gust: 6, lift: -3, easing: 'cubic-bezier(.32,.12,.68,.9)', flutter: 6.5, angle: -15 },
-  { left: 10, top: 21, width: 8.5, seconds: 96, delay: 34, drift: 83, fall: 132, gust: -5, lift: 4, easing: 'cubic-bezier(.25,.04,.65,1)', flutter: 8.1, angle: 22 },
-  { left: 21, top: 12.3, width: 9.6, seconds: 96, delay: 66, drift: 64, fall: 150, gust: 9, lift: -5, easing: 'cubic-bezier(.4,.08,.72,.94)', flutter: 7.3, angle: -28 },
+  { shape: 'slender', left: 20, top: 11.8, width: 9.2, seconds: 96, delay: 2, drift: 70, fall: 142, gust: 10, lift: -3, easing: 'cubic-bezier(.32,.12,.68,.9)', flutter: 5.8, angle: -15, rock: 24, turn: 18, pinch: .78, mirror: 1 },
+  { shape: 'rounded', left: 10, top: 21, width: 10.5, seconds: 96, delay: 34, drift: 83, fall: 132, gust: -12, lift: 6, easing: 'cubic-bezier(.18,.18,.78,1)', flutter: 9.2, angle: 65, rock: 44, turn: 32, pinch: .62, mirror: -1 },
+  { shape: 'curled', left: 21, top: 12.3, width: 9.6, seconds: 96, delay: 66, drift: 64, fall: 150, gust: 16, lift: -7, easing: 'cubic-bezier(.4,.08,.72,.94)', flutter: 7.1, angle: -55, rock: 38, turn: 100, pinch: .55, mirror: 1 },
 ]
 
 export const COASTAL_BIRDS = [

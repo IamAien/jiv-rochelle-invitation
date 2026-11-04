@@ -10,6 +10,7 @@
 .coastal-cloud { position: absolute; height: auto; animation: coastal-cloud-drift linear infinite both paused; }
 .coastal-petal { position: absolute; z-index: 1; opacity: 0; translate: -50% -50%; animation: coastal-petal-fall linear infinite both paused; }
 .coastal-petal-art { display: block; width: 100%; height: auto; animation: coastal-petal-flutter var(--petal-flutter) ease-in-out infinite both paused; animation-delay: inherit; }
+.coastal-petal[data-petal-shape="curled"] .coastal-petal-art { animation-name: coastal-petal-tumble; }
 .coastal-bird { position: absolute; aspect-ratio: 2 / 1; animation: coastal-bird-flight linear infinite both paused; }
 .coastal-bird-part { position: absolute; inset: 0; background-image: var(--coastal-bird); background-size: 100% 100%; background-repeat: no-repeat; }
 .coastal-bird-wing { animation: coastal-wingbeat var(--wing-period) ease-in-out infinite both paused; animation-delay: inherit; }
@@ -29,9 +30,15 @@
   48%, 100% { transform: translate(var(--petal-drift), var(--petal-fall)); opacity: 0; }
 }
 @keyframes coastal-petal-flutter {
+  0%, 100% { transform: rotate(var(--petal-angle)) scaleX(var(--petal-mirror)); }
+  35% { transform: rotate(calc(var(--petal-angle) - var(--petal-rock))) scaleX(calc(var(--petal-mirror) * var(--petal-pinch))); }
+  70% { transform: rotate(calc(var(--petal-angle) + var(--petal-turn))) scaleX(calc(var(--petal-mirror) * .94)); }
+}
+@keyframes coastal-petal-tumble {
   0%, 100% { transform: rotate(var(--petal-angle)) scaleX(1); }
-  35% { transform: rotate(calc(var(--petal-angle) - 28deg)) scaleX(.82); }
-  70% { transform: rotate(calc(var(--petal-angle) + 18deg)) scaleX(.94); }
+  25% { transform: rotate(calc(var(--petal-angle) + var(--petal-rock))) scaleX(var(--petal-pinch)); }
+  50% { transform: rotate(calc(var(--petal-angle) + var(--petal-turn))) scaleX(.95); }
+  75% { transform: rotate(calc(var(--petal-angle) + var(--petal-rock) * .75)) scaleX(.72); }
 }
 @keyframes coastal-bird-flight {
   0% { transform: translate(-18cqw, 1.5cqw) rotate(-2deg) scale(1); opacity: 0; }

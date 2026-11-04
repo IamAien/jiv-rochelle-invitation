@@ -1,0 +1,19 @@
+{
+  "mode": "Built-in imagegen, transparent_background=true",
+  "reference": "src/assets/coastal-layers/ivory-petal.webp",
+  "assets": [
+    {
+      "shape": "rounded",
+      "source": "src/assets/coastal-layers/ivory-petal-rounded-source.png",
+      "runtime": "src/assets/coastal-layers/ivory-petal-rounded.webp",
+      "prompt": "Use case: stylized-concept. The attached single ivory embroidered flower petal is a strict material and color reference. Create ONE different detached petal: a BROAD ROUNDED ivory blossom petal, short and softly fan-shaped, broad gently scalloped rounded tip, tapered narrow base, asymmetric shallow cup, clearly different from the reference's long pointed teardrop outline. Keep the fine warm ivory cotton-thread stitches, pale oatmeal stitched rim and shallow embroidery relief of the reference, with stitches fanning from the narrow base toward the broad tip. Quiet natural ivory with no pink or saturated color. Tightly frame the whole single petal with a little clear margin on true alpha transparency. Only the physical petal threads may be opaque: everything outside its sewn edge must be alpha=0. No haze, cast shadow, glow, linen, matte, fake checkerboard, backdrop, leaf veins, stem, whole flower, additional petals, text, border or watermark."
+    },
+    {
+      "shape": "curled",
+      "source": "src/assets/coastal-layers/ivory-petal-curled-source.png",
+      "runtime": "src/assets/coastal-layers/ivory-petal-curled.webp",
+      "prompt": "Use case: stylized-concept. The attached single ivory embroidered flower petal is a strict material and color reference. Create ONE different detached petal: an ivory blossom petal gently CURLED SIDEWAYS, a soft folded crescent silhouette with a small rolled-over tip and a visible pale oatmeal underside, natural asymmetric fold. Clearly different from a flat straight teardrop. Preserve the reference's fine warm ivory cotton-thread embroidery, delicate stitched rim, parallel thread ridges and shallow relief. Graceful curved petal, not a leaf, feather, shell or ribbon. Tightly frame the whole single petal with a little clear margin on true alpha transparency. Only the physical petal threads may be opaque: everything outside its sewn edge must be alpha=0. No haze, cast shadow, glow, linen, matte, fake checkerboard, backdrop, leaf veins, stem, whole flower, additional petals, text, border or watermark."
+    }
+  ],
+  "verification": "True-alpha variants visually checked over linen; runtime WebP width 192, quality 96. All 38 tests, production build and server-rendered shared composition checks pass. Browser motion visual QA unavailable."
+}
