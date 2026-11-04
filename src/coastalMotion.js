@@ -61,10 +61,12 @@ export function getCoastalWaterStrength(seconds) {
   return arrival * arrival * (3 - 2 * arrival)
 }
 
-export function getCoastalSeaOffset(seconds) {
+export function getCoastalSeaOffsets(seconds) {
   const time = Math.max(0, seconds)
-  // One uniform horizontal translation: left, then right, with no vertical warp.
-  return Math.sin(time * Math.PI * 2 / 10) * .016 * getCoastalWaterStrength(time)
+  const drift = Math.sin(time * Math.PI * 2 / 10) * .016 * getCoastalWaterStrength(time)
+  // Distant and foreground water travel together; the middle current opposes
+  // them. Different amplitudes vary the speed without any vertical distortion.
+  return [drift, -drift * .85, drift * .7]
 }
 
 const VERTEX_SHADER = `
@@ -82,7 +84,7 @@ precision highp float;
 precision mediump float;
 #endif
 uniform sampler2D u_image;
-uniform float u_sea_offset;
+uniform vec3 u_sea_offsets;
 varying vec2 v_uv;
 
 float waterThread(vec3 color) {
@@ -109,20 +111,28 @@ float waterCoverage(vec2 uv, vec3 color) {
     * waterThread(color) * pin;
 }
 
+vec4 sampleCurrent(vec2 uv, float offset) {
+  vec2 displaced = clamp(uv - vec2(offset, 0.0), vec2(0.0), vec2(1.0));
+  vec4 color = texture2D(u_image, displaced);
+  float coverage = waterCoverage(displaced, color.rgb);
+  return vec4(color.rgb * coverage, coverage);
+}
+
 void main() {
   vec2 uv = v_uv;
   vec4 original = texture2D(u_image, uv);
   float water = waterCoverage(uv, original.rgb);
   if (water < 0.001) discard;
 
-  vec2 displaced = clamp(uv + vec2(u_sea_offset, 0.0), vec2(0.0), vec2(1.0));
-  vec4 color = texture2D(u_image, displaced);
-  // Check BOTH ends of the shift: a water destination must never pull a tree
-  // or foreground leaf into the ocean. Leave the original pixel visible there.
-  water = min(water, waterCoverage(displaced, color.rgb));
-  if (water < 0.001) discard;
-  color.a *= water * 0.72;
-  gl_FragColor = color;
+  // Crossfade complete horizontal translations at the band edges rather than
+  // bending the threads between offsets. Every source sample rejects foliage.
+  vec4 distant = sampleCurrent(uv, u_sea_offsets.x);
+  vec4 middle = sampleCurrent(uv, u_sea_offsets.y);
+  vec4 foreground = sampleCurrent(uv, u_sea_offsets.z);
+  vec4 currents = mix(distant, middle, smoothstep(0.846, 0.862, uv.y));
+  currents = mix(currents, foreground, smoothstep(0.895, 0.911, uv.y));
+  if (currents.a < 0.001) discard;
+  gl_FragColor = vec4(currents.rgb / currents.a, min(water, currents.a) * 0.72);
 }`
 
 export function createCoastalWaterRenderer(canvas, image, container) {
@@ -179,12 +189,12 @@ export function createCoastalWaterRenderer(canvas, image, container) {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image)
     gl.uniform1i(gl.getUniformLocation(program, 'u_image'), 0)
-    const offsetLocation = gl.getUniformLocation(program, 'u_sea_offset')
+    const offsetLocation = gl.getUniformLocation(program, 'u_sea_offsets')
 
     const draw = seconds => {
       gl.clearColor(0, 0, 0, 0)
       gl.clear(gl.COLOR_BUFFER_BIT)
-      gl.uniform1f(offsetLocation, getCoastalSeaOffset(seconds))
+      gl.uniform3f(offsetLocation, ...getCoastalSeaOffsets(seconds))
       gl.drawArrays(gl.TRIANGLES, 0, 6)
     }
     const resize = () => {

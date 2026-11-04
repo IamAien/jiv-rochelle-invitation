@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { COASTAL_PLANT_REGIONS, getCoastalSeaOffset, getCoastalWaterStrength, getCoastalImageLayout } from './coastalMotion.js'
+import { COASTAL_PLANT_REGIONS, getCoastalSeaOffsets, getCoastalWaterStrength, getCoastalImageLayout } from './coastalMotion.js'
 
 const close = (actual, expected) => assert.ok(Math.abs(actual - expected) < 1e-7, `${actual} should equal ${expected}`)
 
@@ -40,16 +40,20 @@ test('water starts at rest and eases into full strength', () => {
   assert.equal(getCoastalWaterStrength(1.8), 1)
 })
 
-test('the sea moves left and right as one horizontal sheet without abrupt resets', () => {
-  assert.equal(getCoastalSeaOffset(0), 0)
-  assert.equal(getCoastalSeaOffset(-2), 0)
-  assert.ok(getCoastalSeaOffset(2.5) > 0)
-  assert.ok(getCoastalSeaOffset(7.5) < 0)
-  close(getCoastalSeaOffset(10), 0)
+test('three sea bands alternate direction, vary speed and reverse without abrupt resets', () => {
+  for (const offset of [...getCoastalSeaOffsets(0), ...getCoastalSeaOffsets(-2), ...getCoastalSeaOffsets(10)]) close(offset, 0)
+  const forward = getCoastalSeaOffsets(2.5)
+  const reverse = getCoastalSeaOffsets(7.5)
+  assert.ok(forward[0] > 0 && forward[1] < 0 && forward[2] > 0)
+  assert.ok(reverse[0] < 0 && reverse[1] > 0 && reverse[2] < 0)
+  assert.equal(new Set(forward.map(Math.abs)).size, 3, 'Each current must have a different travel distance and speed')
   for (let frame = 1; frame < 600; frame++) {
-    const offset = getCoastalSeaOffset(frame / 30)
-    assert.ok(Math.abs(offset) <= .016)
-    assert.ok(Math.abs(offset - getCoastalSeaOffset((frame - 1) / 30)) < .001)
+    const offsets = getCoastalSeaOffsets(frame / 30)
+    const previous = getCoastalSeaOffsets((frame - 1) / 30)
+    offsets.forEach((offset, band) => {
+      assert.ok(Math.abs(offset) <= .016)
+      assert.ok(Math.abs(offset - previous[band]) < .001)
+    })
   }
 })
 
