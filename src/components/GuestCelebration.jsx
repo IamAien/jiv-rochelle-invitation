@@ -24,7 +24,7 @@ export default function GuestCelebration({ choices }) {
         <OutfitImage source={guestOutfitSource(getGuestOutfit(guest, choices))} description={`Wedding guest wearing ${getGuestColorName(choices, guest.gender)} ${guest.gender === 'male' ? 'formalwear' : 'a gown'}`} />
       </span>)}
     </div>
-    <figcaption className="guest-outfit-caption" aria-live="polite" aria-atomic="true">
+    <figcaption className="sr-only" aria-live="polite" aria-atomic="true">
       <span><small>Gentlemen</small>{getGuestColorName(choices, 'male')}</span>
       <i aria-hidden="true">&amp;</i>
       <span><small>Ladies</small>{getGuestColorName(choices, 'female')}</span>
