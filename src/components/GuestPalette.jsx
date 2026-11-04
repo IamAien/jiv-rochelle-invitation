@@ -1,20 +1,37 @@
-import { useRef, useState } from 'react'
-
-const PALETTES = [
-  { title: 'Shades of blue', family: 'Blue', colors: [['Misty', '#bccddb'], ['Powder', '#a9c3dd'], ['French', '#7399c9'], ['Cloud', '#d9e5f0'], ['Slate', '#6c7ea3']] },
-  { title: 'Shades of pink', family: 'Pink', colors: [['Blush', '#f2d1cc'], ['Dusty', '#d3a3a3'], ['Rose', '#e59fb0'], ['Peach', '#f5c2a6'], ['Soft', '#f8dde1']] },
-]
+import { useEffect, useRef, useState } from 'react'
+import { ATTIRE_PALETTES, chooseGuestColor } from '../attire.js'
+import { preloadGuestColor } from '../attireArtwork.js'
+import GuestCelebration from './GuestCelebration.jsx'
 
 export default function GuestPalette({ children }) {
   const [selected, setSelected] = useState(null)
   const [message, setMessage] = useState('')
+  const choicesRef = useRef({ male: null, female: null })
+  const [choices, setChoices] = useState(choicesRef.current)
+  const requests = useRef({ male: 0, female: 0 })
   const selection = useRef(null)
-  const pick = (name, color) => {
-    selection.current = color
-    setSelected({ name, color })
+  useEffect(() => () => { requests.current.male++; requests.current.female++ }, [])
+  const prepare = (gender, name) => preloadGuestColor(chooseGuestColor(choicesRef.current, gender, name), gender)
+  const pick = async (gender, name) => {
+    const request = ++requests.current[gender]
     setMessage('')
+    try {
+      await prepare(gender, name)
+      if (requests.current[gender] !== request) return
+      const next = chooseGuestColor(choicesRef.current, gender, name)
+      choicesRef.current = next
+      setChoices(next)
+      selection.current = next[gender].color
+      setSelected(next[gender])
+    } catch {
+      if (requests.current[gender] === request) setMessage('That outfit preview could not load. Please try the shade again.')
+    }
   }
   const reset = () => {
+    requests.current.male++
+    requests.current.female++
+    choicesRef.current = { male: null, female: null }
+    setChoices(choicesRef.current)
     selection.current = null
     setSelected(null)
     setMessage('')
@@ -35,16 +52,18 @@ export default function GuestPalette({ children }) {
     <h2 id="dress-title">Dressed <em>for love</em></h2>
     <p className="dress-code">Formal attire</p>
     <p className="body-copy">We invite you to dress for a day of love and celebration in shades of blue and pink.</p>
-    <p className="palette-hint" id="palette-hint">Choose a little color inspiration below.</p>
+    <p className="palette-hint" id="palette-hint">Choose a shade for the gentlemen and a shade for the ladies.</p>
     <div className="palettes" aria-describedby="palette-hint">
-      {PALETTES.map(palette => <div className="palette-group" key={palette.title} role="group" aria-labelledby={`palette-${palette.family}`}>
+      {ATTIRE_PALETTES.map(palette => <div className="palette-group" key={palette.title} role="group" aria-labelledby={`palette-${palette.family}`}>
         <h3 id={`palette-${palette.family}`}>{palette.title}</h3>
-        <div className="swatches">{palette.colors.map(([name, color]) => <button type="button" className="swatch" key={name} aria-label={`${name} ${palette.family}`} aria-pressed={selected?.color === color} onClick={() => pick(`${name} ${palette.family}`, color)}>
+        <p className="palette-audience">{palette.audience}</p>
+        <div className="swatches">{palette.colors.map(([name, color]) => <button type="button" className="swatch" key={name} aria-label={`${name} ${palette.family}`} aria-controls="celebration-guests" aria-pressed={choices[palette.gender]?.color === color} onPointerEnter={() => { prepare(palette.gender, name).catch(() => {}) }} onFocus={() => { prepare(palette.gender, name).catch(() => {}) }} onClick={() => pick(palette.gender, name)}>
           <span className="swatch-color" style={{ '--swatch': color }} aria-hidden="true"><span className="swatch-check">✓</span></span>
           <span>{name}</span>
         </button>)}</div>
       </div>)}
     </div>
+    <GuestCelebration choices={choices} />
     <div className={`palette-preview ${selected ? 'has-selection' : ''}`} style={{ '--preview-color': selected?.color ?? '#ded9ca' }}>
       <div className="fabric-sample" aria-hidden="true"><span /></div>
       <div className="palette-preview-copy">

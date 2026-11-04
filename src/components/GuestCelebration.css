@@ -1,0 +1,20 @@
+.dress-section .palettes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 38px; max-width: 860px; margin-inline: auto; }
+.dress-section .palette-group + .palette-group { margin-top: 0; }
+.guest-celebration { max-width: 1120px; margin: 36px auto 0; }
+.guest-celebration-scene { position: relative; isolation: isolate; width: 100%; aspect-ratio: 1.9; background: radial-gradient(ellipse at 50% 91%, #b8a48b16, transparent 64%); }
+.celebration-person { position: absolute; left: var(--guest-x); bottom: 0; height: var(--guest-size); z-index: var(--guest-depth); transform: translateX(-50%); pointer-events: none; }
+.celebration-person img { display: block; width: auto; height: 100%; max-width: none; object-fit: contain; user-select: none; }
+.guest-outfit-caption { display: flex; justify-content: center; align-items: center; gap: 24px; margin: 25px auto 0; color: #69705b; font-size: 19px; font-style: italic; }
+.guest-outfit-caption > span { min-width: 125px; }
+.guest-outfit-caption small { display: block; margin-bottom: 6px; font: 8px/1.5 var(--sans); letter-spacing: .15em; text-transform: uppercase; }
+.guest-outfit-caption i { color: #aa9270; font-size: 24px; }
+.palette-audience { margin: -13px 0 18px; font-size: 14px; font-style: italic; color: #73735d; }
+@media (max-width: 680px) {
+  .dress-section .palettes { grid-template-columns: 1fr; gap: 25px; }
+  .guest-celebration { margin-top: 28px; }
+  .guest-celebration-scene { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); aspect-ratio: .95; row-gap: 12px; }
+  .celebration-person { position: relative; left: auto; bottom: auto; width: 100%; height: 100%; transform: none; display: flex; justify-content: center; align-items: end; }
+  .celebration-person img { height: var(--guest-size); }
+  .guest-outfit-caption { font-size: 17px; gap: 12px; margin-top: 22px; }
+  .guest-outfit-caption > span { min-width: 100px; }
+}
