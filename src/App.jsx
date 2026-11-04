@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { ENVELOPE_OPENING_MS, ENVELOPE_CROSSFADE_MS, getCountdown, getTimelineProgress, WEDDING_DATE } from './wedding.js'
-import countdownFrame from './assets/woven-countdown-frame.webp'
+import countdownFrame from './assets/embroidered-countdown-frame.webp'
 import EnvelopeOpening from './components/EnvelopeOpening.jsx'
 import CoastalScene from './components/CoastalScene.jsx'
 import TimelineArtwork from './components/TimelineArtwork.jsx'
@@ -39,13 +39,10 @@ function Countdown() {
     <p className="eyebrow">Every day, a little closer</p><h2 id="countdown-title">Counting down<br /><em>to forever</em></h2>
     <p className="section-intro">Until we say “I do,” with you by our side.</p>
     <div className="countdown" role="timer" aria-label={`${remaining.days} days, ${remaining.hours} hours, ${remaining.minutes} minutes, ${remaining.seconds} seconds until the wedding`}>
-      {['days', 'hours', 'minutes', 'seconds'].map(unit => (
-        <div className="countdown-unit" key={unit}>
-          <div className="countdown-medallion">
-            <img className="countdown-frame" src={countdownFrame} alt="" aria-hidden="true" loading="lazy" />
-            <span className="countdown-value">{String(remaining[unit]).padStart(2, '0')}</span>
-          </div>
-          <span className="countdown-label">{unit}</span>
+      <img className="countdown-frame" src={countdownFrame} width="2172" height="724" alt="" aria-hidden="true" loading="lazy" />
+      {[['days', 24.2], ['hours', 41.6], ['minutes', 58.7], ['seconds', 76.7]].map(([unit, center]) => (
+        <div className="countdown-unit" key={unit} data-unit={unit} style={{ '--unit-center': `${center}%` }} aria-hidden="true">
+          <span className="countdown-value">{String(remaining[unit]).padStart(2, '0')}</span>
         </div>
       ))}
     </div>

@@ -32,10 +32,10 @@ The production output is in `dist/`.
 - Portrait artwork fills the phone opening and keeps its proportions on desktop, with warm linen at either side. The invitation preserves the complete garden on wide screens and uses a centered crop on phones.
 - The opening supports keyboard activation, loading failure recovery, focus handoff, replay, and reduced-motion preferences. Page navigation unlocks after the transition.
 - Text fades in with a slight rise as visitors scroll. Short staggered delays create a soft sequence, and blocks remain visible when scrolling back.
-- Countdown linen patches, running-stitch dividers and fabric swatches follow the supplied scenes' muted textile palette. Smooth warm ivory, pale sage, dusty blush and light stone backgrounds complement the artwork.
+- The supplied floral countdown plaque, running-stitch dividers and fabric swatches follow the invitation's muted palette. Smooth warm ivory, pale sage, dusty blush and light stone backgrounds complement the artwork.
 - The countdown, dress-code and closing sections use clean spacing without floral garlands.
 - The timeline uses the supplied floral arch, dancing couple, wedding cake and disco-ball illustrations for its four events. The supplied moon and clouds close the timeline. Images are optimized as WebP and stay visible independently of the text-reveal animation.
-- The live countdown shows days, hours, minutes and seconds in four responsive medallions, targeting the ceremony at 1:00 PM in Cebu (UTC+8). It updates every second and stops at zero when the wedding begins.
+- The live countdown uses the supplied wide floral plaque, with olive HTML numbers aligned above its printed Days, Hours, Minutes and Seconds labels. The complete frame scales to phones without cropping. It targets 1:00 PM in Cebu (UTC+8), updates every second and stops at zero. See [countdown frame and background-cleanup prompt](design/COUNTDOWN-PLAQUE.md).
 - A shaded ivory pearl follows the timeline as the visitor scrolls forward or back. It sits on its own layer above the events, measures 32px on desktop and 28px on phones, and uses a pixel position that adapts to viewport and content size changes.
 - The envelope has no added text or circle hint; its original J&R wax seal is unobstructed. Reduced-motion preferences shorten the opening. Guests can replay the opening from the footer.
 - Calendar download and venue map links are included.

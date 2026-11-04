@@ -1,8 +1,8 @@
 # Woven decoration set
 
-The current background tints, supplied timeline illustrations and scrolling pearl are described in [Soft linen and timeline](SOFT-LINEN-AND-TIMELINE.md). The earlier bitmap timeline illustrations and floral garland below are retained as source artwork; the countdown patches and linen tile remain active. The countdown heading has no floral decoration or reserved garland spacing.
+The current background tints, supplied timeline illustrations and scrolling pearl are described in [Soft linen and timeline](SOFT-LINEN-AND-TIMELINE.md). The earlier bitmap timeline illustrations, countdown patches and floral garland below are retained as source artwork. The linen tile remains active. The countdown now uses the [supplied wide floral plaque](COUNTDOWN-PLAQUE.md); its heading has no floral decoration or reserved garland spacing.
 
-The invitation decorations use fine cotton embroidery on visible ivory linen, faded olive leaves, dusty rose, oatmeal thread and small lavender accents. The countdown uses plain round linen patches with running-stitch borders and small botanical sprigs. Garlands, timeline motifs, fabric backgrounds, dividers, swatches and the moving timeline marker share that treatment.
+The earlier decoration set uses fine cotton embroidery on visible ivory linen, faded olive leaves, dusty rose, oatmeal thread and small lavender accents. Its round countdown patches are archived; the current supplied plaque has ivory/blue flowers, a blue checked ribbon border and gold dividers.
 
 These decorations accompany the current coastal envelope and villa invitation, four-part live countdown and scroll behavior.
 
