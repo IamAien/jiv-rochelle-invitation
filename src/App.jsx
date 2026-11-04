@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { ENVELOPE_OPENING_MS, ENVELOPE_CROSSFADE_MS, getCountdown, getTimelineProgress, getTimelineActiveIndex, WEDDING_DATE } from './wedding.js'
+import { ENVELOPE_OPENING_MS, ENVELOPE_CROSSFADE_MS, getCountdown, getTimelineProgress, getTimelineActiveIndex } from './wedding.js'
 import countdownFrame from './assets/embroidered-countdown-frame.webp'
 import EnvelopeOpening from './components/EnvelopeOpening.jsx'
 import CoastalScene from './components/CoastalScene.jsx'
+import InvitationCopy from './components/InvitationCopy.jsx'
 import TimelineArtwork from './components/TimelineArtwork.jsx'
 import { setupScrollReveals } from './scrollReveal.js'
 import WeddingNavigation from './components/WeddingNavigation.jsx'
@@ -154,7 +155,7 @@ export default function App() {
       <main>
         <section className="invitation-cover" id="invitation" aria-labelledby="couple-names">
           <CoastalScene key={openingCycle} enabled={stage === 'done'} onReady={setCoastalReady} />
-          <div className="invitation-text"><p className="invite-prelude">Together with their families</p><h1 id="couple-names" ref={headingRef} tabIndex="-1" aria-label="Jiv and Rochelle">Jiv<Ampersand />Rochelle</h1><time className="wedding-date" dateTime={WEDDING_DATE}>February 7, 2027</time><p className="cover-location">Cebu, Philippines</p></div>
+          <div className="invitation-text"><InvitationCopy headingRef={headingRef} /></div>
           <a href="#welcome" className="discover-link">Our forever starts here <span>↓</span></a>
         </section>
         <section className="welcome-section section" id="welcome"><p className="eyebrow">With full hearts</p><h2>A day for love.<br /><em>A lifetime of us.</em></h2><Flourish /><p className="full-names">Jiv Stevens T. Gonzales<Ampersand />Rochelle Ann P. Reyes</p><p className="body-copy">We’re getting married, and it would mean the world to have you there. Join us for a day of happy tears, warm embraces, and the beginning of our forever.</p><button className="text-button" onClick={() => downloadWeddingCalendar()}>Save our date <span aria-hidden="true">↗</span></button></section>

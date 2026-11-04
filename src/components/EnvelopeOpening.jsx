@@ -2,7 +2,7 @@ import { useEffect, useId, useRef, useState } from 'react'
 import envelope from '../assets/embroidered-coastal-envelope.webp'
 import CoastalScene from './CoastalScene.jsx'
 import { ENVELOPE_OPENING_MS } from '../wedding.js'
-import Ampersand from './Ampersand.jsx'
+import InvitationCopy from './InvitationCopy.jsx'
 import './EnvelopeOpening.css'
 
 // The triangular flap pivots at the actual fold. The upper linen stays behind it.
@@ -59,9 +59,7 @@ export default function EnvelopeOpening({ stage, onOpen, onUnavailable, sceneRea
       <div className="envelope-letter">
         <CoastalScene enabled={false} onReady={setLetterReady} />
         <div className="envelope-letter-copy">
-          <p>Together with their families</p>
-          <span className="envelope-letter-names">Jiv<Ampersand />Rochelle</span>
-          <span className="envelope-letter-date">February 7, 2027</span>
+          <InvitationCopy compact />
         </div>
       </div>
       <svg className="envelope-pocket" viewBox="0 0 941 1672">

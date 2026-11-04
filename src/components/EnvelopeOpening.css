@@ -60,11 +60,7 @@
   box-shadow: 0 0 0 1px #a5896033, 0 12px 35px #70573b25;
 }
 .envelope-letter .villa-art { object-fit: contain; }
-.envelope-letter-copy { position: absolute; top: 34%; left: 5%; width: 90%; text-align: center; color: #785a3e; }
-.envelope-letter-copy p { font-size: 3.5cqw; font-style: italic; }
-.envelope-letter-names { display: block; font-size: 9cqw; line-height: 1.2; margin-top: 3cqw; letter-spacing: -.035em; white-space: nowrap; }
-.envelope-letter-names .ampersand { display: inline-block; font-size: .5em; margin: 0 .24em; }
-.envelope-letter-date { display: block; margin-top: 4cqw; font-size: 4.1cqw; letter-spacing: .08em; }
+.envelope-letter-copy { --invite-name-size: 5.3cqw; --invite-small-size: 2.8cqw; --invite-date-size: 3.1cqw; --invite-name-gap: 4.8cqw; --invite-line-gap: 4cqw; --invite-date-gap: 4.5cqw; position: absolute; top: 31%; left: 5%; width: 90%; text-align: center; color: #785a3e; }
 .envelope-trigger { position: absolute; z-index: 5; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; cursor: pointer; }
 .envelope-trigger:disabled { cursor: default; }
 .envelope-trigger:focus-visible { outline: none; }
