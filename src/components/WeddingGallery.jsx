@@ -8,10 +8,11 @@ import roundedPetal from '../assets/coastal-layers/soft-petal-rounded.webp'
 import curledPetal from '../assets/coastal-layers/soft-petal-curled.webp'
 
 const FRAME_PETALS = [
-  { src: slenderPetal, left: 20, width: 6.5, seconds: 52, delay: 1, drift: 32, gust: 5, angle: -25, flutter: 5.4 },
-  { src: roundedPetal, left: 32, width: 7.4, seconds: 52, delay: 3, drift: 24, gust: -7, angle: 40, flutter: 7.2 },
-  { src: curledPetal, left: 45, width: 7, seconds: 52, delay: 27, drift: 28, gust: 8, angle: -55, flutter: 6.1 },
-  { src: slenderPetal, left: 16, width: 6, seconds: 52, delay: 29, drift: 38, gust: -4, angle: 65, flutter: 8.3 },
+  { src: slenderPetal, left: 20, width: 6.2, seconds: 52, delay: 1, drift: 32, gust: 5, angle: -25, flutter: 5.4 },
+  { src: roundedPetal, left: 32, width: 7, seconds: 52, delay: 10, drift: 24, gust: -7, angle: 40, flutter: 7.2 },
+  { src: curledPetal, left: 45, width: 6.7, seconds: 52, delay: 22, drift: 28, gust: 8, angle: -55, flutter: 6.1 },
+  { src: slenderPetal, left: 16, width: 5.7, seconds: 52, delay: 31, drift: 38, gust: -4, angle: 65, flutter: 8.3 },
+  { src: roundedPetal, left: 38, width: 6.6, seconds: 52, delay: 43, drift: 26, gust: 6, angle: -40, flutter: 6.6 },
 ]
 
 function FramePetals() {
