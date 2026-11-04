@@ -57,7 +57,7 @@ export default function EnvelopeOpening({ stage, onOpen, onUnavailable, sceneRea
         <image href={envelope} width="941" height="1672" clipPath={`url(#${id}-upper-linen)`} />
       </svg>
       <div className="envelope-letter">
-        <CoastalScene enabled={opening} onReady={setLetterReady} />
+        <CoastalScene enabled={false} onReady={setLetterReady} />
         <div className="envelope-letter-copy">
           <p>Together with their families</p>
           <span className="envelope-letter-names">Jiv<Ampersand />Rochelle</span>

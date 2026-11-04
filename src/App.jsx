@@ -138,7 +138,7 @@ export default function App() {
       <WeddingNavigation enabled={stage === 'done'} />
       <main>
         <section className="invitation-cover" id="invitation" aria-labelledby="couple-names">
-          <CoastalScene key={openingCycle} enabled={stage !== 'closed'} onReady={setCoastalReady} />
+          <CoastalScene key={openingCycle} enabled={stage === 'done'} onReady={setCoastalReady} />
           <div className="invitation-text"><p className="invite-prelude">Together with their families</p><h1 id="couple-names" ref={headingRef} tabIndex="-1" aria-label="Jiv and Rochelle">Jiv<Ampersand />Rochelle</h1><time className="wedding-date" dateTime={WEDDING_DATE}>February 7, 2027</time><p className="cover-location">Cebu, Philippines</p></div>
           <a href="#welcome" className="discover-link">Our forever starts here <span>↓</span></a>
         </section>

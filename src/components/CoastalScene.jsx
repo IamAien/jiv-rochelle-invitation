@@ -35,7 +35,7 @@ export default function CoastalScene({ enabled = false, onReady }) {
       <canvas ref={canvasRef} className="coastal-water-canvas" aria-hidden="true" />
       {COASTAL_CLOUDS.map((cloud, index) => <img key={index} ref={element => { cloudRefs.current[index] = element }} className="coastal-cloud" src={COASTAL_LAYER_ARTWORK.cloud} alt="" style={{
         left: `${cloud.left}%`, top: `${cloud.top}%`, width: `${cloud.width}%`,
-        animationDuration: `${cloud.seconds}s`, animationDelay: `${cloud.delay}s`,
+        animationDuration: `${cloud.seconds}s`, animationDelay: `${cloud.delay}s`, '--cloud-travel': `${cloud.travel}cqw`,
       }} />)}
       {COASTAL_BIRDS.map((bird, index) => <div key={index} className="coastal-bird" style={{
         left: `${bird.left}%`, top: `${bird.top}%`, width: `${bird.width}%`,

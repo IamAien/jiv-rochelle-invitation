@@ -18,8 +18,8 @@ export function getCoastalImageLayout({ width, height, imageWidth, imageHeight, 
 }
 
 export const COASTAL_PLANT_REGIONS = [
-  { name: 'top', x: 24, y: 58, width: 600, height: 550, origin: '0% 22.8%', positive: 3.2, negative: -2.8, seconds: 8.5, delay: 0 },
-  { name: 'right', x: 509, y: 1222, width: 400, height: 420, origin: '100% 100%', positive: 3.8, negative: -3.1, seconds: 9.3, delay: .4 },
+  { name: 'top', x: 44, y: 70, width: 600, height: 550, origin: '0% 22.8%', positive: 3.2, negative: -2.8, seconds: 8.5, delay: 0 },
+  { name: 'right', x: 493, y: 1208, width: 400, height: 420, origin: '100% 100%', positive: 3.8, negative: -3.1, seconds: 9.3, delay: .4 },
 ]
 
 // Layout size stays stable while the envelope translates its invitation card.
@@ -29,8 +29,11 @@ export function getCoastalElementSize(element, environment = window) {
 }
 
 export const COASTAL_CLOUDS = [
-  { left: 55, top: 0, width: 43, seconds: 22, delay: -6 },
-  { left: 72, top: 14, width: 33, seconds: 28, delay: -11 },
+  { left: 55, top: 0, width: 43, seconds: 22, delay: -6, travel: 16 },
+  { left: 66, top: 8.5, width: 30, seconds: 32, delay: -14, travel: 14 },
+  { left: 70, top: 18, width: 31, seconds: 36, delay: -11, travel: 12 },
+  { left: 62, top: 70.5, width: 31, seconds: 38, delay: -8, travel: 10 },
+  { left: 76, top: 74, width: 23, seconds: 44, delay: -21, travel: 10 },
 ]
 
 export const COASTAL_BIRDS = [

@@ -2,7 +2,9 @@
 
 The 2026-11-04 revision replaces the flat line birds with textured embroidered gulls. Left and right wing cutouts rotate around their shoulders while a separate body stays stable. Each 3.8–4.7-second cycle has two short wingbeats followed by a longer glide. Flight crosses a shallow arc over 24–33 seconds; the bird slowly recedes and gently banks. The former inverted vertical scaling is removed.
 
-The visible upper clouds now move, rather than adding faint small wisps over stationary clouds. A stationary 421 × 630 clean-sky patch is registered at source coordinate (520, 0), with feathered left and bottom edges. It covers only the upper-right sky; the original illustration remains the base. Two transparent clouds are shown at 33–43% of the full artboard width, 94% maximum opacity, and travel right by 16% of the artboard width over 22–28 seconds. They fade before resetting. Reduced motion and printing show the original image; hidden or offscreen scenes pause.
+The sliding letter and hero share the same prepared full composition, including all plants, clouds and birds. Both stay still throughout the complete envelope opening, card slide and crossfade. The letter never plays scene motion; the hero begins only at `stage === 'done'`. Existing full-size plant assets remain unchanged, with the top branch placed at native (44, 70) and the bottom branch at (493, 1208), slightly farther inward near the original plants.
+
+Five transparent embroidered clouds now occupy the scene: three in the upper-right sky and two near the distant coast. A stationary 421 × 630 clean-sky patch is registered at source coordinate (520, 0), with feathered left and bottom edges. It covers only the upper-right sky; the original illustration remains the base. The clouds are shown at 23–43% of the full artboard width and 94% maximum opacity. Each travels right by 10–16% of the artboard width over 22–44 seconds, then fades before resetting. Reduced motion and printing show the original image; hidden or offscreen scenes pause.
 
 ## Saved assets
 
@@ -30,4 +32,4 @@ Edit target: `src/assets/embroidered-coastal-garden.webp`. Opaque output.
 
 ## Verification
 
-The generated assets and an offline composite were visually inspected. The sky patch has no visible rectangular edge, and the birds use the scene's ivory/slate thread texture. Existing behavior tests, the production build and server-rendered markup checks cover the unchanged invitation and updated scene structure. Browser automation is unavailable in this session, so real-time visual motion remains unverified.
+The generated assets and an offline composite were visually inspected. The sky patch has no visible rectangular edge, and the birds use the scene's ivory/slate thread texture. The 36 behavior tests, production build and server-rendered markup checks cover the invitation, paused scene preparation and the identical five-cloud composition in the letter and hero. Browser automation is unavailable in this session, so real-time visual motion remains unverified.
