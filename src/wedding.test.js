@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { getCountdown, getTimelineProgress, getTimelineActiveIndex, WEDDING_TIMESTAMP } from './wedding.js'
+import { getCountdown, getTimelineProgress, getTimelineActiveIndex, getStoryChapterIndex, WEDDING_TIMESTAMP } from './wedding.js'
 
 test('the wedding starts at 1 PM in Cebu regardless of the guest’s timezone', () => {
   assert.equal(WEDDING_TIMESTAMP, Date.UTC(2027, 1, 7, 5))
@@ -64,4 +64,17 @@ test('timeline focus follows the pearl in either scroll direction using measured
   assert.equal(getTimelineActiveIndex(100, markers), 0)
   assert.equal(getTimelineActiveIndex(280, [42, 277, 512, 747]), 1)
   assert.equal(getTimelineActiveIndex(0, []), -1)
+})
+
+test('story focus follows the nearest passage in either direction and clears offscreen', () => {
+  const chapters = [0, 220, 470, 680].map(top => ({ top, bottom: top + 200, height: 200 }))
+  const shifted = offset => chapters.map(chapter => ({ ...chapter, top: chapter.top - offset, bottom: chapter.bottom - offset }))
+  assert.equal(getStoryChapterIndex(shifted(0), 800), 1)
+  assert.equal(getStoryChapterIndex(shifted(200), 800), 2)
+  assert.equal(getStoryChapterIndex(shifted(450), 800), 3)
+  assert.equal(getStoryChapterIndex(shifted(0), 800), 1)
+  assert.equal(getStoryChapterIndex(shifted(-300), 800), 0)
+  assert.equal(getStoryChapterIndex(shifted(-900), 800), -1)
+  assert.equal(getStoryChapterIndex(shifted(1000), 800), -1)
+  assert.equal(getStoryChapterIndex([], 800), -1)
 })

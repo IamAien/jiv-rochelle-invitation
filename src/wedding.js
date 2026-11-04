@@ -30,3 +30,8 @@ export function getTimelineActiveIndex(pearlY, markers) {
   })
   return active
 }
+
+export function getStoryChapterIndex(chapters, viewportHeight) {
+  if (!chapters.some(chapter => chapter.bottom > 0 && chapter.top < viewportHeight)) return -1
+  return getTimelineActiveIndex(viewportHeight * .55, chapters.map(chapter => chapter.top + chapter.height / 2))
+}

@@ -3,10 +3,10 @@
 The supplied `jiv-rochelle-wedding3/src/App.jsx` and `App.css` were used as interaction references. The invitation uses the coastal envelope opening and villa artwork, with its selected typefaces, muted palette, countdown frames, timeline pearl, and wedding details.
 
 - The reference's scroll progress becomes a thin running-stitch line beneath the existing header. Navigation underlines the section being read. Desktop navigation also links to the story and attire; phones retain the three original links.
-- The reference's word-by-word story becomes four naturally scrolling chapters. A small thread marker and warm paper highlight follow the current paragraph in either direction. Every paragraph stays readable, with no pinned screen or additional scroll distance.
+- The reference's word-by-word story becomes four naturally scrolling chapters. A heart marker and warm paper glow follow the current paragraph in either direction, dimming the other passages. The active heart beats gently and releases two tiny floating hearts; see STORY-HEARTS.md. Every paragraph stays readable, with no pinned screen or additional scroll distance.
 - The reference's page-filling color effect becomes ten real swatch buttons. Choosing one changes a little linen sample, marks the selected swatch, and offers its color code for copying. Reset restores the neutral sample. A failed clipboard write shows the code for manual copying.
 - Each venue offers directions and its own calendar file. The welcome section still downloads both events together. Calendar times remain 1 PM and 5 PM in Cebu on February 7, 2027.
-- Venue hover and keyboard focus receive a quiet ivory background. Swatches lift slightly on devices with a precise pointer. Reduced-motion settings remove decorative movement and story tracking highlights.
+- Venue hover and keyboard focus receive a quiet ivory background. Swatches lift slightly on devices with a precise pointer. Reduced-motion settings remove decorative movement while keeping the static story focus cue.
 
 Cursor trails, click sparkles, confetti, sound, press-and-hold entry, and full-page color floods were left out. The site has no RSVP destination configured, so the reference RSVP form was not introduced.
 
