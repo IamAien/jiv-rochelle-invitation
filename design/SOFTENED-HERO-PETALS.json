@@ -1,0 +1,28 @@
+{
+  "mode": "Built-in imagegen edits, transparent_background=true",
+  "scope": "Second-image hero and matching still envelope scene. Photo-frame petals keep their earlier artwork.",
+  "assets": [
+    {
+      "shape": "slender",
+      "reference": "src/assets/coastal-layers/flower-petal-slender.webp",
+      "source": "src/assets/coastal-layers/soft-petal-slender-source.png",
+      "runtime": "src/assets/coastal-layers/soft-petal-slender.webp",
+      "prompt": "Use case: precise-object-edit. EDIT TARGET: the attached single slender ivory embroidered petal. Preserve its outline, proportions, orientation, warm ivory cotton color and recognizable stitch pattern. Make only a gentle material refinement: reduce the raised relief and texture intensity by about 25 to 30 percent. Lower the puffy yarn ridges, soften the deep oatmeal recess shadows and fuzzy microfibers, keeping clear but quieter cotton stitches. The result should look like a slightly flatter embroidered flower petal, less bulky and less heavily knitted than this target, still tactile and matching ivory embroidered wedding flowers. Do not make it smooth, plastic, glossy, painted, flat satin silk, or a flat vector shape. Keep the complete petal and small transparent margin. Preserve actual alpha transparency everywhere outside the physical petal, with no haze, external shadow, glow, background, linen rectangle, checkerboard, extra petal, leaf, stem, whole flower, text or watermark."
+    },
+    {
+      "shape": "rounded",
+      "reference": "src/assets/coastal-layers/flower-petal-rounded.webp",
+      "source": "src/assets/coastal-layers/soft-petal-rounded-source.png",
+      "runtime": "src/assets/coastal-layers/soft-petal-rounded.webp",
+      "prompt": "Use case: precise-object-edit. EDIT TARGET: the attached single rounded ivory embroidered petal. Preserve its outline, proportions, orientation, warm ivory cotton color and recognizable stitch pattern. Make only a gentle material refinement: reduce the raised relief and texture intensity by about 25 to 30 percent. Lower the puffy yarn ridges, soften the deep oatmeal recess shadows and fuzzy microfibers, keeping clear but quieter cotton stitches. The result should look like a slightly flatter embroidered flower petal, less bulky and less heavily knitted than this target, still tactile and matching ivory embroidered wedding flowers. Do not make it smooth, plastic, glossy, painted, flat satin silk, or a flat vector shape. Keep the complete petal and small transparent margin. Preserve actual alpha transparency everywhere outside the physical petal, with no haze, external shadow, glow, background, linen rectangle, checkerboard, extra petal, leaf, stem, whole flower, text or watermark."
+    },
+    {
+      "shape": "curled",
+      "reference": "src/assets/coastal-layers/flower-petal-curled.webp",
+      "source": "src/assets/coastal-layers/soft-petal-curled-source.png",
+      "runtime": "src/assets/coastal-layers/soft-petal-curled.webp",
+      "prompt": "Use case: precise-object-edit. EDIT TARGET: the attached single curled ivory embroidered petal. Preserve its outline, proportions, orientation, warm ivory cotton color and recognizable stitch pattern. Make only a gentle material refinement: reduce the raised relief and texture intensity by about 25 to 30 percent. Lower the puffy yarn ridges, soften the deep oatmeal recess shadows and fuzzy microfibers, keeping clear but quieter cotton stitches. The result should look like a slightly flatter embroidered flower petal, less bulky and less heavily knitted than this target, still tactile and matching ivory embroidered wedding flowers. Do not make it smooth, plastic, glossy, painted, flat satin silk, or a flat vector shape. Keep the complete petal and small transparent margin. Preserve actual alpha transparency everywhere outside the physical petal, with no haze, external shadow, glow, background, linen rectangle, checkerboard, extra petal, leaf, stem, whole flower, text or watermark."
+    }
+  ],
+  "verification": "Softened relief inspected over linen. Runtime width 192, WebP quality 96 with alpha. Four prepared layers form staggered pairs; a five-cycle check confirms maximum two visible including loop boundaries. Sizes reduced about 7%. All 38 tests, production build and shared-scene markup checks pass. Live browser motion visual QA unavailable."
+}
