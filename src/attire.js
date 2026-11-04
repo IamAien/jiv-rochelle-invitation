@@ -5,7 +5,7 @@ export const ATTIRE_PALETTES = [
 
 // Variants are mapped by the supplied garment color, not filename order.
 export const ATTIRE_GUESTS = [
-  { id: 'right-female-2', gender: 'female', variants: [1, 2, 3, 4, 5], x: 10, depth: 3, size: 96 },
+  { id: 'right-female-2', gender: 'female', variants: [1, 2, 3, 4, 5], width: 768, x: 10, depth: 3, size: 96 },
   { id: 'right-female-1', gender: 'female', variants: [2, 3, 5, 1, 4], x: 26, depth: 5, size: 96 },
   { id: 'right-male-1', gender: 'male', variants: [1, 2, 4, 3, 5], x: 42, depth: 4, size: 100 },
   { id: 'left-female-1', gender: 'female', variants: [1, 2, 3, 4, 5], x: 58, depth: 7, size: 96 },

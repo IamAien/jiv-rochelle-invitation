@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { existsSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { ATTIRE_GUESTS, ATTIRE_PALETTES, chooseGuestColor, getGuestOutfit } from './attire.js'
 
 test('suit and dress selections remain independent through repeated color changes', () => {
@@ -32,6 +32,10 @@ test('all six guests have the five supplied outfit colors and every mapped file 
     for (const guest of ATTIRE_GUESTS.filter(person => person.gender === palette.gender)) {
       const filename = getGuestOutfit(guest, choices)
       assert.ok(existsSync(new URL(`./assets/attire-guests/${filename}`, import.meta.url)), filename)
+      const bytes = readFileSync(new URL(`./assets/attire-guests/${filename}`, import.meta.url))
+      assert.equal(bytes.toString('ascii', 12, 16), 'VP8X')
+      assert.equal(bytes.readUIntLE(24, 3) + 1, guest.width ?? 640, `${filename} must match the fixed transition canvas width`)
+      assert.equal(bytes.readUIntLE(27, 3) + 1, 960, `${filename} must match the fixed transition canvas height`)
       sources.add(filename)
     }
   }

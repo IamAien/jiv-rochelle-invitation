@@ -7,12 +7,12 @@
 @keyframes palette-gentle-nudge { 0%, 100% { box-shadow: 0 0 0 0 #98a38600; } 40% { box-shadow: 0 0 0 5px #98a38633; } 80% { box-shadow: 0 0 0 9px #98a38600; } }
 .guest-celebration { width: 92%; max-width: 760px; margin: 28px auto 0; }
 .guest-celebration-scene { position: relative; isolation: isolate; width: 100%; aspect-ratio: 1.9; background: radial-gradient(ellipse at 50% 91%, #b8a48b16, transparent 64%); }
-.celebration-person { position: absolute; left: var(--guest-x); bottom: 0; height: var(--guest-size); z-index: var(--guest-depth); transform: translateX(-50%); pointer-events: none; }
-.celebration-person img { display: block; width: auto; height: 100%; max-width: none; object-fit: contain; user-select: none; }
-.guest-outfit-current { position: relative; z-index: 1; }
+.celebration-person { position: absolute; left: var(--guest-x); bottom: 0; height: var(--guest-size); aspect-ratio: var(--guest-ratio); z-index: var(--guest-depth); transform: translateX(-50%); pointer-events: none; }
+.celebration-person img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; max-width: none; object-fit: contain; user-select: none; }
+.guest-outfit-current { z-index: 1; }
 .celebration-person .guest-outfit-previous { position: absolute; inset: 0; animation: guest-outfit-leave .65s ease-in-out both; }
 .guest-outfit-current.is-changing { animation: guest-outfit-enter .65s ease-in-out both; }
-@keyframes guest-outfit-enter { from { opacity: 0; filter: brightness(1.05); } to { opacity: 1; filter: brightness(1); } }
+@keyframes guest-outfit-enter { from { opacity: 0; } to { opacity: 1; } }
 @keyframes guest-outfit-leave { from { opacity: 1; } to { opacity: 0; } }
 .palette-audience { margin: -13px 0 18px; font-size: 14px; font-style: italic; color: #73735d; }
 @media (max-width: 680px) {
