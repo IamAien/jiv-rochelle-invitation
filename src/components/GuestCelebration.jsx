@@ -18,7 +18,7 @@ function OutfitImage({ source, description }) {
 }
 
 export default function GuestCelebration({ choices }) {
-  return <figure className="guest-celebration" id="celebration-guests" aria-label="An embroidered group of eight wedding guests">
+  return <figure className="guest-celebration" id="celebration-guests" aria-label="An embroidered group of six wedding guests">
     <div className="guest-celebration-scene">
       {ATTIRE_GUESTS.map(guest => <span className={`celebration-person is-${guest.gender}`} key={guest.id} data-guest={guest.id} style={{ '--guest-x': `${guest.x}%`, '--guest-depth': guest.depth, '--guest-size': `${guest.size}%` }}>
         <OutfitImage source={guestOutfitSource(getGuestOutfit(guest, choices))} description={`Wedding guest wearing ${getGuestColorName(choices, guest.gender)} ${guest.gender === 'male' ? 'formalwear' : 'a gown'}`} />

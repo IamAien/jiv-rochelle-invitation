@@ -1,6 +1,6 @@
 import { ATTIRE_GUESTS, getGuestOutfit } from './attire.js'
 
-const artwork = import.meta.glob('./assets/attire-guests/*.webp', { eager: true, query: '?url', import: 'default' })
+const artwork = import.meta.glob(['./assets/attire-guests/*.webp', '!./assets/attire-guests/right-male-2-*.webp', '!./assets/attire-guests/left-female-2-*.webp'], { eager: true, query: '?url', import: 'default' })
 const loaded = new Map()
 
 export const guestOutfitSource = filename => artwork[`./assets/attire-guests/${filename}`]

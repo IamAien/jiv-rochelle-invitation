@@ -5,14 +5,12 @@ export const ATTIRE_PALETTES = [
 
 // Variants are mapped by the supplied garment color, not filename order.
 export const ATTIRE_GUESTS = [
-  { id: 'right-female-2', gender: 'female', variants: [1, 2, 3, 4, 5], x: 8, depth: 3, size: 96 },
-  { id: 'right-male-2', gender: 'male', variants: [1, 2, 3, 4, 5], x: 20, depth: 2, size: 100 },
-  { id: 'right-female-1', gender: 'female', variants: [2, 3, 5, 1, 4], x: 32, depth: 5, size: 96 },
-  { id: 'right-male-1', gender: 'male', variants: [1, 2, 4, 3, 5], x: 44, depth: 4, size: 100 },
-  { id: 'left-female-1', gender: 'female', variants: [1, 2, 3, 4, 5], x: 56, depth: 7, size: 96 },
-  { id: 'left-male-1', gender: 'male', variants: [1, 2, 3, 4, 5], x: 68, depth: 6, size: 100 },
-  { id: 'left-female-2', gender: 'female', variants: [1, 2, 3, 4, 5], x: 80, depth: 8, size: 96 },
-  { id: 'left-male-2', gender: 'male', variants: [1, 2, 3, 4, 5], x: 92, depth: 2, size: 100 },
+  { id: 'left-male-2', gender: 'male', variants: [1, 2, 3, 4, 5], x: 10, depth: 2, size: 100 },
+  { id: 'right-female-1', gender: 'female', variants: [2, 3, 5, 1, 4], x: 26, depth: 5, size: 96 },
+  { id: 'right-male-1', gender: 'male', variants: [1, 2, 4, 3, 5], x: 42, depth: 4, size: 100 },
+  { id: 'left-female-1', gender: 'female', variants: [1, 2, 3, 4, 5], x: 58, depth: 7, size: 96 },
+  { id: 'left-male-1', gender: 'male', variants: [1, 2, 3, 4, 5], x: 74, depth: 6, size: 100 },
+  { id: 'right-female-2', gender: 'female', variants: [1, 2, 3, 4, 5], x: 90, depth: 3, size: 96 },
 ]
 
 export function chooseGuestColor(current, gender, name) {
