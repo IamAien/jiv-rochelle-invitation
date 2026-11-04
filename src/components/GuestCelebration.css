@@ -1,20 +1,32 @@
 .dress-section .palettes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 38px; max-width: 860px; margin-inline: auto; }
 .dress-section .palette-group + .palette-group { margin-top: 0; }
-.guest-celebration { max-width: 1120px; margin: 36px auto 0; }
+.guest-celebration { max-width: 820px; margin: 28px auto 0; }
 .guest-celebration-scene { position: relative; isolation: isolate; width: 100%; aspect-ratio: 1.9; background: radial-gradient(ellipse at 50% 91%, #b8a48b16, transparent 64%); }
 .celebration-person { position: absolute; left: var(--guest-x); bottom: 0; height: var(--guest-size); z-index: var(--guest-depth); transform: translateX(-50%); pointer-events: none; }
 .celebration-person img { display: block; width: auto; height: 100%; max-width: none; object-fit: contain; user-select: none; }
+.guest-outfit-current { position: relative; z-index: 1; }
+.celebration-person .guest-outfit-previous { position: absolute; inset: 0; animation: guest-outfit-leave .65s ease-in-out both; }
+.guest-outfit-current.is-changing { animation: guest-outfit-enter .65s ease-in-out both; }
+@keyframes guest-outfit-enter { from { opacity: 0; filter: brightness(1.05); } to { opacity: 1; filter: brightness(1); } }
+@keyframes guest-outfit-leave { from { opacity: 1; } to { opacity: 0; } }
 .guest-outfit-caption { display: flex; justify-content: center; align-items: center; gap: 24px; margin: 25px auto 0; color: #69705b; font-size: 19px; font-style: italic; }
 .guest-outfit-caption > span { min-width: 125px; }
 .guest-outfit-caption small { display: block; margin-bottom: 6px; font: 8px/1.5 var(--sans); letter-spacing: .15em; text-transform: uppercase; }
 .guest-outfit-caption i { color: #aa9270; font-size: 24px; }
 .palette-audience { margin: -13px 0 18px; font-size: 14px; font-style: italic; color: #73735d; }
 @media (max-width: 680px) {
-  .dress-section .palettes { grid-template-columns: 1fr; gap: 25px; }
+  .dress-section .palettes { gap: 12px; }
+  .dress-section .swatches { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 3px; }
+  .dress-section .swatch { padding-inline: 0; gap: 7px; font-size: clamp(8px, 2.2vw, 11px); }
+  .dress-section .swatch-color { width: clamp(18px, 5.2vw, 32px); height: clamp(18px, 5.2vw, 32px); border-width: 2px; }
+  .dress-section .swatch-check { font-size: 12px; }
+  .dress-section .palette-group h3 { font-size: 8px; letter-spacing: .1em; margin-bottom: 18px; }
+  .palette-audience { font-size: 12px; margin: -8px 0 12px; }
   .guest-celebration { margin-top: 28px; }
-  .guest-celebration-scene { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); aspect-ratio: .95; row-gap: 12px; }
-  .celebration-person { position: relative; left: auto; bottom: auto; width: 100%; height: 100%; transform: none; display: flex; justify-content: center; align-items: end; }
-  .celebration-person img { height: var(--guest-size); }
-  .guest-outfit-caption { font-size: 17px; gap: 12px; margin-top: 22px; }
-  .guest-outfit-caption > span { min-width: 100px; }
+  .guest-outfit-caption { font-size: 14px; gap: 10px; margin-top: 18px; }
+  .guest-outfit-caption > span { min-width: 85px; }
+}
+@media (prefers-reduced-motion: reduce), print {
+  .guest-outfit-current.is-changing { animation: none; }
+  .celebration-person .guest-outfit-previous { display: none; animation: none; }
 }

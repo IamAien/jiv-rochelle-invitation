@@ -23,6 +23,7 @@ test('suit and dress selections remain independent through repeated color change
 test('all eight guests have the five supplied outfit colors and every mapped file exists', () => {
   assert.equal(ATTIRE_GUESTS.filter(guest => guest.gender === 'male').length, 4)
   assert.equal(ATTIRE_GUESTS.filter(guest => guest.gender === 'female').length, 4)
+  assert.deepEqual(ATTIRE_GUESTS.slice(3, 5).map(guest => guest.gender), ['male', 'female'], 'The center pair must be a man and a woman')
   const sources = new Set()
   for (const palette of ATTIRE_PALETTES) for (const [name] of palette.colors) {
     const choices = chooseGuestColor({ male: null, female: null }, palette.gender, name)
