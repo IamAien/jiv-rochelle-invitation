@@ -18,7 +18,7 @@ export function getCoastalImageLayout({ width, height, imageWidth, imageHeight, 
 }
 
 export const COASTAL_PLANT_REGIONS = [
-  { name: 'top', x: -28, y: 38, width: 650, height: 650, origin: '0% 32.5%', positive: 3.2, negative: -2.8, seconds: 8.5, delay: 0 },
+  { name: 'top', x: -28, y: 30, width: 610, height: 610, origin: '0% 32.5%', positive: 3.2, negative: -2.8, seconds: 8.5, delay: 0 },
   { name: 'right', x: 493, y: 1260, width: 400, height: 420, origin: '87.5% 100%', positive: 3.8, negative: -3.1, seconds: 9.3, delay: .4 },
 ]
 
@@ -40,9 +40,11 @@ export const COASTAL_CLOUDS = [
 ]
 
 export const COASTAL_PETALS = [
-  { left: 21, top: 13, width: 7.2, seconds: 27, delay: 2, drift: -6, fall: 56, flutter: 6.5, angle: -15 },
-  { left: 10, top: 22.4, width: 6.3, seconds: 31, delay: 11, drift: 5, fall: 50, flutter: 7.8, angle: 22 },
-  { left: 22, top: 13.5, width: 6.8, seconds: 35, delay: 20, drift: -9, fall: 66, flutter: 8.7, angle: -28 },
+  // A shared cycle keeps releases 32 seconds apart instead of bunching up over time.
+  // Each flight occupies less than half the cycle, with its own gusts and easing.
+  { left: 20, top: 11.8, width: 9.2, seconds: 96, delay: 2, drift: 70, fall: 142, gust: 6, lift: -3, easing: 'cubic-bezier(.32,.12,.68,.9)', flutter: 6.5, angle: -15 },
+  { left: 10, top: 21, width: 8.5, seconds: 96, delay: 34, drift: 83, fall: 132, gust: -5, lift: 4, easing: 'cubic-bezier(.25,.04,.65,1)', flutter: 8.1, angle: 22 },
+  { left: 21, top: 12.3, width: 9.6, seconds: 96, delay: 66, drift: 64, fall: 150, gust: 9, lift: -5, easing: 'cubic-bezier(.4,.08,.72,.94)', flutter: 7.3, angle: -28 },
 ]
 
 export const COASTAL_BIRDS = [
