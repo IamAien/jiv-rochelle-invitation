@@ -1,21 +1,38 @@
 .coastal-scene { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
-.coastal-plants-preload { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.coastal-art-preload { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 .coastal-layer-stack { container-type: inline-size; position: absolute; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity 1.2s ease; }
 .coastal-scene[data-layers-ready] .coastal-layer-stack { opacity: 1; }
+.coastal-sky-plate { position: absolute; left: 55.2604%; top: 0; width: 44.7396%; height: 37.6794%; mask-image: linear-gradient(to right, transparent, #000 10%), linear-gradient(to bottom, #000 85%, transparent); mask-composite: intersect; }
 .coastal-water-canvas { position: absolute; display: block; opacity: 0; pointer-events: none; }
 .coastal-scene[data-water-ready] .coastal-water-canvas { opacity: 1; }
 .coastal-plant-placement { position: absolute; inset: 0; }
 .coastal-plant-layer { position: absolute; inset: 0; background-image: var(--coastal-plants); background-size: 100% 100%; background-repeat: no-repeat; animation: coastal-plant-sway ease-in-out infinite both paused; }
 .coastal-cloud { position: absolute; height: auto; animation: coastal-cloud-drift linear infinite both paused; }
-.coastal-bird { position: absolute; aspect-ratio: 2 / 1; color: #807969; animation: coastal-bird-flight linear infinite both paused; }
-.coastal-bird svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.coastal-bird-wings { transform-box: view-box; transform-origin: 50% 56.25%; animation: coastal-wingbeat var(--wing-period) ease-in-out infinite both paused; }
-.coastal-scene[data-motion-running] :is(.coastal-plant-layer, .coastal-cloud, .coastal-bird, .coastal-bird-wings) { animation-play-state: running; }
+.coastal-bird { position: absolute; aspect-ratio: 2 / 1; animation: coastal-bird-flight linear infinite both paused; }
+.coastal-bird-part { position: absolute; inset: 0; background-image: var(--coastal-bird); background-size: 100% 100%; background-repeat: no-repeat; }
+.coastal-bird-wing { animation: coastal-wingbeat var(--wing-period) ease-in-out infinite both paused; animation-delay: inherit; }
+.coastal-bird-wing-left { clip-path: inset(0 50% 0 0); transform-origin: 48% 55%; --wing-direction: 1; }
+.coastal-bird-wing-right { clip-path: inset(0 0 0 50%); transform-origin: 52% 55%; --wing-direction: -1; }
+.coastal-bird-body { clip-path: inset(0 44% 0 44%); }
+.coastal-scene[data-motion-running] :is(.coastal-plant-layer, .coastal-cloud, .coastal-bird, .coastal-bird-wing) { animation-play-state: running; }
 @keyframes coastal-plant-sway { 0%, 100% { transform: rotate(0deg); } 30% { transform: rotate(var(--sway-positive)); } 72% { transform: rotate(var(--sway-negative)); } }
-@keyframes coastal-cloud-drift { 0% { transform: translateX(0); opacity: 0; } 12%, 82% { opacity: .55; } 100% { transform: translateX(8cqw); opacity: 0; } }
-@keyframes coastal-bird-flight { 0% { transform: translate(0, 0); opacity: 0; } 12%, 82% { opacity: .65; } 100% { transform: translate(9cqw, -1.8cqw); opacity: 0; } }
-@keyframes coastal-wingbeat { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(-.45); } }
+@keyframes coastal-cloud-drift { 0% { transform: translateX(0); opacity: 0; } 8%, 82% { opacity: .94; } 100% { transform: translateX(16cqw); opacity: 0; } }
+@keyframes coastal-bird-flight {
+  0% { transform: translate(-18cqw, 1.5cqw) rotate(-2deg) scale(1); opacity: 0; }
+  8% { opacity: .94; }
+  25% { transform: translate(-6cqw, -.8cqw) rotate(-1deg) scale(.97); }
+  50% { transform: translate(6cqw, -1.8cqw) rotate(0deg) scale(.94); }
+  75% { transform: translate(18cqw, -2.3cqw) rotate(1deg) scale(.91); }
+  92% { opacity: .94; }
+  100% { transform: translate(30cqw, -1.5cqw) rotate(2deg) scale(.88); opacity: 0; }
+}
+@keyframes coastal-wingbeat {
+  0%, 8%, 20% { transform: rotate(calc(10deg * var(--wing-direction))); }
+  14%, 26% { transform: rotate(calc(-14deg * var(--wing-direction))); }
+  34% { transform: rotate(calc(4deg * var(--wing-direction))); }
+  42%, 100% { transform: rotate(0deg); }
+}
 @media (prefers-reduced-motion: reduce), print {
-  .coastal-layer-stack, .coastal-plants-preload { display: none; }
-  .coastal-plant-layer, .coastal-cloud, .coastal-bird, .coastal-bird-wings { animation: none; }
+  .coastal-layer-stack, .coastal-art-preload { display: none; }
+  .coastal-plant-layer, .coastal-cloud, .coastal-bird, .coastal-bird-wing { animation: none; }
 }

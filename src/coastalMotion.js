@@ -23,14 +23,14 @@ export const COASTAL_PLANT_REGIONS = [
 ]
 
 export const COASTAL_CLOUDS = [
-  { left: 67, top: 9, width: 19, seconds: 42, delay: -9 },
-  { left: 88, top: 25, width: 13, seconds: 54, delay: -24 },
+  { left: 55, top: 0, width: 43, seconds: 22, delay: -6 },
+  { left: 72, top: 14, width: 33, seconds: 28, delay: -11 },
 ]
 
 export const COASTAL_BIRDS = [
-  { left: 64, top: 70.5, width: 4.6, seconds: 48, delay: -10, wing: 1.1 },
-  { left: 69, top: 69, width: 3.8, seconds: 55, delay: -17, wing: 1.35 },
-  { left: 73, top: 71.5, width: 3.4, seconds: 61, delay: -6, wing: 1.55 },
+  { left: 64, top: 70.5, width: 5.5, seconds: 24, delay: -5, wing: 3.8 },
+  { left: 69, top: 69, width: 4.8, seconds: 29, delay: -9, wing: 4.3 },
+  { left: 73, top: 71.5, width: 4.2, seconds: 33, delay: -2, wing: 4.7 },
 ]
 
 export function getCoastalWaterStrength(seconds) {

@@ -9,6 +9,8 @@ export default function CoastalScene({ enabled }) {
   const stackRef = useRef(null)
   const plantsRef = useRef(null)
   const cloudRef = useRef(null)
+  const birdRef = useRef(null)
+  const skyRef = useRef(null)
   const canvasRef = useRef(null)
 
   useEffect(() => {
@@ -18,9 +20,11 @@ export default function CoastalScene({ enabled }) {
     const stack = stackRef.current
     const plants = plantsRef.current
     const cloud = cloudRef.current
+    const bird = birdRef.current
+    const sky = skyRef.current
     const canvas = canvasRef.current
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const assets = [image, plants, cloud]
+    const assets = [image, plants, cloud, bird, sky]
     let renderer = null
     let inView = container.getBoundingClientRect().bottom > 0
     let waterUnavailable = false
@@ -108,8 +112,10 @@ export default function CoastalScene({ enabled }) {
   return <div className="coastal-scene" ref={containerRef}>
     <img ref={imageRef} className="villa-art" src={INVITATION_ARTWORK.src} width={INVITATION_ARTWORK.width} height={INVITATION_ARTWORK.height}
       alt="Embroidered coastal villa and flower-filled garden overlooking the blue sea, framed by ivory blossoms on warm linen" fetchPriority="high" />
-    <img ref={plantsRef} className="coastal-plants-preload" src={COASTAL_LAYER_ARTWORK.plants} alt="" aria-hidden="true" />
-    <div ref={stackRef} className="coastal-layer-stack" style={{ '--coastal-plants': `url(${COASTAL_LAYER_ARTWORK.plants})` }} aria-hidden="true">
+    <img ref={plantsRef} className="coastal-art-preload" src={COASTAL_LAYER_ARTWORK.plants} alt="" aria-hidden="true" />
+    <img ref={birdRef} className="coastal-art-preload" src={COASTAL_LAYER_ARTWORK.bird} alt="" aria-hidden="true" />
+    <div ref={stackRef} className="coastal-layer-stack" style={{ '--coastal-plants': `url(${COASTAL_LAYER_ARTWORK.plants})`, '--coastal-bird': `url(${COASTAL_LAYER_ARTWORK.bird})` }} aria-hidden="true">
+      <img ref={skyRef} className="coastal-sky-plate" src={COASTAL_LAYER_ARTWORK.sky} alt="" />
       <canvas ref={canvasRef} className="coastal-water-canvas" aria-hidden="true" />
       {COASTAL_CLOUDS.map((cloud, index) => <img key={index} ref={index === 0 ? cloudRef : undefined} className="coastal-cloud" src={COASTAL_LAYER_ARTWORK.cloud} alt="" style={{
         left: `${cloud.left}%`, top: `${cloud.top}%`, width: `${cloud.width}%`,
@@ -119,10 +125,9 @@ export default function CoastalScene({ enabled }) {
         left: `${bird.left}%`, top: `${bird.top}%`, width: `${bird.width}%`,
         animationDuration: `${bird.seconds}s`, animationDelay: `${bird.delay}s`, '--wing-period': `${bird.wing}s`,
       }}>
-        <svg viewBox="0 0 32 16" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true">
-          <g className="coastal-bird-wings"><path d="M16 9 Q9 1 2 5" /><path d="M16 9 Q23 1 30 5" /></g>
-          <path d="M15 9h2" />
-        </svg>
+        <span className="coastal-bird-part coastal-bird-wing coastal-bird-wing-left" />
+        <span className="coastal-bird-part coastal-bird-wing coastal-bird-wing-right" />
+        <span className="coastal-bird-part coastal-bird-body" />
       </div>)}
       {COASTAL_PLANT_REGIONS.map(region => <div key={region.name} className="coastal-plant-placement" style={{
         transform: `translate(${region.x}%, ${region.y}%) scale(${region.scale})`, transformOrigin: region.anchor,
