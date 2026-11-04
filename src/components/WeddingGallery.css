@@ -10,10 +10,10 @@
 .memory-frame-petals[data-running] :is(.memory-frame-petal, .memory-frame-petal img) { animation-play-state: running; }
 @keyframes memory-frame-petal-fall {
   0% { transform: translate(0, 0); opacity: 0; }
-  10%, 78% { opacity: .95; }
-  30% { transform: translate(calc(var(--frame-petal-drift) * .25 + var(--frame-petal-gust)), 42cqw); }
-  60% { transform: translate(calc(var(--frame-petal-drift) * .6 - var(--frame-petal-gust) * .4), 94cqw); }
-  92%, 100% { transform: translate(var(--frame-petal-drift), 154cqw); opacity: 0; }
+  5%, 40% { opacity: .95; }
+  16% { transform: translate(calc(var(--frame-petal-drift) * .25 + var(--frame-petal-gust)), 42cqw); }
+  31% { transform: translate(calc(var(--frame-petal-drift) * .6 - var(--frame-petal-gust) * .4), 94cqw); }
+  48%, 100% { transform: translate(var(--frame-petal-drift), 154cqw); opacity: 0; }
 }
 @keyframes memory-frame-petal-flutter {
   0%, 100% { transform: rotate(var(--frame-petal-angle)) scaleX(1); }

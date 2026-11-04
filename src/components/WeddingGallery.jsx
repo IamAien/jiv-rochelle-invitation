@@ -3,15 +3,15 @@ import { createScratchGrid, getPhotoSource, getPhotoSwipe, MEMORY_PHOTOS, record
 import './WeddingGallery.css'
 import Ampersand from './Ampersand.jsx'
 import ovalFrame from '../assets/oval-photo-frame.webp'
-import slenderPetal from '../assets/coastal-layers/flower-petal-slender.webp'
-import roundedPetal from '../assets/coastal-layers/flower-petal-rounded.webp'
-import curledPetal from '../assets/coastal-layers/flower-petal-curled.webp'
+import slenderPetal from '../assets/coastal-layers/soft-petal-slender.webp'
+import roundedPetal from '../assets/coastal-layers/soft-petal-rounded.webp'
+import curledPetal from '../assets/coastal-layers/soft-petal-curled.webp'
 
 const FRAME_PETALS = [
-  { src: slenderPetal, left: 20, width: 7, seconds: 19, delay: -3, drift: 32, gust: 5, angle: -25, flutter: 5.4 },
-  { src: roundedPetal, left: 32, width: 8, seconds: 24, delay: -15, drift: 24, gust: -7, angle: 40, flutter: 7.2 },
-  { src: curledPetal, left: 45, width: 7.5, seconds: 21, delay: -9, drift: 28, gust: 8, angle: -55, flutter: 6.1 },
-  { src: slenderPetal, left: 16, width: 6.5, seconds: 27, delay: -22, drift: 38, gust: -4, angle: 65, flutter: 8.3 },
+  { src: slenderPetal, left: 20, width: 6.5, seconds: 52, delay: 1, drift: 32, gust: 5, angle: -25, flutter: 5.4 },
+  { src: roundedPetal, left: 32, width: 7.4, seconds: 52, delay: 3, drift: 24, gust: -7, angle: 40, flutter: 7.2 },
+  { src: curledPetal, left: 45, width: 7, seconds: 52, delay: 27, drift: 28, gust: 8, angle: -55, flutter: 6.1 },
+  { src: slenderPetal, left: 16, width: 6, seconds: 52, delay: 29, drift: 38, gust: -4, angle: 65, flutter: 8.3 },
 ]
 
 function FramePetals() {
