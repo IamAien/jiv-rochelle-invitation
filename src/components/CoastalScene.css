@@ -4,10 +4,8 @@
 .coastal-scene[data-layers-ready] .coastal-layer-stack { opacity: 1; }
 .coastal-water-canvas { position: absolute; display: block; opacity: 0; pointer-events: none; }
 .coastal-scene[data-water-ready] .coastal-water-canvas { opacity: 1; }
-.coastal-plant-layer { position: absolute; animation: coastal-plant-sway ease-in-out infinite both paused; }
-.coastal-corner-branch { inset: 0; background-image: var(--coastal-plants); background-size: 100% 100%; background-repeat: no-repeat; }
-.coastal-top-sprig { left: 1%; top: 5.5%; width: 40%; opacity: .85; filter: saturate(.75) contrast(.92); }
-.coastal-top-sprig img { width: 100%; height: auto; }
+.coastal-plant-placement { position: absolute; inset: 0; }
+.coastal-plant-layer { position: absolute; inset: 0; background-image: var(--coastal-plants); background-size: 100% 100%; background-repeat: no-repeat; animation: coastal-plant-sway ease-in-out infinite both paused; }
 .coastal-cloud { position: absolute; height: auto; animation: coastal-cloud-drift linear infinite both paused; }
 .coastal-bird { position: absolute; aspect-ratio: 2 / 1; color: #807969; animation: coastal-bird-flight linear infinite both paused; }
 .coastal-bird svg { display: block; width: 100%; height: 100%; overflow: visible; }

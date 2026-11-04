@@ -8,7 +8,6 @@ export default function CoastalScene({ enabled }) {
   const imageRef = useRef(null)
   const stackRef = useRef(null)
   const plantsRef = useRef(null)
-  const topPlantRef = useRef(null)
   const cloudRef = useRef(null)
   const canvasRef = useRef(null)
 
@@ -18,11 +17,10 @@ export default function CoastalScene({ enabled }) {
     const image = imageRef.current
     const stack = stackRef.current
     const plants = plantsRef.current
-    const topPlant = topPlantRef.current
     const cloud = cloudRef.current
     const canvas = canvasRef.current
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const assets = [image, plants, topPlant, cloud]
+    const assets = [image, plants, cloud]
     let renderer = null
     let inView = container.getBoundingClientRect().bottom > 0
     let waterUnavailable = false
@@ -126,11 +124,15 @@ export default function CoastalScene({ enabled }) {
           <path d="M15 9h2" />
         </svg>
       </div>)}
-      {COASTAL_PLANT_REGIONS.map(region => <div key={region.name} className={`coastal-plant-layer ${region.name === 'top' ? 'coastal-top-sprig' : 'coastal-corner-branch'}`} data-corner={region.name} style={{
-        clipPath: region.clip, transformOrigin: region.origin,
-        '--sway-positive': `${region.positive}deg`, '--sway-negative': `${region.negative}deg`,
-        animationDuration: `${region.seconds}s`, animationDelay: `${region.delay}s`,
-      }}>{region.name === 'top' && <img ref={topPlantRef} src={COASTAL_LAYER_ARTWORK.topPlant} alt="" />}</div>)}
+      {COASTAL_PLANT_REGIONS.map(region => <div key={region.name} className="coastal-plant-placement" style={{
+        transform: `translate(${region.x}%, ${region.y}%) scale(${region.scale})`, transformOrigin: region.anchor,
+      }}>
+        <div className="coastal-plant-layer" data-corner={region.name} style={{
+          clipPath: region.clip, transformOrigin: region.origin,
+          '--sway-positive': `${region.positive}deg`, '--sway-negative': `${region.negative}deg`,
+          animationDuration: `${region.seconds}s`, animationDelay: `${region.delay}s`,
+        }} />
+      </div>)}
     </div>
   </div>
 }

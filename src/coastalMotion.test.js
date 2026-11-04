@@ -48,7 +48,7 @@ test('the sea moves left and right as one horizontal sheet without abrupt resets
   close(getCoastalSeaOffset(10), 0)
   for (let frame = 1; frame < 600; frame++) {
     const offset = getCoastalSeaOffset(frame / 30)
-    assert.ok(Math.abs(offset) <= .012)
+    assert.ok(Math.abs(offset) <= .016)
     assert.ok(Math.abs(offset - getCoastalSeaOffset((frame - 1) / 30)) < .001)
   }
 })

@@ -18,8 +18,8 @@ export function getCoastalImageLayout({ width, height, imageWidth, imageHeight, 
 }
 
 export const COASTAL_PLANT_REGIONS = [
-  { name: 'top', clip: 'inset(0)', origin: '0% 38%', positive: 3.2, negative: -2.8, seconds: 8.5, delay: 0 },
-  { name: 'right', clip: 'inset(76% 0 0 55%)', origin: '100% 100%', positive: 3.8, negative: -3.1, seconds: 9.3, delay: .4 },
+  { name: 'top', clip: 'inset(0 34% 65% 0)', x: 0, y: 17, scale: .62, anchor: '0% 0%', origin: '0% 7.5%', positive: 3.2, negative: -2.8, seconds: 8.5, delay: 0 },
+  { name: 'right', clip: 'inset(76% 0 0 55%)', x: 0, y: -8, scale: .74, anchor: '100% 100%', origin: '100% 100%', positive: 3.8, negative: -3.1, seconds: 9.3, delay: .4 },
 ]
 
 export const COASTAL_CLOUDS = [
@@ -28,9 +28,9 @@ export const COASTAL_CLOUDS = [
 ]
 
 export const COASTAL_BIRDS = [
-  { left: 64, top: 70.5, width: 2.3, seconds: 48, delay: -10, wing: 1.1 },
-  { left: 69, top: 69, width: 1.9, seconds: 55, delay: -17, wing: 1.35 },
-  { left: 73, top: 71.5, width: 1.7, seconds: 61, delay: -6, wing: 1.55 },
+  { left: 64, top: 70.5, width: 4.6, seconds: 48, delay: -10, wing: 1.1 },
+  { left: 69, top: 69, width: 3.8, seconds: 55, delay: -17, wing: 1.35 },
+  { left: 73, top: 71.5, width: 3.4, seconds: 61, delay: -6, wing: 1.55 },
 ]
 
 export function getCoastalWaterStrength(seconds) {
@@ -42,7 +42,7 @@ export function getCoastalWaterStrength(seconds) {
 export function getCoastalSeaOffset(seconds) {
   const time = Math.max(0, seconds)
   // One uniform horizontal translation: left, then right, with no vertical warp.
-  return Math.sin(time * Math.PI * 2 / 10) * .012 * getCoastalWaterStrength(time)
+  return Math.sin(time * Math.PI * 2 / 10) * .016 * getCoastalWaterStrength(time)
 }
 
 const VERTEX_SHADER = `
