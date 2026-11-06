@@ -2,5 +2,6 @@
 .invitation-names { font-size: var(--invite-name-size, 34px); font-weight: 500; line-height: 1.16; margin-top: var(--invite-name-gap, 26px); letter-spacing: -.02em; white-space: nowrap; outline: none; }
 .invitation-name { display: block; }
 .invitation-and { display: block; font-size: .55em; font-style: italic; font-weight: 400; letter-spacing: .03em; margin: .55em 0 .65em; }
+.invitation-and .ampersand svg { width: 1em; height: 1em; }
 .invite-request { font-size: var(--invite-small-size, 15px); line-height: 1.5; letter-spacing: .025em; margin-top: var(--invite-line-gap, 24px); }
 .wedding-date { display: block; font-size: var(--invite-date-size, 17px); line-height: 1.5; letter-spacing: .06em; margin-top: var(--invite-date-gap, 24px); }
