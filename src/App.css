@@ -143,17 +143,15 @@ body { background: var(--ivory); }
 .swatches { display: flex; justify-content: center; gap: 16px; }
 .swatch { display: flex; flex-direction: column; align-items: center; gap: 10px; font-size: 13px; padding: 4px 2px; border: 0; background: transparent; }
 .swatch-color { display: block; position: relative; isolation: isolate; width: 48px; height: 48px; border: 3px solid #f9f5ed; border-radius: 50%; outline: 1px dashed #b7ae9780; background: var(--swatch); }
-.swatch-color { transition: transform .35s, outline-color .35s, box-shadow .35s; }
-.swatch[aria-pressed="true"] .swatch-color { outline: 2px solid #7c8869; box-shadow: 0 0 0 5px #85906d1c; }
-.swatch-check { position: absolute; z-index: 1; inset: 0; display: grid; place-items: center; font: 18px var(--sans); opacity: 0; color: #4e483c; text-shadow: 0 1px #fff9; transition: opacity .3s; }
-.swatch[aria-pressed="true"] .swatch-check { opacity: 1; }
+.swatch-color { transition: outline-color .25s; }
+.swatch[aria-pressed="true"] .swatch-color { outline: 1px solid #9c927780; }
 .swatch-color::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background-image: var(--linen); background-size: 110px 110px; mix-blend-mode: multiply; opacity: .65; }
 .swatch-color::after { content: ''; position: absolute; inset: 3px; border: 1px dashed #fff9; border-radius: inherit; }
 .palette-status { min-height: 32px; margin: 10px auto 0; font: 10px/1.6 var(--sans); color: #5b694b; }
 .dress-section .flourish { margin-top: 22px; }
 @media (hover: hover) and (pointer: fine) {
   .venue:hover { background-color: #f7f1e780; }
-  .swatch:hover .swatch-color { transform: translateY(-3px); outline-color: #7c8869; }
+  .swatch:hover .swatch-color { outline-color: #9c927780; }
 }
 .closing-section { --section-tone: #e3e2d6; padding-top: 74px; padding-bottom: 95px; }
 .closing-section > .monogram { font-size: 91px; margin-top: 34px; color: #8e7961; }

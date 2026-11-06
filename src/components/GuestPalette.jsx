@@ -50,7 +50,7 @@ export default function GuestPalette({ children }) {
         <h3 id={`palette-${palette.family}`}>{palette.title}</h3>
         <p className="palette-audience">{palette.audience}</p>
         <div className="swatches">{palette.colors.map(([name, color]) => <button type="button" className="swatch" key={name} aria-label={`${name} ${palette.family}`} aria-controls="celebration-guests" aria-pressed={choices[palette.gender]?.color === color} onPointerEnter={() => { prepare(palette.gender, name).catch(() => {}) }} onFocus={() => { prepare(palette.gender, name).catch(() => {}) }} onClick={() => pick(palette.gender, name)}>
-          <span className="swatch-color" style={{ '--swatch': color }} aria-hidden="true"><span className="swatch-check">✓</span></span>
+          <span className="swatch-color" style={{ '--swatch': color }} aria-hidden="true" />
           <span>{name}</span>
         </button>)}</div>
       </div>)}
