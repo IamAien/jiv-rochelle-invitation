@@ -30,8 +30,8 @@ export default function WeddingStory({ enabled, children }) {
 
   return <section className="story-section section" id="story" ref={story} aria-labelledby="story-title">
     {children}
-    <p className="eyebrow">Some things are meant to be</p>
-    <h2 id="story-title">A chance meeting.<br /><em>An endless story.</em></h2>
+    <p className="eyebrow">How we met</p>
+    <h2 id="story-title">Our Story</h2>
     <ol className="story-copy">
       {CHAPTERS.map(([label, text], index) => <li className="story-chapter" key={label}>
         <span className="chapter-marker" aria-hidden="true"><StoryHeart /><span className="chapter-heart-spark spark-one"><StoryHeart /></span><span className="chapter-heart-spark spark-two"><StoryHeart /></span></span>
@@ -39,6 +39,5 @@ export default function WeddingStory({ enabled, children }) {
         <p>{text}</p>
       </li>)}
     </ol>
-    <span className="story-signature">And so, our forever begins.</span>
   </section>
 }

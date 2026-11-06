@@ -138,7 +138,6 @@ body { background: var(--ivory); }
 .chapter-number { margin-right: 12px; font-variant-numeric: tabular-nums; }
 .story-copy .is-current .chapter-label { color: #925c69; }
 .story-copy p { font-size: 20px; line-height: 1.7; margin-top: 12px; }
-.story-signature { display: block; font-size: 27px; font-style: italic; margin-top: 32px; }
 .dress-section { --section-tone: #ebe7dd; padding-top: 95px; padding-bottom: 55px; border-top: 1px solid #a6a68d26; }
 .dress-code { margin-top: 28px; font-size: 26px; font-style: italic; }
 .dress-section .body-copy { margin-top: 17px; }
@@ -241,7 +240,6 @@ body { background: var(--ivory); }
   .palette-preview .selected-color { font-size: 23px; }
   .palette-preview .preview-eyebrow { font-size: 7.5px; }
   .fabric-sample { height: 73px; }
-  .story-signature { font-size: 25px; }
   .dress-section { padding-top: 76px; }
   .swatches { gap: 13px; }
   .swatch-color { width: 43px; height: 43px; }

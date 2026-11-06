@@ -3,7 +3,6 @@ const REVEAL_SELECTOR = [
   '.section h3',
   '.section p',
   '.section .event-note',
-  '.section .story-signature',
   '.section .text-button',
   '.section .countdown-unit',
   '.section .swatches',
