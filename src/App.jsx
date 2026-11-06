@@ -37,8 +37,7 @@ function Countdown() {
     return () => window.clearInterval(timer)
   }, [])
   return <section className="countdown-section section" id="countdown" aria-labelledby="countdown-title">
-    <p className="eyebrow">Every day, a little closer</p><h2 id="countdown-title">Counting down<br /><em>to forever</em></h2>
-    <p className="section-intro">Until we say “I do,” with you by our side.</p>
+    <p className="eyebrow">Every day, a little closer</p><h2 id="countdown-title">Countdown</h2>
     <div className="countdown" role="timer" aria-label={`${remaining.days} days, ${remaining.hours} hours, ${remaining.minutes} minutes, ${remaining.seconds} seconds until the wedding`}>
       <img className="countdown-frame" src={countdownFrame} width="2172" height="724" alt="" aria-hidden="true" loading="lazy" />
       {[['days', 24.2], ['hours', 41.6], ['minutes', 58.7], ['seconds', 76.7]].map(([unit, center]) => (
