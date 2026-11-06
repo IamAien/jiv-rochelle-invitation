@@ -15,8 +15,6 @@ export default function WeddingRsvp({ formUrl = GOOGLE_FORM_URL }) {
       <span className="rsvp-card-label">Jiv &amp; Rochelle · February 7, 2027</span>
       {links ? <>
         <h3>Will you join us?</h3>
-        <p className="rsvp-card-copy">Let us know if you can make it, and leave a little note for us.</p>
-        <p className="rsvp-guest-note">Please include only the guests named on your invitation.</p>
         {links.embed ? <>
           <button type="button" className="rsvp-button" aria-expanded={showForm} aria-controls="rsvp-google-form" onClick={() => { setHasOpened(true); setShowForm(value => !value) }}>
             {showForm ? 'Close the form' : 'Fill in your RSVP'} <span aria-hidden="true">{showForm ? '−' : '↗'}</span>
@@ -32,6 +30,5 @@ export default function WeddingRsvp({ formUrl = GOOGLE_FORM_URL }) {
         <p className="rsvp-card-copy">Please check back to let us know if you can join us. We can’t wait to celebrate together.</p>
       </>}
     </div>
-    <p className="rsvp-signoff">With love, Jiv &amp; Rochelle</p>
   </section>
 }
