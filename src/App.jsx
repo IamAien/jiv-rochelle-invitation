@@ -94,7 +94,7 @@ function Timeline() {
     }
   }, [])
   return <section className="timeline-section section" id="timeline" aria-labelledby="timeline-title">
-    <p className="eyebrow">The day we’ve been dreaming of</p><h2 id="timeline-title">Our wedding <em>day</em></h2>
+    <p className="eyebrow">The schedule</p><h2 id="timeline-title">Our wedding <em>day</em></h2>
     <p className="section-intro">A beautiful beginning, one moment at a time.</p>
     <div className="timeline" ref={trackRef}>
       <div className="timeline-thread" aria-hidden="true"><span className="timeline-fill" /></div>
