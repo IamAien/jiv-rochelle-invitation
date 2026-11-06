@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { GOOGLE_FORM_URL, getGoogleFormLinks } from '../rsvp.js'
-import { RSVP_QR_ARTWORK } from '../rsvpQr.js'
 import './WeddingRsvp.css'
 
 export default function WeddingRsvp({ formUrl = GOOGLE_FORM_URL }) {
@@ -24,12 +23,6 @@ export default function WeddingRsvp({ formUrl = GOOGLE_FORM_URL }) {
           </div>
           <a className="rsvp-open-link" href={links.responder} target="_blank" rel="noopener noreferrer">Open form in a new tab <span aria-hidden="true">↗</span></a>
         </> : <a className="rsvp-button" href={links.responder} target="_blank" rel="noopener noreferrer">Fill in your RSVP <span aria-hidden="true">↗</span></a>}
-        {links.responder === RSVP_QR_ARTWORK.url && <figure className="rsvp-qr">
-          <a href={links.responder} target="_blank" rel="noopener noreferrer" aria-label="Open the RSVP form from the QR code">
-            <img src={RSVP_QR_ARTWORK.src} width="228" height="228" alt="QR code for Jiv and Rochelle’s wedding RSVP form" loading="lazy" />
-          </a>
-          <figcaption>Scan to RSVP</figcaption>
-        </figure>}
         <p className="rsvp-footnote">Please select Submit in the form to send your response.</p>
       </> : <>
         <h3>RSVP will open soon</h3>

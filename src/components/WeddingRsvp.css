@@ -11,10 +11,6 @@
 .rsvp-google-form { display: block; width: 100%; height: 1080px; margin-top: 28px; border: 0; background: #fff; }
 .rsvp-open-link { display: block; width: fit-content; margin: 18px auto 0; padding: 8px 0; border-bottom: 1px dashed #93957a; font: 10px/1.6 var(--sans); }
 .rsvp-footnote { font-size: 15px; line-height: 1.5; margin-top: 20px; }
-.rsvp-qr { width: fit-content; max-width: 100%; margin: 28px auto 0; }
-.rsvp-qr a { display: block; width: 228px; max-width: 100%; border: 1px solid #92967c38; background: #fff; }
-.rsvp-qr img { width: 100%; height: auto; }
-.rsvp-qr figcaption { margin-top: 12px; font: 10px/1.6 var(--sans); letter-spacing: .1em; text-transform: uppercase; }
 .site-header nav .rsvp-nav { font-weight: 600; color: #586047; }
 @media (max-width: 600px) {
   .rsvp-section { scroll-margin-top: 56px; }
