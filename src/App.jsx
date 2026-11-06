@@ -17,9 +17,7 @@ import './App.css'
 
 const EVENTS = [
   { icon: 'arch', time: '1:00 PM', title: 'The ceremony', description: 'The Archdiocesan Shrine of the Most Sacred Heart of Jesus', note: 'Our forever begins.' },
-  { icon: 'couple', time: 'After “I do”', title: 'A little time together', description: 'Photographs, happy tears, and wishes for the newlyweds.', note: 'A moment to remember.' },
   { icon: 'cake', time: '5:00 PM', title: 'The reception', description: 'Marco Polo Plaza Cebu', note: 'Let the celebration begin.' },
-  { icon: 'disco', time: 'Into the evening', title: 'Love & celebration', description: 'Good food, heartfelt toasts, and a little dancing.', note: 'Memories to last a lifetime.' },
 ]
 
 function Flourish({ className = '' }) {
