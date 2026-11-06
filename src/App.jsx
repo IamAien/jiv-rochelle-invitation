@@ -17,8 +17,8 @@ import Flourish from './components/Flourish.jsx'
 import './App.css'
 
 const EVENTS = [
-  { icon: 'arch', time: '1:00 PM', title: 'The ceremony', description: 'The Archdiocesan Shrine of the Most Sacred Heart of Jesus', note: 'Our forever begins.' },
-  { icon: 'cake', time: '5:00 PM', title: 'The reception', description: 'Marco Polo Plaza Cebu', note: 'Let the celebration begin.' },
+  { icon: 'arch', time: '1:00 PM', title: 'The ceremony', description: 'The Archdiocesan Shrine of the Most Sacred Heart of Jesus' },
+  { icon: 'cake', time: '5:00 PM', title: 'The reception', description: 'Marco Polo Plaza Cebu' },
 ]
 
 function Monogram({ small = false }) {
@@ -93,7 +93,7 @@ function Timeline() {
     <p className="section-intro">A beautiful beginning, one moment at a time.</p>
     <div className="timeline" ref={trackRef}>
       <div className="timeline-thread" aria-hidden="true"><span className="timeline-fill" /></div>
-      <ol className="timeline-events">{EVENTS.map(event => <li className="timeline-event" key={event.title}><div className="timeline-art"><TimelineArtwork kind={event.icon} /></div><div className="timeline-copy"><p className="event-time">{event.time}</p><h3>{event.title}</h3><p>{event.description}</p><span className="event-note">{event.note}</span></div></li>)}</ol>
+      <ol className="timeline-events">{EVENTS.map(event => <li className="timeline-event" key={event.title}><div className="timeline-art"><TimelineArtwork kind={event.icon} /></div><div className="timeline-copy"><p className="event-time">{event.time}</p><h3>{event.title}</h3><p>{event.description}</p></div></li>)}</ol>
       <span className="traveling-pearl" aria-hidden="true" />
       <TimelineArtwork kind="moon" className="timeline-ending" />
     </div>
