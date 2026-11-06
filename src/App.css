@@ -144,7 +144,7 @@ body { background: var(--ivory); }
 .swatch { display: flex; flex-direction: column; align-items: center; gap: 10px; font-size: 13px; padding: 4px 2px; border: 0; background: transparent; }
 .swatch-color { display: block; position: relative; isolation: isolate; width: 48px; height: 48px; border: 3px solid #f9f5ed; border-radius: 50%; outline: 1px dashed #b7ae9780; background: var(--swatch); }
 .swatch-color { transition: outline-color .25s; }
-.swatch[aria-pressed="true"] .swatch-color { outline: 1px solid #9c927780; }
+.swatch[aria-pressed="true"] .swatch-color { outline: 1.5px solid #9c927780; }
 .swatch-color::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background-image: var(--linen); background-size: 110px 110px; mix-blend-mode: multiply; opacity: .65; }
 .swatch-color::after { content: ''; position: absolute; inset: 3px; border: 1px dashed #fff9; border-radius: inherit; }
 .palette-status { min-height: 32px; margin: 10px auto 0; font: 10px/1.6 var(--sans); color: #5b694b; }
