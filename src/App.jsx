@@ -11,6 +11,7 @@ import WeddingStory from './components/WeddingStory.jsx'
 import GuestPalette from './components/GuestPalette.jsx'
 import WeddingVenues from './components/WeddingVenues.jsx'
 import WeddingGallery from './components/WeddingGallery.jsx'
+import WeddingRsvp from './components/WeddingRsvp.jsx'
 import Ampersand from './components/Ampersand.jsx'
 import { downloadWeddingCalendar } from './calendar.js'
 import './App.css'
@@ -164,6 +165,7 @@ export default function App() {
         <WeddingStory enabled={stage === 'done'}><Flourish className="story-ornament" /></WeddingStory>
         <WeddingGallery />
         <GuestPalette><Flourish /></GuestPalette>
+        <WeddingRsvp />
       </main>
       <footer className="closing-section section"><p className="eyebrow">We can’t wait to celebrate with you</p><Monogram /><p className="closing-names">Jiv <Ampersand /> Rochelle</p><p className="closing-date">February 7, 2027 · Cebu</p><button className="replay-button" onClick={replayOpening}><span aria-hidden="true">↺</span> Open the magic again</button></footer>
     </div>

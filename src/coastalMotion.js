@@ -34,9 +34,9 @@ export const COASTAL_CLOUDS = [
   { shape: 'filament', left: 60, top: 12, width: 35, seconds: 38, delay: -17, travel: 14, opacity: .91 },
   { shape: 'wisp', left: 78, top: 20, width: 26, seconds: 34, delay: -10, travel: 12, opacity: .92 },
   { shape: 'filament', left: 81, top: 27, width: 22, seconds: 42, delay: -20, travel: 10, opacity: .86, mirror: true },
-  { shape: 'filament', left: 61, top: 70, width: 33, seconds: 32, delay: -8, travel: 10, opacity: .87, mirror: true },
-  { shape: 'rounded', left: 76, top: 73, width: 23, seconds: 35, delay: -22, travel: 10, opacity: .90 },
-  { shape: 'wisp', left: 83, top: 76, width: 20, seconds: 37, delay: -15, travel: 8, opacity: .83 },
+  { shape: 'filament', left: 61, top: 70, width: 33, seconds: 25.6, delay: -6.4, travel: 10, opacity: .87, mirror: true },
+  { shape: 'rounded', left: 76, top: 73, width: 23, seconds: 28, delay: -17.6, travel: 10, opacity: .90 },
+  { shape: 'wisp', left: 83, top: 76, width: 20, seconds: 29.6, delay: -12, travel: 8, opacity: .83 },
 ]
 
 export const COASTAL_PETALS = [
@@ -67,7 +67,7 @@ export function getCoastalSeaCurrents(seconds) {
   const strength = getCoastalWaterStrength(time)
   // Independent one-way flows: right, left, right. Two staggered texture
   // samples hide each reset, so no band has to stop or reverse direction.
-  return [[8, 1], [10.5, -1], [13, 1]].map(([period, direction]) => {
+  return [[6.4, 1], [8.4, -1], [10.4, 1]].map(([period, direction]) => {
     const phase = (time / period) % 1
     const alternate = (phase + .5) % 1
     return {

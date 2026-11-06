@@ -9,6 +9,7 @@ const LINKS = [
   ['story', 'Our story'],
   ['moments', 'Our moments'],
   ['dress', 'Attire'],
+  ['rsvp', 'RSVP'],
 ]
 
 export default function WeddingNavigation({ enabled }) {
@@ -32,7 +33,7 @@ export default function WeddingNavigation({ enabled }) {
       <span className="monogram small" aria-label="Jiv and Rochelle">J<Ampersand />R</span>
     </a>
     <nav aria-label="Wedding invitation">
-      {LINKS.map(([id, label], index) => <a key={id} href={`#${id}`} className={index > 2 ? 'secondary-nav' : undefined} aria-current={current === id ? 'location' : undefined}>{label}</a>)}
+      {LINKS.map(([id, label], index) => <a key={id} href={`#${id}`} className={id === 'rsvp' ? 'rsvp-nav' : index > 2 ? 'secondary-nav' : undefined} aria-current={current === id ? 'location' : undefined}>{label}</a>)}
     </nav>
     <span className="header-date">07.02.27</span>
     <div className="reading-thread" ref={thread} aria-hidden="true"><span /></div>
