@@ -149,18 +149,6 @@ body { background: var(--ivory); }
 .swatch[aria-pressed="true"] .swatch-check { opacity: 1; }
 .swatch-color::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background-image: var(--linen); background-size: 110px 110px; mix-blend-mode: multiply; opacity: .65; }
 .swatch-color::after { content: ''; position: absolute; inset: 3px; border: 1px dashed #fff9; border-radius: inherit; }
-.palette-preview { display: grid; grid-template-columns: 70px minmax(0, 1fr); align-items: center; gap: 23px; max-width: 400px; min-height: 132px; padding: 23px; margin: 36px auto 0; border: 1px dashed #9a9b8280; background: #f7f1e580; text-align: left; }
-.fabric-sample { position: relative; height: 82px; background: var(--preview-color); box-shadow: 2px 3px 5px #7669511a; transform: rotate(-5deg); transition: background-color .6s, transform .6s; }
-.fabric-sample::before { content: ''; position: absolute; inset: 0; background-image: var(--linen); background-size: 100px; mix-blend-mode: multiply; opacity: .6; }
-.fabric-sample::after { content: ''; position: absolute; inset: 5px; border: 1px dashed #fff9; }
-.fabric-sample span { position: absolute; top: -4px; left: 24px; width: 23px; height: 11px; background: #f1e8dc90; border-inline: 1px solid #d0c8b955; transform: rotate(8deg); }
-.has-selection .fabric-sample { transform: rotate(-2deg); }
-.palette-preview .preview-eyebrow { font: 8px/1.8 var(--sans); text-transform: uppercase; letter-spacing: .12em; }
-.palette-preview .selected-color { font-size: 25px; line-height: 1.2; margin-top: 7px; }
-.palette-preview-note { display: block; font-size: 14px; line-height: 1.5; margin-top: 8px; }
-.palette-actions { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 12px; }
-.palette-actions button { border: 0; border-bottom: 1px dashed #93957a; padding: 7px 0; background: transparent; font: 8px/1.5 var(--sans); letter-spacing: .04em; }
-.palette-actions button:hover { color: #65744f; }
 .palette-status { min-height: 32px; margin: 10px auto 0; font: 10px/1.6 var(--sans); color: #5b694b; }
 .dress-section .flourish { margin-top: 22px; }
 @media (hover: hover) and (pointer: fine) {
@@ -230,10 +218,6 @@ body { background: var(--ivory); }
   .story-copy p { font-size: 19px; }
   .story-chapter { padding-left: 26px; }
   .story-chapter::before { right: -8px; left: 10px; }
-  .palette-preview { grid-template-columns: 57px minmax(0, 1fr); gap: 18px; padding: 18px; }
-  .palette-preview .selected-color { font-size: 23px; }
-  .palette-preview .preview-eyebrow { font-size: 7.5px; }
-  .fabric-sample { height: 73px; }
   .dress-section { padding-top: 76px; }
   .swatches { gap: 13px; }
   .swatch-color { width: 43px; height: 43px; }

@@ -4,14 +4,12 @@ import { preloadGuestColor } from '../attireArtwork.js'
 import GuestCelebration from './GuestCelebration.jsx'
 
 export default function GuestPalette({ children }) {
-  const [selected, setSelected] = useState(null)
   const [message, setMessage] = useState('')
   const [hasTriedColor, setHasTriedColor] = useState(false)
   const paletteRef = useRef(null)
   const choicesRef = useRef({ male: null, female: null })
   const [choices, setChoices] = useState(choicesRef.current)
   const requests = useRef({ male: 0, female: 0 })
-  const selection = useRef(null)
   useEffect(() => () => { requests.current.male++; requests.current.female++ }, [])
   useEffect(() => {
     const palette = paletteRef.current
@@ -37,29 +35,8 @@ export default function GuestPalette({ children }) {
       const next = chooseGuestColor(choicesRef.current, gender, name)
       choicesRef.current = next
       setChoices(next)
-      selection.current = next[gender].color
-      setSelected(next[gender])
     } catch {
       if (requests.current[gender] === request) setMessage('That outfit preview could not load. Please try the shade again.')
-    }
-  }
-  const reset = () => {
-    requests.current.male++
-    requests.current.female++
-    choicesRef.current = { male: null, female: null }
-    setChoices(choicesRef.current)
-    selection.current = null
-    setSelected(null)
-    setMessage('')
-  }
-  const copyColor = async () => {
-    if (!selected) return
-    const { color, name } = selected
-    try {
-      await navigator.clipboard.writeText(color.toUpperCase())
-      if (selection.current === color) setMessage(`${name} color code copied.`)
-    } catch {
-      if (selection.current === color) setMessage(`Copy this color code: ${color.toUpperCase()}`)
     }
   }
 
@@ -83,15 +60,7 @@ export default function GuestPalette({ children }) {
       </span>
     </div>
     <GuestCelebration choices={choices} />
-    <div className={`palette-preview ${selected ? 'has-selection' : ''}`} style={{ '--preview-color': selected?.color ?? '#ded9ca' }}>
-      <div className="fabric-sample" aria-hidden="true"><span /></div>
-      <div className="palette-preview-copy">
-        <p className="preview-eyebrow">A shade for your celebration</p>
-        <p className="selected-color" aria-live="polite" aria-atomic="true">{selected?.name ?? 'Find your favorite shade'}</p>
-        {selected ? <div className="palette-actions"><button type="button" onClick={copyColor}>Copy {selected.color.toUpperCase()}</button><button type="button" onClick={reset}>Reset</button></div> : <span className="palette-preview-note">Tap a color to see how it looks.</span>}
-      </div>
-    </div>
-    <div className="palette-status" role="status">{message}</div>
+    <div className={message ? 'palette-status' : 'sr-only'} role="status">{message}</div>
     {children}
   </section>
 }
