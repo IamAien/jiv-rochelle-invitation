@@ -12,6 +12,7 @@ import GuestPalette from './components/GuestPalette.jsx'
 import WeddingVenues from './components/WeddingVenues.jsx'
 import WeddingGallery from './components/WeddingGallery.jsx'
 import WeddingRsvp from './components/WeddingRsvp.jsx'
+import WeddingMusic from './components/WeddingMusic.jsx'
 import Ampersand from './components/Ampersand.jsx'
 import Flourish from './components/Flourish.jsx'
 import './App.css'
@@ -107,6 +108,7 @@ export default function App() {
   const [openingCycle, setOpeningCycle] = useState(0)
   const headingRef = useRef(null)
   const contentRef = useRef(null)
+  const musicRef = useRef(null)
   useEffect(() => {
     const previousOverflow = document.body.style.overflow
     if (stage !== 'done') document.body.style.overflow = 'hidden'
@@ -127,6 +129,7 @@ export default function App() {
   }, [stage])
   const openInvitation = () => {
     if (stage !== 'closed') return
+    void musicRef.current?.start()
     window.scrollTo({ top: 0, behavior: 'instant' })
     setOpeningStarted(true)
     setStage('opening')
@@ -136,6 +139,7 @@ export default function App() {
     setStage('done')
   }
   const replayOpening = () => {
+    musicRef.current?.reset()
     window.scrollTo({ top: 0, behavior: 'instant' })
     setCoastalReady(false)
     setOpeningCycle(cycle => cycle + 1)
@@ -169,5 +173,6 @@ export default function App() {
       <footer className="closing-section section"><p className="eyebrow">We can’t wait to celebrate with you</p><Monogram /><p className="closing-names">Jiv <Ampersand /> Rochelle</p><p className="closing-date">February 7, 2027 · Cebu</p><button className="replay-button" onClick={replayOpening}><span aria-hidden="true">↺</span> Open the magic again</button></footer>
     </div>
     <EnvelopeOpening key={openingCycle} stage={stage} sceneReady={coastalReady} onOpen={openInvitation} onUnavailable={handleEnvelopeUnavailable} />
+    <WeddingMusic ref={musicRef} visible={stage !== 'closed'} />
   </>
 }

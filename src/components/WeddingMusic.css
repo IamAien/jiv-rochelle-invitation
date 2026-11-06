@@ -1,0 +1,6 @@
+.music-toggle { position: fixed; z-index: 200; right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; max-width: calc(100% - 32px); padding: 11px 15px; border: 1px dashed #a39279; border-radius: 24px; background: #f7f1e5f5; color: #66563f; box-shadow: 0 3px 12px #584b3d18; font: 10px/1.5 var(--sans); letter-spacing: .04em; transition: background-color .2s, color .2s; }
+.music-toggle svg { display: block; flex: none; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.music-toggle[aria-pressed="true"] { background: #e7e8dd; color: #566345; }
+.music-toggle:hover { background: #fffaf0; }
+.music-toggle:disabled { opacity: .7; }
+@media print { .music-toggle { display: none; } }
