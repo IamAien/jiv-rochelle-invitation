@@ -13,16 +13,13 @@ import WeddingVenues from './components/WeddingVenues.jsx'
 import WeddingGallery from './components/WeddingGallery.jsx'
 import WeddingRsvp from './components/WeddingRsvp.jsx'
 import Ampersand from './components/Ampersand.jsx'
+import Flourish from './components/Flourish.jsx'
 import './App.css'
 
 const EVENTS = [
   { icon: 'arch', time: '1:00 PM', title: 'The ceremony', description: 'The Archdiocesan Shrine of the Most Sacred Heart of Jesus', note: 'Our forever begins.' },
   { icon: 'cake', time: '5:00 PM', title: 'The reception', description: 'Marco Polo Plaza Cebu', note: 'Let the celebration begin.' },
 ]
-
-function Flourish({ className = '' }) {
-  return <div className={`flourish ${className}`} aria-hidden="true"><span /><i /><span /></div>
-}
 
 function Monogram({ small = false }) {
   return <span className={small ? 'monogram small' : 'monogram'} aria-label="Jiv and Rochelle">J<Ampersand />R</span>

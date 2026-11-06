@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { createScratchGrid, getPhotoSource, getPhotoSwipe, MEMORY_PHOTOS, recordScratchStroke, REVEAL_PHOTOS, wrapPhotoIndex } from '../gallery.js'
 import './WeddingGallery.css'
 import Ampersand from './Ampersand.jsx'
+import Flourish from './Flourish.jsx'
 import ovalFrame from '../assets/oval-photo-frame.webp'
 import slenderPetal from '../assets/coastal-layers/soft-petal-slender.webp'
 import roundedPetal from '../assets/coastal-layers/soft-petal-rounded.webp'
@@ -265,7 +266,7 @@ export default function WeddingGallery() {
     <h2 id="gallery-title">Little moments.<br /><em>A love to keep.</em></h2>
     <p className="section-intro">A few pages from our story, with many more to come.</p>
     <div className="memory-reveal-grid">{REVEAL_PHOTOS.map(photo => <RevealPhoto key={photo.caption} photo={photo} />)}</div>
-    <div className="flourish gallery-flourish" aria-hidden="true"><span /><i /><span /></div>
+    <Flourish className="gallery-flourish" />
     <MemoryStack photos={MEMORY_PHOTOS} />
   </section>
 }

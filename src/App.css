@@ -36,10 +36,7 @@ body { background: var(--ivory); }
 .body-copy { font-size: 20px; line-height: 1.65; max-width: 390px; margin: 28px auto 0; }
 .flourish { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 26px auto; }
 .flourish span { width: 42px; height: 2px; background: repeating-linear-gradient(90deg, #b6a18b 0 4px, transparent 4px 8px); }
-.flourish i { position: relative; width: 19px; height: 16px; }
-.flourish i::before, .flourish i::after { content: ''; position: absolute; width: 11px; height: 7px; border: 1px dashed #969b80; border-radius: 100% 0 100% 0; }
-.flourish i::before { left: 0; top: 6px; transform: rotate(16deg); }
-.flourish i::after { right: 0; top: 2px; transform: rotate(-16deg); }
+.flourish-heart { display: block; flex: none; width: 19px; height: 18px; fill: none; stroke: #a58a7c; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .invitation-cover { position: relative; height: max(730px, calc(100svh - 64px)); background: #f9ecda; background-image: linear-gradient(#f9ecdad9, #f9ecdad9), var(--linen); scroll-margin-top: 64px; }
 .villa-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; }
 .invitation-text { --invite-name-size: clamp(24px, calc((100svh - 64px) * .034), 36px); position: absolute; z-index: 1; top: 31%; left: 50%; transform: translateX(-50%); width: min(88%, 480px); text-align: center; color: #785a3e; text-shadow: 0 1px #fff9; }
