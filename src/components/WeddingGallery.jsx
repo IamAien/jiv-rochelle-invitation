@@ -264,7 +264,6 @@ export default function WeddingGallery() {
     <p className="eyebrow">Our moments</p>
     <h2 id="gallery-title">Little moments.<br /><em>A love to keep.</em></h2>
     <p className="section-intro">A few pages from our story, with many more to come.</p>
-    <p className="gallery-hint">Brush gently to uncover a memory, or choose “Reveal photo.”</p>
     <div className="memory-reveal-grid">{REVEAL_PHOTOS.map(photo => <RevealPhoto key={photo.caption} photo={photo} />)}</div>
     <div className="flourish gallery-flourish" aria-hidden="true"><span /><i /><span /></div>
     <MemoryStack photos={MEMORY_PHOTOS} />

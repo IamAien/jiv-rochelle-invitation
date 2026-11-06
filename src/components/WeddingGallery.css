@@ -1,5 +1,4 @@
 .gallery-section { --section-tone: #e9e5da; padding-top: 82px; padding-bottom: 88px; }
-.gallery-hint { max-width: 360px; margin: 18px auto 0; font-size: 15px; line-height: 1.6; font-style: italic; }
 .memory-reveal-grid { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 520px; margin: 48px auto 0; }
 .memory-reveal-card { position: relative; margin: 0; min-width: 0; }
 .memory-framed-art { position: relative; width: 100%; aspect-ratio: 1054 / 1492; }
@@ -66,7 +65,6 @@
 @media (max-width: 600px) {
   .gallery-section { padding-top: 68px; padding-bottom: 70px; }
   .gallery-section .section-intro { font-size: 17px; }
-  .gallery-hint { font-size: 14px; }
   .memory-reveal-caption > span { font-size: 21px; }
   .gallery-flourish { margin-top: 52px; }
   .memory-stack { margin-top: 36px; }
@@ -82,5 +80,5 @@
 }
 @media print {
   .memory-veil { display: none; }
-  .gallery-hint, .memory-reveal-caption button, .album-controls, .album-hint { display: none; }
+  .memory-reveal-caption button, .album-controls, .album-hint { display: none; }
 }

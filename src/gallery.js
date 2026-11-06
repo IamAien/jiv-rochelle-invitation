@@ -9,7 +9,7 @@ export const MEMORY_PHOTOS = [
   { src: '', caption: 'Little moments', alt: 'An everyday moment with Jiv and Rochelle' },
   { src: '', caption: 'Coffee dates', alt: 'Jiv and Rochelle on a coffee date' },
   { src: '', caption: 'Adventures', alt: 'Jiv and Rochelle on an adventure together' },
-  { src: '', caption: 'Almost forever', alt: 'Jiv and Rochelle before their wedding' },
+  { src: '', caption: 'A favorite memory', alt: 'Jiv and Rochelle before their wedding' },
 ]
 
 export function getPhotoSource(src, base = '/') {
