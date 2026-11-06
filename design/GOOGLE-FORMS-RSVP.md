@@ -4,6 +4,8 @@ The invitation has an RSVP navigation link and a matching section after Attire, 
 
 The connection was checked through public HTTP requests without cookies. Browser interaction, submitting a response, editing that response, and confirming storage in the private response sheet still require an end-to-end test with the form owner. No test responses were submitted during the connection check.
 
+The RSVP card also includes a clickable QR code that opens the same guest-facing Google Form. Its PNG artwork is in `src/assets/rsvp-qr.png`, with its encoded URL recorded in `src/rsvpQr.js`. The image has a white quiet zone and was independently decoded at its original resolution and at 228px and 200px. Regenerate both the image and its recorded URL when changing forms; the component hides the QR if its recorded destination differs from the configured responder link. A shareable copy is in `output/rsvp/rsvp-qr.png` in the working directory.
+
 ## Create the form in your account
 
 You can create it manually at https://forms.google.com, or use the prepared script:
