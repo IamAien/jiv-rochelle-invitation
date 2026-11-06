@@ -155,7 +155,6 @@ export default function App() {
           <p className="eyebrow">With full hearts</p>
           <h2>A day for love.<br /><em>A lifetime of us.</em></h2>
           <Flourish />
-          <p className="full-names">Jiv Stevens T. Gonzales<Ampersand />Rochelle Ann P. Reyes</p>
           <h3 className="welcome-message">Welcome to Our Wedding</h3>
           <p className="body-copy">We are so happy to celebrate this day with you</p>
         </section>
