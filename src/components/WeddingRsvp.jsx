@@ -8,6 +8,7 @@ export default function WeddingRsvp({ formUrl = GOOGLE_FORM_URL }) {
   const [hasOpened, setHasOpened] = useState(false)
 
   return <section className="rsvp-section section" id="rsvp" aria-labelledby="rsvp-title">
+    <p className="eyebrow">We hope you can join us</p>
     <h2 id="rsvp-title">Celebrate <em>with us</em></h2>
     <p className="section-intro">Your presence would mean the world to us.</p>
     <div className="rsvp-card">
