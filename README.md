@@ -4,9 +4,9 @@ A responsive wedding invitation for February 7, 2027, in Cebu, Philippines. Buil
 
 ## Published website
 
-Share [Jiv & Rochelle's invitation](https://iamaien.github.io/jiv-rochelle-invitation/).
+Share [Jiv & Rochelle's invitation](https://jivandrochelle.github.io/jiv-rochelle-invitation/).
 
-The site is published through the `IamAien/jiv-rochelle-invitation` GitHub repository. Pushing to `main` runs the behavior tests, builds the site, and deploys `dist/` to GitHub Pages. The Vite base path is `/jiv-rochelle-invitation/` so artwork and scripts load from the repository's Pages URL.
+The site is published through the `jivandrochelle/jiv-rochelle-invitation` GitHub repository. Pushing to `main` runs the behavior tests, builds the site, and deploys `dist/` to GitHub Pages. The Vite base path is `/jiv-rochelle-invitation/` so artwork and scripts load from the repository's Pages URL.
 
 ## Local preview
 
