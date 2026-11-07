@@ -1,4 +1,4 @@
-export const WEDDING_MUSIC = { path: 'audio/romantic-piano.mp3', volume: .3 }
+export const WEDDING_MUSIC = { path: 'audio/bruno-mars-risk-it-all.mp3', volume: .3 }
 
 export function createWeddingMusicController(audio, { document: page = globalThis.document, onChange = () => {} } = {}) {
   let enabled = true
