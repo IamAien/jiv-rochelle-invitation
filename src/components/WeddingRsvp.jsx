@@ -12,7 +12,7 @@ export default function WeddingRsvp({ formUrl = GOOGLE_FORM_URL }) {
       <span className="rsvp-card-label">Jiv &amp; Rochelle · February 7, 2027</span>
       {links ? <>
         <h3>Will you join us?</h3>
-        <a className="rsvp-button" href={links.responder} target="_blank" rel="noopener noreferrer">Open form in a new tab <span aria-hidden="true">↗</span></a>
+        <a className="rsvp-button" href={links.responder} target="_blank" rel="noopener noreferrer">Fill in your RSVP <span aria-hidden="true">↗</span></a>
         <p className="rsvp-footnote">Please select Submit in the form to send your response.</p>
       </> : <>
         <h3>RSVP will open soon</h3>

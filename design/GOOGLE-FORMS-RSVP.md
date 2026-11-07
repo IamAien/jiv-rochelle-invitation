@@ -4,7 +4,7 @@ The invitation has an RSVP navigation link and a matching section after Attire, 
 
 The connection was checked through public HTTP requests without cookies. Browser interaction, submitting a response, editing that response, and confirming storage in the private response sheet still require an end-to-end test with the form owner. No test responses were submitted during the connection check.
 
-Guests use the main “Open form in a new tab” button to open Google Forms in a separate tab. The website does not embed the form. The QR code and its source artwork have been removed from the website.
+Guests use the main “Fill in your RSVP” button to open Google Forms in a separate tab. The website does not embed the form. The QR code and its source artwork have been removed from the website.
 
 ## Create the form in your account
 
@@ -48,7 +48,7 @@ Only the couple and anyone they explicitly add as collaborators should have edit
 
 Set `GOOGLE_FORM_URL` in `src/rsvp.js` to the published responder URL. Never use an editor URL, a response spreadsheet URL, or a `formResponse` submission endpoint. Then run `npm test` and `npm run build` and deploy through the existing GitHub Pages workflow.
 
-“Open form in a new tab” links directly to the responder page, preserving any prefilled fields and removing embedded-mode parameters. Google handles submission, validation, and confirmation in the new tab.
+“Fill in your RSVP” links directly to the responder page, preserving any prefilled fields and removing embedded-mode parameters. Google handles submission, validation, and confirmation in the new tab.
 
 ## End-to-end check after connection
 
