@@ -9,13 +9,11 @@ export function getGoogleFormLinks(value) {
     if (url.protocol !== 'https:' || url.username || url.password || url.port) return null
     url.hash = ''
     if (url.hostname === 'forms.gle' && /^\/[\w-]+\/?$/.test(url.pathname)) {
-      return { responder: url.href, embed: null }
+      return { responder: url.href }
     }
     if (url.hostname !== 'docs.google.com' || !/^\/forms\/d\/(?:e\/)?[\w-]+\/viewform\/?$/.test(url.pathname)) return null
     url.searchParams.delete('embedded')
-    const responder = url.href
-    url.searchParams.set('embedded', 'true')
-    return { responder, embed: url.href }
+    return { responder: url.href }
   } catch {
     return null
   }

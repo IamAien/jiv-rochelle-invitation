@@ -1,10 +1,10 @@
 # Google Forms RSVP
 
-The invitation has an RSVP navigation link and a matching section after Attire, connected to the couple's published Google Form in `src/rsvp.js`. Both the responder page and embedded URL load successfully without an authenticated session. The form asks for first name, last name, attendance, optional email address and mobile number, and a personal message. The website's copy follows those questions. It does not collect dietary requirements or household guest counts.
+The invitation has an RSVP navigation link and a matching section after Attire, connected to the couple's published Google Form in `src/rsvp.js`. The responder page loads successfully without an authenticated session. The form asks for first name, last name, attendance, optional email address and mobile number, and a personal message. The website's copy follows those questions. It does not collect dietary requirements or household guest counts.
 
 The connection was checked through public HTTP requests without cookies. Browser interaction, submitting a response, editing that response, and confirming storage in the private response sheet still require an end-to-end test with the form owner. No test responses were submitted during the connection check.
 
-Guests open the form using the RSVP button or its direct-link fallback. The QR code and its source artwork have been removed from the website.
+Guests use the main “Open form in a new tab” button to open Google Forms in a separate tab. The website does not embed the form. The QR code and its source artwork have been removed from the website.
 
 ## Create the form in your account
 
@@ -17,7 +17,7 @@ You can create it manually at https://forms.google.com, or use the prepared scri
 5. Review the questions and add a header or change the colors if desired.
 6. Publish the form with responder access set to **Anyone with the link**. Keep the response sheet and form editing access private.
 7. Open the guest-facing link in a signed-out/private browser window. Verify that you can complete it without logging in.
-8. Send the guest-facing link to the website editor. Prefer the full `https://docs.google.com/forms/d/e/.../viewform` link for embedding. A `https://forms.gle/...` short link will open directly in a new tab.
+8. Send the guest-facing link to the website editor. Both full `https://docs.google.com/forms/d/e/.../viewform` links and `https://forms.gle/...` short links open in a new tab.
 
 The script creates a draft only. It has not been executed in a Google account or tested against a real form in this session.
 
@@ -48,12 +48,12 @@ Only the couple and anyone they explicitly add as collaborators should have edit
 
 Set `GOOGLE_FORM_URL` in `src/rsvp.js` to the published responder URL. Never use an editor URL, a response spreadsheet URL, or a `formResponse` submission endpoint. Then run `npm test` and `npm run build` and deploy through the existing GitHub Pages workflow.
 
-With a full responder link, “Fill in your RSVP” expands the Google Form inside the invitation. Google is loaded only when a guest first opens the form. Closing and reopening it keeps the iframe mounted to preserve their entries within the current page session. A direct link remains available if the embedded form does not display. Google handles submission, validation, and confirmation; the website does not infer success from an iframe load.
+“Open form in a new tab” links directly to the responder page, preserving any prefilled fields and removing embedded-mode parameters. Google handles submission, validation, and confirmation in the new tab.
 
 ## End-to-end check after connection
 
 1. Visit the invitation on a phone and desktop and reach RSVP from the navigation.
-2. Open the form in the invitation and via the new-tab fallback while signed out of Google.
+2. Use the main RSVP button while signed out of Google. Verify that the form opens in a new tab and the invitation remains available in the original tab.
 3. Submit a clearly labeled test response. Check the Google confirmation and confirm the same response appears in the private spreadsheet.
 4. Save the edit-response link, revise the response, and verify the existing sheet row updates.
 5. Check that the form does not expose a response summary or the private response sheet.
